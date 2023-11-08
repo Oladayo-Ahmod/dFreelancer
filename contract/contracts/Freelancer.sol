@@ -107,7 +107,7 @@ contract Dfreelancer {
         Job storage job = jobs[jobId];
         require(job.employer != address(0), "Job not found.");
         require(isFreelancerHired(job, freelancerAddress), "Freelancer is not hired for this job.");
-        require(!isJobCompletedByFreelancer(job, freelancerAddress), "Job is already completed by this freelancer.");
+        require(job.completed = false, "Job is already completed.");
 
         // Pay the freelancer and mark the job as completed
         uint payment = job.budget;
@@ -133,12 +133,9 @@ contract Dfreelancer {
         Job storage job = jobs[jobId];
         require(job.employer == msg.sender, "Only the employer can deposit funds.");
         require(!job.completed, "Job is already completed.");
-        require(job.budget >= msg.value, "Insufficient amount");
-        
-        
+        require(msg.value >= job.budget, "Insufficient amount");
+
         escrowFunds[msg.sender] += msg.value;
-
-
         emit FundsDeposited(jobId, msg.sender, msg.value);
     }
 
@@ -151,6 +148,7 @@ contract Dfreelancer {
         uint escrowAmount = escrowFunds[msg.sender];
 
         require(escrowAmount > 0, "No funds in escrow.");
+        require(escrowAmount >= job.budget, "insufficient funds");
 
         escrowFunds[msg.sender] = 0;
         
@@ -162,10 +160,8 @@ contract Dfreelancer {
     }
 
     function isFreelancerHired(Job storage job, address freelancerAddress) internal view returns (bool) {
-        for (uint i = 0; i < job.hiredFreelancers.length; i++) {
-            if (job.hiredFreelancers[i] == freelancerAddress) {
-                return true;
-            }
+        if (job.hiredFreelancer == freelancerAddress) {
+            return true;
         }
         return false;
     }
