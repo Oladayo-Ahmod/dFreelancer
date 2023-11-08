@@ -98,7 +98,8 @@ contract Dfreelancer {
         require(job.employer != address(0), "Job not found.");
         require(!isFreelancerHired(job, freelancerAddress), "Freelancer is already hired.");
 
-        job.hiredFreelancers.push(freelancerAddress);
+        job.hiredFreelancer = freelancerAddress;
+    
     }
 
     function completeJob(uint jobId, address freelancerAddress) public onlyOwner {
