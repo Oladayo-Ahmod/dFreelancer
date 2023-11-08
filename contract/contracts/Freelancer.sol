@@ -111,8 +111,6 @@ contract Dfreelancer {
 
         // Pay the freelancer and mark the job as completed
         uint payment = job.budget;
-        // job.completedByFreelancers[freelancerAddress] = true;
-
         job.completed = true;
 
         Freelancer storage freelancer = freelancers[freelancerAddress];
@@ -135,6 +133,8 @@ contract Dfreelancer {
         Job storage job = jobs[jobId];
         require(job.employer == msg.sender, "Only the employer can deposit funds.");
         require(!job.completed, "Job is already completed.");
+        require(job.budget >= msg.value, "Insufficient amount");
+        
         
         escrowFunds[msg.sender] += msg.value;
 
