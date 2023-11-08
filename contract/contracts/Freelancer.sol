@@ -143,7 +143,7 @@ contract Dfreelancer {
         require(jobId <= totalJobs && jobId > 0, "Job does not exist.");
         Job storage job = jobs[jobId];
         require(msg.sender == job.employer, "Only the employer can release escrow.");
-        require(isJobCompletedByFreelancer(job, freelancerAddress), "Job is not completed by this freelancer.");
+        require(job.completed = true, "Job is not completed by freelancer");
 
         uint escrowAmount = escrowFunds[msg.sender];
 
@@ -166,9 +166,6 @@ contract Dfreelancer {
         return false;
     }
 
-    function isJobCompletedByFreelancer(Job storage job, address freelancerAddress) internal view returns (bool) {
-        return job.completedByFreelancers[freelancerAddress];
-    }
 
     function withdrawEarnings() public {
         Freelancer storage freelancer = freelancers[msg.sender];
