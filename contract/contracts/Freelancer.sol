@@ -41,6 +41,8 @@ contract Dfreelancer {
     event JobCompleted(uint jobId, address freelancerAddress, uint payment);
     event FundsDeposited(uint jobId, address sender, uint amount);
     event FundsReleased(uint jobId, address freelancerAddress, uint amount);
+    event AppliedForJob(uint jobId, address employerAddress, address freelancerAddress);
+
 
     constructor() {
         owner = msg.sender;
@@ -77,6 +79,8 @@ contract Dfreelancer {
         }
 
         job.applicants.push(msg.sender);
+
+        emit AppliedForJob(jobId,job.employer,msg.sender);
     }
 
     function hireFreelancer(uint jobId, address freelancerAddress) public onlyOwner {

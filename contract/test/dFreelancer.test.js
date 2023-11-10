@@ -39,13 +39,15 @@ describe("Dfreelancer", function () {
     expect(registeredFreelancer.balance).to.equal(0);
   });
 
-  // it("Should apply for a job", async function () {
-  //   await dfreelancer.createJob("Another Job", "Another test job", 200);
-  //   const jobId = 2;
-  //   await dfreelancer.connect(freelancer).applyForJob(jobId);
-  //   const job = await dfreelancer.jobs(jobId);
-  //   expect(job.applicants).to.include(freelancer.address);
-  // });
+  it("Should apply for a job", async function () {
+    await dfreelancer.connect(owner).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
+    const apply = await dfreelancer.connect(freelancer).applyForJob('1');
+    const receipt = await apply.wait()
+    const events = receipt.events.find(event => event.event === 'AppliedForJob');
+    assert.equal(events.args[2],freelancer.address) //
+    // const job = await dfreelancer.getJobByID('1');
+    // expect(job.applicants).to.include(freelancer.address);
+  });
 
   // it("Should hire a freelancer", async function () {
   //   const jobId = 1;
