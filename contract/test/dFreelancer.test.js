@@ -61,11 +61,10 @@ describe("Dfreelancer", function () {
     await dfreelancer.hireFreelancer('1', freelancer.address);
     await dfreelancer.connect(owner).completeJob('1', freelancer.address);
     const job = await dfreelancer.getJobByID('1');
-    console.log(job);
-  //   const freelancerBalance = (await dfreelancer.freelancers(freelancer.address)).balance;
-  //   expect(job.completed).to.be.true;
-  //   expect(job.completedByFreelancers[freelancer.address]).to.be.true;
-  //   expect(freelancerBalance).to.equal(jobBudget);
+    const freelancerBalance = (await dfreelancer.freelancers(freelancer.address)).balance;
+    expect(job.completed).to.be.true;
+    expect(job.hiredFreelancer).to.equal(freelancer.address)
+    expect(freelancerBalance).to.equal(jobBudget);
   });
 
   // it("Should deposit funds to a job", async function () {
