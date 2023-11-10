@@ -28,16 +28,16 @@ describe("Dfreelancer", function () {
       expect(job.completed).to.be.false;
   });
 
-  // it("Should register a freelancer", async function () {
-  //   const freelancerName = "Test Freelancer";
-  //   const freelancerSkills = "Solidity, JavaScript";
-  //   await dfreelancer.connect(freelancer).registerFreelancer(freelancerName, freelancerSkills);
-  //   const registeredFreelancer = await dfreelancer.freelancers(freelancer.address);
-  //   expect(registeredFreelancer.freelancerAddress).to.equal(freelancer.address);
-  //   expect(registeredFreelancer.name).to.equal(freelancerName);
-  //   expect(registeredFreelancer.skills).to.equal(freelancerSkills);
-  //   expect(registeredFreelancer.balance).to.equal(0);
-  // });
+  it("Should register a freelancer", async function () {
+    const freelancerName = "Test Freelancer";
+    const freelancerSkills = "Solidity, JavaScript";
+    await dfreelancer.connect(freelancer).registerFreelancer(freelancerName, freelancerSkills);
+    const registeredFreelancer = await dfreelancer.freelancers(freelancer.address);
+    expect(registeredFreelancer.freelancerAddress).to.equal(freelancer.address);
+    expect(registeredFreelancer.name).to.equal(freelancerName);
+    expect(registeredFreelancer.skills).to.equal(freelancerSkills);
+    expect(registeredFreelancer.balance).to.equal(0);
+  });
 
   // it("Should apply for a job", async function () {
   //   await dfreelancer.createJob("Another Job", "Another test job", 200);
