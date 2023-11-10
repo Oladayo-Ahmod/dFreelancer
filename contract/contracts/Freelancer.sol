@@ -5,6 +5,7 @@ contract Dfreelancer {
     address public owner;
     uint8 public totalJobs;
     uint public totalFreelancers;
+    uint public totalEmployers;
     uint public totalCompletedJobs;
 
     struct Job {
@@ -45,6 +46,7 @@ contract Dfreelancer {
 
     event JobCreated(uint jobId, string title);
     event FreelancerRegistered(address freelancerAddress, string name);
+    event EmployerRegistered(address EmployerAddress, string name);
     event JobCompleted(uint jobId, address freelancerAddress, uint payment);
     event FundsDeposited(uint jobId, address sender, uint amount);
     event FundsReleased(uint jobId, address freelancerAddress, uint amount);
@@ -130,6 +132,14 @@ contract Dfreelancer {
         totalFreelancers++;
         freelancers[msg.sender] = Freelancer(msg.sender, _name, _skills, 0);
         emit FreelancerRegistered(msg.sender, _name);
+    }
+
+      function registerEmployer(string memory _name, string memory _skills) public {
+        require(bytes(_name).length > 0, "Name cannot be empty.");
+        require(bytes(_skills).length > 0, "Skills cannot be empty.");
+        totalEmployers++;
+        employers[msg.sender] = Employer(msg.sender, _name, _skills, 0);
+        emit EmployerRegistered(msg.sender, _name);
     }
 
     function depositFunds(uint jobId) public payable {
