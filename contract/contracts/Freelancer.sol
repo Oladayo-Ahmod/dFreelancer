@@ -15,9 +15,7 @@ contract Dfreelancer {
         uint256 budget;
         bool completed;
         address[] applicants;
-        address hiredFreelancer;
-        bool completedByFreelancer;
-        
+        address hiredFreelancer;        
         
     }
 
@@ -56,7 +54,8 @@ contract Dfreelancer {
     function createJob(string memory _title, string memory _description, uint256 _budget) public {
         totalJobs++;
         uint8 jobId = totalJobs;
-        jobs[jobId] = Job(jobId,payable(msg.sender),_title,_description,_budget,false,new address[](0),address(0),false);
+        jobs[jobId] = Job(jobId,payable(msg.sender),_title,_description,_budget,false,new address[](0),address(0));
+        
     
         emit JobCreated(jobId, _title);
     }
@@ -98,7 +97,7 @@ contract Dfreelancer {
         Job storage job = jobs[jobId];
         require(job.employer != address(0), "Job not found.");
         require(isFreelancerHired(job, freelancerAddress), "Freelancer is not hired for this job.");
-        require(job.completed = false, "Job is already completed.");
+        // require(job.completed = false, "Job is already completed.");
 
         // Pay the freelancer and mark the job as completed
         uint payment = job.budget;
