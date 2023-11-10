@@ -26,10 +26,19 @@ contract Dfreelancer {
         uint balance;
     }
 
+    
+    struct Employer {
+        address employerAddress;
+        string name;
+        string skills;
+        uint balance;
+    }
+
     // Job[] public jobs;
     mapping(uint256 => Job) jobs;
 
     mapping(address => Freelancer) public freelancers;
+    mapping(address => Employer) public employers;
     // mapping(address => bool) completedByFreelancers;
     mapping(address => uint) escrowFunds;
 
@@ -46,17 +55,22 @@ contract Dfreelancer {
         owner = msg.sender;
     }
 
+    modifier onlyEmployer(address _employerAddress){
+        require(employers[msg.sender].employerAddress == _employerAddress, "Only employer can create job");
+
+        _;
+    }
+
+
     modifier onlyOwner() {
         require(msg.sender == owner, "Only the owner can call this function.");
         _;
     }
 
-    function createJob(string memory _title, string memory _description, uint256 _budget) public {
+    function createJob(string memory _title, string memory _description, uint256 _budget) public onlyEmployer(msg.sender){
         totalJobs++;
         uint8 jobId = totalJobs;
-        jobs[jobId] = Job(jobId,payable(msg.sender),_title,_description,_budget,false,new address[](0),address(0));
-        
-    
+        jobs[jobId] = Job(jobId,payable(msg.sender),_title,_description,_budget,false,new address[](0),address(0));    
         emit JobCreated(jobId, _title);
     }
 
