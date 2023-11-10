@@ -28,7 +28,9 @@ contract Dfreelancer {
         uint balance;
     }
 
-    Job[] public jobs;
+    // Job[] public jobs;
+    mapping(uint256 => Job) jobs;
+
     mapping(address => Freelancer) public freelancers;
     // mapping(address => bool) completedByFreelancers;
     mapping(address => uint) escrowFunds;
@@ -52,8 +54,9 @@ contract Dfreelancer {
     function createJob(string memory _title, string memory _description, uint256 _budget) public {
         totalJobs++;
         uint8 jobId = totalJobs;
-        jobs.push(Job(jobId,payable(msg.sender),_title,_description,_budget,false,new address[](0),address(0),false));
-
+        jobs[jobId] = Job(jobId,payable(msg.sender),_title,_description,_budget,false,new address[](0),address(0),false);
+        
+        // jobs.push(Job(jobId,payable(msg.sender),_title,_description,_budget,false,new address[](0),address(0),false));
 
         // Job storage newJob = jobs.push();
         // newJob.employer = msg.sender;
@@ -70,11 +73,11 @@ contract Dfreelancer {
         emit JobCreated(jobId, _title);
     }
 
-     function getJobByID(uint256 jobId) public view returns (address, string memory, string memory, uint, bool) {
+     function getJobByID(uint256 jobId) external view returns(Job memory props) {
         require(jobId > 0 && jobId <= totalJobs, "Invalid job ID");
-
-        Job storage job = jobs[jobId];
-        return (job.employer, job.title, job.description, job.budget, job.completed);
+        props = jobs[jobId];
+        // Job storage job = jobs[jobId];
+        // return (job.employer, job.title, job.description, job.budget, job.completed);
     }
 
     function applyForJob(uint jobId) public {
