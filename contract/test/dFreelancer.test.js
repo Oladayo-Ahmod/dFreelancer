@@ -8,7 +8,7 @@ describe("Dfreelancer", function () {
   let employer;
   let jobTitle = "Sample Job";
   let jobDescription = "This is a test job";
-  let jobBudget = 100;
+  let jobBudget = '100';
 
   beforeEach(async function () {
     [owner, freelancer, employer] = await ethers.getSigners();
@@ -24,7 +24,7 @@ describe("Dfreelancer", function () {
       expect(job.employer).to.equal(owner.address);
       expect(job.title).to.equal(jobTitle);
       expect(job.description).to.equal(jobDescription);
-      expect(job.budget).to.equal(ethers.utils.parseEther(jobBudget));
+      expect(job.budget.toString()).to.equal(ethers.utils.parseEther(jobBudget));
       expect(job.completed).to.be.false;
   });
 
