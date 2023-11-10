@@ -52,9 +52,7 @@ describe("Dfreelancer", function () {
     await dfreelancer.connect(freelancer).applyForJob('1');
     await dfreelancer.hireFreelancer('1', freelancer.address);
     const job = await dfreelancer.getJobByID('1');
-    console.log(job);
-    // assert(jo)
-    // expect(job.hiredFreelancers).to.include(freelancer.address);
+    expect(job.hiredFreelancer).to.equal(freelancer.address)
   });
 
   // it("Should complete a job and release funds", async function () {
