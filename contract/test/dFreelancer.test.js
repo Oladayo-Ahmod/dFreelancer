@@ -77,8 +77,11 @@ describe("Dfreelancer", function () {
     await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     await dfreelancer.connect(employer).registerEmployer('Ahmod','technology')
     await dfreelancer.connect(employer).depositFunds('1', { value: ethers.utils.parseEther(fund) });
+    const escrowFund = await dfreelancer.getEmployerEscrow(employer.address)
     const _employer = await dfreelancer.getEmployerByAddress(employer.address);
     expect(_employer.balance).to.equal(ethers.utils.parseEther(fund))
+    console.log(escrowFund);
+
   });
 
   // it("Should release escrow funds to a freelancer", async function () {

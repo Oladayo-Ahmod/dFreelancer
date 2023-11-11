@@ -89,6 +89,10 @@ contract Dfreelancer {
         props = freelancers[_freelancer];
     }
 
+    function getEmployerEscrow(address _employer) external view returns(uint){
+        return escrowFunds[_employer];
+    }
+
     function applyForJob(uint jobId) public {
         require(jobId <= totalJobs && jobId > 0, "Job does not exist.");
         Job storage job = jobs[jobId];
