@@ -80,7 +80,7 @@ describe("Dfreelancer", function () {
     const escrowFund = await dfreelancer.getEmployerEscrow(employer.address)
     const _employer = await dfreelancer.getEmployerByAddress(employer.address);
     expect(_employer.balance).to.equal(ethers.utils.parseEther(fund))
-    console.log(escrowFund);
+    expect(escrowFund).to.equal(ethers.utils.parseEther(fund))
 
   });
 
