@@ -58,6 +58,7 @@ contract Dfreelancer {
         owner = msg.sender;
     }
 
+    
     modifier onlyEmployer(address _employerAddress){
         require(employers[msg.sender].employerAddress == _employerAddress, "Only employer can create job");
 
@@ -75,6 +76,8 @@ contract Dfreelancer {
         _;
     }
 
+    /// @notice job creation and increment job count,
+    /// @param _title, @param _description, @param _budget
     function createJob(string memory _title, string memory _description, uint256 _budget) public onlyEmployer(msg.sender){
         totalJobs++;
         uint8 jobId = totalJobs;
@@ -82,24 +85,38 @@ contract Dfreelancer {
         emit JobCreated(jobId, _title);
     }
 
+    /// @notice retrieves job by ID
+    /// @param jobId, jobId
+    /// @return props
      function getJobByID(uint256 jobId) external view returns(Job memory props) {
         require(jobId > 0 && jobId <= totalJobs, "Invalid job ID");
         props = jobs[jobId];
     }
 
+    /// @notice retrieves employer by address
+    /// @param _employer, address
+    /// @return props
     function getEmployerByAddress(address _employer) external view returns(Employer memory props){
         props = employers[_employer];
     }
 
+     /// @notice retrieves freelancer by address
+    /// @param _freelancer, address
+    /// @return props
     function getFreelancerByAddress(address _freelancer) external view returns(Freelancer memory props){
         props = freelancers[_freelancer];
     }
 
+     /// @notice retrieves employer escrow balance
+    /// @param _employer, @param _job_id
+    /// @return uint
     function getEmployerEscrow(address _employer, uint256 _job_id) external view returns(uint){
         return escrowFunds[_employer][_job_id];
 
     }
 
+     /// @notice job application
+    /// @param jobId, job id
     function applyForJob(uint jobId) public {
         require(jobId <= totalJobs && jobId > 0, "Job does not exist.");
         Job storage job = jobs[jobId];
@@ -117,6 +134,8 @@ contract Dfreelancer {
         emit AppliedForJob(jobId,job.employer,msg.sender);
     }
 
+    /// @notice hiring freelancer and check if freelancer is not already hired for the job
+    /// @param jobId, @param freelancerAddress
     function hireFreelancer(uint jobId, address freelancerAddress) public onlyEmployer(msg.sender) {
         require(jobId <= totalJobs && jobId > 0, "Job does not exist.");
         Job storage job = jobs[jobId];
@@ -127,13 +146,13 @@ contract Dfreelancer {
     
     }
 
+    /// @notice process job completion
+    /// @param jobId, @param freelancerAddress
     function completeJob(uint jobId, address freelancerAddress) public onlyEmployer(msg.sender) {
         require(jobId <= totalJobs && jobId > 0, "Job does not exist.");
         Job storage job = jobs[jobId];
         require(job.employer != address(0), "Job not found.");
         require(isFreelancerHired(job, freelancerAddress), "Freelancer is not hired for this job.");
-        // require(job.completed = false, "Job is already completed.");
-
         // mark the job as completed
         uint payment = job.budget;
         job.completed = true;
@@ -141,6 +160,8 @@ contract Dfreelancer {
         emit JobCompleted(jobId, freelancerAddress, payment);
     }
 
+    /// @notice process freelancer registration
+    /// @param _name , @param _skills
     function registerFreelancer(string memory _name, string memory _skills) public {
         require(bytes(_name).length > 0, "Name cannot be empty.");
         require(bytes(_skills).length > 0, "Skills cannot be empty.");
@@ -149,6 +170,8 @@ contract Dfreelancer {
         emit FreelancerRegistered(msg.sender, _name);
     }
 
+        /// @notice process employer registration
+        /// @param _name , @param _industry
       function registerEmployer(string memory _name, string memory _industry) public {
         require(bytes(_name).length > 0, "Name cannot be empty.");
         require(bytes(_industry).length > 0, "Skills cannot be empty.");
@@ -157,6 +180,8 @@ contract Dfreelancer {
         emit EmployerRegistered(msg.sender, _name);
     }
 
+        /// @notice process employer funds deposit for a specific job
+        /// @param jobId , job id
     function depositFunds(uint jobId) public payable {
         require(jobId <= totalJobs && jobId > 0, "Job does not exist.");
         Job storage job = jobs[jobId];
@@ -170,6 +195,8 @@ contract Dfreelancer {
         emit FundsDeposited(jobId, msg.sender, msg.value);
     }
 
+        /// @notice release escrow fund after successful completion of the job
+        /// @param jobId , @param freelancerAddress
     function releaseEscrow(uint jobId, address freelancerAddress) public onlyEmployer(msg.sender){
         require(jobId <= totalJobs && jobId > 0, "Job does not exist.");
         Job storage job = jobs[jobId];
@@ -187,6 +214,9 @@ contract Dfreelancer {
         emit FundsReleased(jobId, freelancerAddress, escrowAmount);
     }
 
+        /// @notice check if freelancer is hired
+        /// @param job , @param freelancerAddress
+        /// @return bool
     function isFreelancerHired(Job storage job, address freelancerAddress) internal view returns (bool) {
         if (job.hiredFreelancer == freelancerAddress) {
             return true;
@@ -194,7 +224,7 @@ contract Dfreelancer {
         return false;
     }
 
-
+    /// @notice process funds withdrawal to the freelancer after successful completion of a job
     function withdrawEarnings() public onlyFreelancer(msg.sender) {
         Freelancer storage freelancer = freelancers[msg.sender];
         require(freelancer.balance > 0, "No balance to withdraw.");
