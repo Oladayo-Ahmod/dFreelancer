@@ -128,13 +128,9 @@ contract Dfreelancer {
         require(isFreelancerHired(job, freelancerAddress), "Freelancer is not hired for this job.");
         // require(job.completed = false, "Job is already completed.");
 
-        // Pay the freelancer and mark the job as completed
+        // mark the job as completed
         uint payment = job.budget;
         job.completed = true;
-
-        Freelancer storage freelancer = freelancers[freelancerAddress];
-        freelancer.balance += payment;
-
         totalCompletedJobs++;
         emit JobCompleted(jobId, freelancerAddress, payment);
     }
