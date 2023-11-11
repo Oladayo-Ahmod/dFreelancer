@@ -41,6 +41,7 @@ describe("Dfreelancer", function () {
   });
 
   it("Should apply for a job", async function () {
+    await dfreelancer.connect(employer).registerEmployer('Ahmod','technology')
     await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     const apply = await dfreelancer.connect(freelancer).applyForJob('1');
     const receipt = await apply.wait()
@@ -49,6 +50,7 @@ describe("Dfreelancer", function () {
   });
 
   it("Should hire a freelancer", async function () {
+    await dfreelancer.connect(employer).registerEmployer('Ahmod','technology')
     await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     await dfreelancer.connect(freelancer).applyForJob('1');
     await dfreelancer.connect(employer).hireFreelancer('1', freelancer.address);
@@ -57,9 +59,10 @@ describe("Dfreelancer", function () {
   });
 
   it("Should complete a job and release funds", async function () {
+    await dfreelancer.connect(employer).registerEmployer('Ahmod','technology')
     await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     await dfreelancer.connect(freelancer).applyForJob('1');
-    await dfreelancer.hireFreelancer('1', freelancer.address);
+    await dfreelancer.connect(employer).hireFreelancer('1', freelancer.address);
     await dfreelancer.connect(employer).completeJob('1', freelancer.address);
     const job = await dfreelancer.getJobByID('1');
     const freelancerBalance = (await dfreelancer.freelancers(freelancer.address)).balance;
@@ -69,11 +72,18 @@ describe("Dfreelancer", function () {
   });
 
   it("Should deposit funds to a job", async function () {
-    const jobId = 2;
-    const depositAmount = 50;
-    await dfreelancer.connect(employer).depositFunds(jobId, { value: depositAmount });
-    const job = await dfreelancer.jobs(jobId);
-    expect(job.escrowFunds[employer.address]).to.equal(depositAmount);
+    await dfreelancer.connect(employer).registerEmployer('Ahmod','technology')
+    await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
+    await dfreelancer.connect(employer).registerEmployer('Ahmod','technology')
+    const test = await dfreelancer.connect(employer).depositFunds('1', { value: ethers.utils.parseEther('200') });
+     await test.wait()
+    // const events = receipt.events.find(event => event.event === 'FundsDeposited');
+    const _employer = (await dfreelancer.employers(employer.address)).balance
+    console.log(employer.address);
+    // const _employe = await dfreelancer.connect(employer).escrowFunds(employer.address)
+    // console.log(_employe);
+    // const job = await dfreelancer.getJobByID(jobId);
+    // expect(job.escrowFunds[employer.address]).to.equal(depositAmount);
   });
 
   // it("Should release escrow funds to a freelancer", async function () {

@@ -81,6 +81,10 @@ contract Dfreelancer {
         props = jobs[jobId];
     }
 
+    function getEmployerByAddress() external view returns(Employer memory props){
+        props = employers[msg.sender];
+    }
+
     function applyForJob(uint jobId) public {
         require(jobId <= totalJobs && jobId > 0, "Job does not exist.");
         Job storage job = jobs[jobId];
@@ -98,7 +102,7 @@ contract Dfreelancer {
         emit AppliedForJob(jobId,job.employer,msg.sender);
     }
 
-    function hireFreelancer(uint jobId, address freelancerAddress) public onlyOwner {
+    function hireFreelancer(uint jobId, address freelancerAddress) public onlyEmployer(msg.sender) {
         require(jobId <= totalJobs && jobId > 0, "Job does not exist.");
         Job storage job = jobs[jobId];
         require(job.employer != address(0), "Job not found.");
@@ -108,7 +112,7 @@ contract Dfreelancer {
     
     }
 
-    function completeJob(uint jobId, address freelancerAddress) public onlyOwner {
+    function completeJob(uint jobId, address freelancerAddress) public onlyEmployer(msg.sender) {
         require(jobId <= totalJobs && jobId > 0, "Job does not exist.");
         Job storage job = jobs[jobId];
         require(job.employer != address(0), "Job not found.");
@@ -145,10 +149,12 @@ contract Dfreelancer {
     function depositFunds(uint jobId) public payable {
         require(jobId <= totalJobs && jobId > 0, "Job does not exist.");
         Job storage job = jobs[jobId];
+        Employer memory employer = employers[msg.sender];
         require(job.employer == msg.sender, "Only the employer can deposit funds.");
         require(!job.completed, "Job is already completed.");
         require(msg.value >= job.budget, "Insufficient amount");
-
+        
+        employer.balance += msg.value;
         escrowFunds[msg.sender] += msg.value;
         emit FundsDeposited(jobId, msg.sender, msg.value);
     }
@@ -163,13 +169,10 @@ contract Dfreelancer {
 
         require(escrowAmount > 0, "No funds in escrow.");
         require(escrowAmount >= job.budget, "insufficient funds");
-
-        escrowFunds[msg.sender] = 0;
-        
+        escrowFunds[msg.sender] = 0;        
         // Implement logic to release funds from escrow to the freelancer's address
         Freelancer storage freelancer = freelancers[freelancerAddress];
         freelancer.balance += escrowAmount;
-
         emit FundsReleased(jobId, freelancerAddress, escrowAmount);
     }
 
