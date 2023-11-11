@@ -51,6 +51,7 @@ contract Dfreelancer {
     event FundsDeposited(uint jobId, address sender, uint amount);
     event FundsReleased(uint jobId, address freelancerAddress, uint amount);
     event AppliedForJob(uint jobId, address employerAddress, address freelancerAddress);
+    event WithdrawFund(address freelancer, uint amount);
 
 
     constructor() {
@@ -203,5 +204,7 @@ contract Dfreelancer {
 
         (bool success, ) = msg.sender.call{value: balance}("");
         require(success, "Transfer failed.");
+
+        emit WithdrawFund(msg.sender,balance);
     }
 }
