@@ -96,7 +96,7 @@ describe("Dfreelancer", function () {
     await dfreelancer.connect(employer).releaseEscrow('1', freelancer.address);
     
     const updatedBalance = (await dfreelancer.freelancers(freelancer.address)).balance;
-    assert.equal(updatedBalance,ethers.utils.parseEther(fund))
+    assert.equal(updatedBalance.toString(),ethers.utils.parseEther(fund).toString())
   });
 
   // it("Should withdraw earnings", async function () {
