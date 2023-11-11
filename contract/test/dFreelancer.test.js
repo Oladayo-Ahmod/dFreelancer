@@ -97,7 +97,8 @@ describe("Dfreelancer", function () {
     await dfreelancer.connect(employer).releaseEscrow('1', freelancer.address);
     // const job = await dfreelancer.jobs(jobId);
     const updatedBalance = (await dfreelancer.freelancers(freelancer.address)).balance;
-    console.log(updatedBalance);
+    console.log('initial',initialBalance);
+    console.log('updated',updatedBalance);
     // expect(job.escrowFunds[employer.address]).to.equal(0);
     // expect(updatedBalance).to.equal(initialBalance + 50);
   });
