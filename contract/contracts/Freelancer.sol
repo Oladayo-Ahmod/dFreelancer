@@ -41,7 +41,7 @@ contract Dfreelancer {
     mapping(address => Freelancer) public freelancers;
     mapping(address => Employer) public employers;
     // mapping(address => bool) completedByFreelancers;
-    mapping(address => uint) escrowFunds;
+    mapping(address => mapping(uint256 => uint)) escrowFunds;
 
 
     event JobCreated(uint jobId, string title);
@@ -89,8 +89,9 @@ contract Dfreelancer {
         props = freelancers[_freelancer];
     }
 
-    function getEmployerEscrow(address _employer) external view returns(uint){
-        return escrowFunds[_employer];
+    function getEmployerEscrow(address _employer, uint256 _job_id) external view returns(uint){
+        return escrowFunds[_employer][_job_id];
+
     }
 
     function applyForJob(uint jobId) public {
@@ -163,21 +164,21 @@ contract Dfreelancer {
         require(msg.value >= job.budget, "Insufficient amount");
         
         employer.balance += msg.value;
-        escrowFunds[msg.sender] += msg.value;
+        escrowFunds[msg.sender][jobId] += msg.value;
         emit FundsDeposited(jobId, msg.sender, msg.value);
     }
 
-    function releaseEscrow(uint jobId, address freelancerAddress) public {
+    function releaseEscrow(uint jobId, address freelancerAddress) public onlyEmployer(msg.sender){
         require(jobId <= totalJobs && jobId > 0, "Job does not exist.");
         Job storage job = jobs[jobId];
         require(msg.sender == job.employer, "Only the employer can release escrow.");
         require(job.completed = true, "Job is not completed by freelancer");
 
-        uint escrowAmount = escrowFunds[msg.sender];
+        uint escrowAmount = escrowFunds[msg.sender][jobId];
 
         require(escrowAmount > 0, "No funds in escrow.");
         require(escrowAmount >= job.budget, "insufficient funds");
-        escrowFunds[msg.sender] = 0;        
+        escrowFunds[msg.sender][jobId] = 0;        
         // Implement logic to release funds from escrow to the freelancer's address
         Freelancer storage freelancer = freelancers[freelancerAddress];
         freelancer.balance += escrowAmount;
