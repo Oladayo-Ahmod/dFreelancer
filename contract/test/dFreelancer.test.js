@@ -76,7 +76,7 @@ describe("Dfreelancer", function () {
     await dfreelancer.connect(employer).registerEmployer('Ahmod','technology')
     await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     await dfreelancer.connect(employer).registerEmployer('Ahmod','technology')
-    await dfreelancer.connect(employer).depositFunds('1', { value: ethers.utils.parseEther(fund) });
+    await dfreelancer.connect(employer).depositFunds('1', { value: ethers.utils.parseEther(fund)});
     const escrowFund = await dfreelancer.getEmployerEscrow(employer.address)
     const _employer = await dfreelancer.getEmployerByAddress(employer.address);
     expect(_employer.balance).to.equal(ethers.utils.parseEther(fund))
@@ -84,15 +84,23 @@ describe("Dfreelancer", function () {
 
   });
 
-  // it("Should release escrow funds to a freelancer", async function () {
-  //   const jobId = 2;
-  //   const initialBalance = (await dfreelancer.freelancers(freelancer.address)).balance;
-  //   await dfreelancer.releaseEscrow(jobId, freelancer.address);
-  //   const job = await dfreelancer.jobs(jobId);
-  //   const updatedBalance = (await dfreelancer.freelancers(freelancer.address)).balance;
-  //   expect(job.escrowFunds[employer.address]).to.equal(0);
-  //   expect(updatedBalance).to.equal(initialBalance + 50);
-  // });
+  it("Should release escrow funds to a freelancer", async function () {
+    const initialBalance = (await dfreelancer.freelancers(freelancer.address)).balance; // previous balance
+    await dfreelancer.connect(employer).registerEmployer('Ahmod','technology') 
+    await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
+    await dfreelancer.connect(freelancer).applyForJob('1');
+
+    await dfreelancer.connect(employer).hireFreelancer('1', freelancer.address);
+    await dfreelancer.connect(employer).completeJob('1', freelancer.address);
+    await dfreelancer.connect(employer).depositFunds('1', { value: ethers.utils.parseEther(fund)});
+
+    await dfreelancer.connect(employer).releaseEscrow('1', freelancer.address);
+    // const job = await dfreelancer.jobs(jobId);
+    const updatedBalance = (await dfreelancer.freelancers(freelancer.address)).balance;
+    console.log(updatedBalance);
+    // expect(job.escrowFunds[employer.address]).to.equal(0);
+    // expect(updatedBalance).to.equal(initialBalance + 50);
+  });
 
   // it("Should withdraw earnings", async function () {
   //   const initialBalance = await ethers.provider.getBalance(freelancer.address);
