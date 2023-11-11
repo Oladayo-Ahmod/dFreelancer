@@ -63,6 +63,11 @@ contract Dfreelancer {
         _;
     }
 
+     modifier onlyFreelancer(address _freelancerAddress){
+        require(freelancers[msg.sender].freelancerAddress == _freelancerAddress, "Only freelancer can withdraw fund");
+        _;
+    }
+
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Only the owner can call this function.");
@@ -189,7 +194,7 @@ contract Dfreelancer {
     }
 
 
-    function withdrawEarnings() public {
+    function withdrawEarnings() public onlyFreelancer(msg.sender) {
         Freelancer storage freelancer = freelancers[msg.sender];
         require(freelancer.balance > 0, "No balance to withdraw.");
 

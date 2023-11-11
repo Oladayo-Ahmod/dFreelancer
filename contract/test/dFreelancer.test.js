@@ -84,7 +84,6 @@ describe("Dfreelancer", function () {
 
   it("Should release escrow funds to a freelancer", async function () {
     const fund = '200'
-    const initialBalance = (await dfreelancer.freelancers(freelancer.address)).balance; // previous balance
     await dfreelancer.connect(employer).registerEmployer('Ahmod','technology') 
     await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     await dfreelancer.connect(freelancer).applyForJob('1');
@@ -99,13 +98,12 @@ describe("Dfreelancer", function () {
     assert.equal(updatedBalance.toString(),ethers.utils.parseEther(fund).toString())
   });
 
-  // it("Should withdraw earnings", async function () {
-  //   const initialBalance = await ethers.provider.getBalance(freelancer.address);
-  //   await dfreelancer.connect(freelancer).withdrawEarnings();
-  //   const updatedBalance = await ethers.provider.getBalance(freelancer.address);
-  //   expect(updatedBalance.gt(initialBalance)).to.be.true;
-  // });
+  it("Should withdraw earnings", async function () {
+    const initialBalance = (await dfreelancer.freelancers(freelancer.address)).balance; // previous balance
+    await dfreelancer.connect(freelancer).withdrawEarnings();
+    const updatedBalance = await ethers.provider.getBalance(freelancer.address);
+    expect(updatedBalance.gt(initialBalance)).to.be.true;
+  });
 
-  // Add more test cases as needed...
 
 });
