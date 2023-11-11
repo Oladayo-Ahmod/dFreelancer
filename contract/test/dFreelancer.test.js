@@ -3,7 +3,8 @@ const { ethers } = require("hardhat");
 
 describe("Dfreelancer", function () {
   let dfreelancer;
-  let owner;
+  const freelancerName = "Test Freelancer";
+  const freelancerSkills = "Solidity, JavaScript";
   let freelancer;
   let employer;
   let jobTitle = "Sample Job";
@@ -30,8 +31,6 @@ describe("Dfreelancer", function () {
   });
 
   it("Should register a freelancer", async function () {
-    const freelancerName = "Test Freelancer";
-    const freelancerSkills = "Solidity, JavaScript";
     await dfreelancer.connect(freelancer).registerFreelancer(freelancerName, freelancerSkills);
     const registeredFreelancer = await dfreelancer.freelancers(freelancer.address);
     expect(registeredFreelancer.freelancerAddress).to.equal(freelancer.address);
@@ -41,6 +40,7 @@ describe("Dfreelancer", function () {
   });
 
   it("Should apply for a job", async function () {
+    await dfreelancer.connect(freelancer).registerFreelancer(freelancerName, freelancerSkills);
     await dfreelancer.connect(employer).registerEmployer('Ahmod','technology')
     await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     const apply = await dfreelancer.connect(freelancer).applyForJob('1');
@@ -50,6 +50,7 @@ describe("Dfreelancer", function () {
   });
 
   it("Should hire a freelancer", async function () {
+    await dfreelancer.connect(freelancer).registerFreelancer(freelancerName, freelancerSkills);
     await dfreelancer.connect(employer).registerEmployer('Ahmod','technology')
     await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     await dfreelancer.connect(freelancer).applyForJob('1');
@@ -59,6 +60,7 @@ describe("Dfreelancer", function () {
   });
 
   it("Should complete a job", async function () {
+    await dfreelancer.connect(freelancer).registerFreelancer(freelancerName, freelancerSkills);
     await dfreelancer.connect(employer).registerEmployer('Ahmod','technology')
     await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     await dfreelancer.connect(freelancer).applyForJob('1');
@@ -71,6 +73,7 @@ describe("Dfreelancer", function () {
 
   it("Should deposit funds to a job", async function () {
     const fund = '100' 
+    await dfreelancer.connect(freelancer).registerFreelancer(freelancerName, freelancerSkills);
     await dfreelancer.connect(employer).registerEmployer('Ahmod','technology')
     await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     await dfreelancer.connect(employer).registerEmployer('Ahmod','technology')
@@ -84,6 +87,7 @@ describe("Dfreelancer", function () {
 
   it("Should release escrow funds to a freelancer", async function () {
     const fund = '200'
+    await dfreelancer.connect(freelancer).registerFreelancer(freelancerName, freelancerSkills);
     await dfreelancer.connect(employer).registerEmployer('Ahmod','technology') 
     await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     await dfreelancer.connect(freelancer).applyForJob('1');
@@ -99,10 +103,25 @@ describe("Dfreelancer", function () {
   });
 
   it("Should withdraw earnings", async function () {
+    const fund = '105' // job budget plus incentive
     const initialBalance = (await dfreelancer.freelancers(freelancer.address)).balance; // previous balance
-    await dfreelancer.connect(freelancer).withdrawEarnings();
-    const updatedBalance = await ethers.provider.getBalance(freelancer.address);
-    expect(updatedBalance.gt(initialBalance)).to.be.true;
+
+    await dfreelancer.connect(freelancer).registerFreelancer(freelancerName, freelancerSkills);
+    await dfreelancer.connect(employer).registerEmployer('Ahmod','technology') 
+    await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
+    await dfreelancer.connect(freelancer).applyForJob('1');
+
+    await dfreelancer.connect(employer).hireFreelancer('1', freelancer.address);
+    await dfreelancer.connect(employer).depositFunds('1', { value: ethers.utils.parseEther(fund)});
+    await dfreelancer.connect(employer).completeJob('1', freelancer.address);
+
+    await dfreelancer.connect(employer).releaseEscrow('1', freelancer.address);
+
+    const withdraw = await dfreelancer.connect(freelancer).withdrawEarnings();
+    const receipt = await withdraw.wait()
+    const event = receipt.events.find((event)=> event.event == 'WithdrawFund')
+    assert.equal(event.args[1].toString(),ethers.utils.parseEther(fund).toString()) 
+
   });
 
 
