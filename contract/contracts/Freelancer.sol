@@ -31,7 +31,7 @@ contract Dfreelancer {
     struct Employer {
         address employerAddress;
         string name;
-        string skills;
+        string industry;
         uint balance;
     }
 
@@ -134,11 +134,11 @@ contract Dfreelancer {
         emit FreelancerRegistered(msg.sender, _name);
     }
 
-      function registerEmployer(string memory _name, string memory _skills) public {
+      function registerEmployer(string memory _name, string memory _industry) public {
         require(bytes(_name).length > 0, "Name cannot be empty.");
-        require(bytes(_skills).length > 0, "Skills cannot be empty.");
+        require(bytes(_industry).length > 0, "Skills cannot be empty.");
         totalEmployers++;
-        employers[msg.sender] = Employer(msg.sender, _name, _skills, 0);
+        employers[msg.sender] = Employer(msg.sender, _name, _industry, 0);
         emit EmployerRegistered(msg.sender, _name);
     }
 

@@ -19,6 +19,7 @@ describe("Dfreelancer", function () {
   });
 
   it("Should create a job", async function () {
+      await dfreelancer.connect(employer).registerEmployer('Ahmod','technology')
       await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
       const job = await dfreelancer.getJobByID('1');
       expect(job.employer).to.equal(employer.address);
