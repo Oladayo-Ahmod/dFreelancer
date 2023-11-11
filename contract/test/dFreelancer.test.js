@@ -78,8 +78,11 @@ describe("Dfreelancer", function () {
     const test = await dfreelancer.connect(employer).depositFunds('1', { value: ethers.utils.parseEther('200') });
      await test.wait()
     // const events = receipt.events.find(event => event.event === 'FundsDeposited');
-    const _employer = (await dfreelancer.employers(employer.address)).balance
-    console.log(employer.address);
+    // const _employer = (await dfreelancer.employers(employer.address)).balance
+    // console.log(employer.address);
+    const _employer = await dfreelancer.getEmployerByAddress(employer.address);
+    console.log(_employer);
+    console.log('address',employer.address);
     // const _employe = await dfreelancer.connect(employer).escrowFunds(employer.address)
     // console.log(_employe);
     // const job = await dfreelancer.getJobByID(jobId);

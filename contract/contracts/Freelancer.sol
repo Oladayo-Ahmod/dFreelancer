@@ -81,8 +81,12 @@ contract Dfreelancer {
         props = jobs[jobId];
     }
 
-    function getEmployerByAddress() external view returns(Employer memory props){
-        props = employers[msg.sender];
+    function getEmployerByAddress(address _employer) external view returns(Employer memory props){
+        props = employers[_employer];
+    }
+
+    function getFreelancerByAddress(address _freelancer) external view returns(Freelancer memory props){
+        props = freelancers[_freelancer];
     }
 
     function applyForJob(uint jobId) public {
@@ -149,7 +153,7 @@ contract Dfreelancer {
     function depositFunds(uint jobId) public payable {
         require(jobId <= totalJobs && jobId > 0, "Job does not exist.");
         Job storage job = jobs[jobId];
-        Employer memory employer = employers[msg.sender];
+        Employer storage employer = employers[msg.sender];
         require(job.employer == msg.sender, "Only the employer can deposit funds.");
         require(!job.completed, "Job is already completed.");
         require(msg.value >= job.budget, "Insufficient amount");
