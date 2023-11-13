@@ -99,7 +99,6 @@ describe("Dfreelancer", function () {
     .registerEmployer('Ahmod','technology','United States','https://img.com')
     await dfreelancer.connect(employer)
     .createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
-    await dfreelancer.connect(employer).registerEmployer('Ahmod','technology')
     await dfreelancer.connect(employer).depositFunds('1', { value: ethers.utils.parseEther(fund)});
     const escrowFund = await dfreelancer.getEmployerEscrow(employer.address,'1')
     const _employer = await dfreelancer.getEmployerByAddress(employer.address);
