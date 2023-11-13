@@ -37,7 +37,8 @@ describe("Dfreelancer", function () {
 
   //  registering freelancer
   it("Should register a freelancer", async function () {
-    await dfreelancer.connect(freelancer).registerFreelancer(freelancerName, freelancerSkills);
+    await dfreelancer.connect(freelancer)
+    .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerCountry);
     const registeredFreelancer = await dfreelancer.freelancers(freelancer.address);
     expect(registeredFreelancer.freelancerAddress).to.equal(freelancer.address);
     expect(registeredFreelancer.name).to.equal(freelancerName);
