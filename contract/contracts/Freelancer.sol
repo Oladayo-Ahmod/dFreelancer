@@ -25,6 +25,8 @@ contract Dfreelancer {
         string name;
         string skills;
         uint balance;
+        string country;
+        string image;
     }
 
     
@@ -33,6 +35,8 @@ contract Dfreelancer {
         string name;
         string industry;
         uint balance;
+        string country;
+        string image;
     }
 
     // Job[] public jobs;
@@ -162,21 +166,23 @@ contract Dfreelancer {
 
     /// @notice process freelancer registration
     /// @param _name , @param _skills
-    function registerFreelancer(string memory _name, string memory _skills) public {
+    function registerFreelancer
+    (string memory _name, string memory _skills, string memory _country, string memory _imageURI) public {
         require(bytes(_name).length > 0, "Name cannot be empty.");
         require(bytes(_skills).length > 0, "Skills cannot be empty.");
         totalFreelancers++;
-        freelancers[msg.sender] = Freelancer(msg.sender, _name, _skills, 0);
+        freelancers[msg.sender] = Freelancer(msg.sender, _name, _skills, 0,_country, _imageURI);
         emit FreelancerRegistered(msg.sender, _name);
     }
 
         /// @notice process employer registration
         /// @param _name , @param _industry
-      function registerEmployer(string memory _name, string memory _industry) public {
+      function registerEmployer
+      (string memory _name, string memory _industry,string memory _country, string memory _imageURI) public {
         require(bytes(_name).length > 0, "Name cannot be empty.");
         require(bytes(_industry).length > 0, "Skills cannot be empty.");
         totalEmployers++;
-        employers[msg.sender] = Employer(msg.sender, _name, _industry, 0);
+        employers[msg.sender] = Employer(msg.sender, _name, _industry, 0,_country, _imageURI);
         emit EmployerRegistered(msg.sender, _name);
     }
 
