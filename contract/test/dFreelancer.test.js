@@ -5,6 +5,8 @@ describe("Dfreelancer", function () {
   let dfreelancer;
   const freelancerName = "Test Freelancer";
   const freelancerSkills = "Solidity, JavaScript";
+  const freelancerCountry = 'Nigeria'
+  const freelancerImageURI = 'https://image.com'
   let freelancer;
   let employer;
   let jobTitle = "Sample Job";
@@ -21,8 +23,10 @@ describe("Dfreelancer", function () {
 
   // creating job
   it("Should create a job", async function () {
-      await dfreelancer.connect(employer).registerEmployer('Ahmod','technology')
-      await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
+      await dfreelancer.connect(employer)
+      .registerEmployer('Ahmod','technology','United States','https://img.com')
+      await dfreelancer.connect(employer)
+      .createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
       const job = await dfreelancer.getJobByID('1');
       expect(job.employer).to.equal(employer.address);
       expect(job.title).to.equal(jobTitle);
@@ -43,9 +47,12 @@ describe("Dfreelancer", function () {
 
   // applying for job
   it("Should apply for a job", async function () {
-    await dfreelancer.connect(freelancer).registerFreelancer(freelancerName, freelancerSkills);
-    await dfreelancer.connect(employer).registerEmployer('Ahmod','technology')
-    await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
+    await dfreelancer.connect(freelancer)
+    .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI);
+    await dfreelancer.connect(employer)
+    .registerEmployer('Ahmod','technology','United States','https://img.com')
+    await dfreelancer.connect(employer)
+    .createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     const apply = await dfreelancer.connect(freelancer).applyForJob('1');
     const receipt = await apply.wait()
     const events = receipt.events.find(event => event.event === 'AppliedForJob');
@@ -54,9 +61,12 @@ describe("Dfreelancer", function () {
 
   // hiring freelancer
   it("Should hire a freelancer", async function () {
-    await dfreelancer.connect(freelancer).registerFreelancer(freelancerName, freelancerSkills);
-    await dfreelancer.connect(employer).registerEmployer('Ahmod','technology')
-    await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
+    await dfreelancer.connect(freelancer)
+    .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI);
+    await dfreelancer.connect(employer)
+    .registerEmployer('Ahmod','technology','United States','https://img.com')
+    await dfreelancer.connect(employer)
+    .createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     await dfreelancer.connect(freelancer).applyForJob('1');
     await dfreelancer.connect(employer).hireFreelancer('1', freelancer.address);
     const job = await dfreelancer.getJobByID('1');
@@ -65,9 +75,12 @@ describe("Dfreelancer", function () {
 
 // job completion
   it("Should complete a job", async function () {
-    await dfreelancer.connect(freelancer).registerFreelancer(freelancerName, freelancerSkills);
-    await dfreelancer.connect(employer).registerEmployer('Ahmod','technology')
-    await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
+    await dfreelancer.connect(freelancer)
+    .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI);
+    await dfreelancer.connect(employer)
+    .registerEmployer('Ahmod','technology','United States','https://img.com')
+    await dfreelancer.connect(employer).
+    createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     await dfreelancer.connect(freelancer).applyForJob('1');
     await dfreelancer.connect(employer).hireFreelancer('1', freelancer.address);
     await dfreelancer.connect(employer).completeJob('1', freelancer.address);
@@ -79,9 +92,12 @@ describe("Dfreelancer", function () {
   // funds deposit by employer
   it("Should deposit funds to a job", async function () {
     const fund = '100' 
-    await dfreelancer.connect(freelancer).registerFreelancer(freelancerName, freelancerSkills);
-    await dfreelancer.connect(employer).registerEmployer('Ahmod','technology')
-    await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
+    await dfreelancer.connect(freelancer)
+    .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI);
+    await dfreelancer.connect(employer)
+    .registerEmployer('Ahmod','technology','United States','https://img.com')
+    await dfreelancer.connect(employer)
+    .createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     await dfreelancer.connect(employer).registerEmployer('Ahmod','technology')
     await dfreelancer.connect(employer).depositFunds('1', { value: ethers.utils.parseEther(fund)});
     const escrowFund = await dfreelancer.getEmployerEscrow(employer.address,'1')
@@ -94,9 +110,12 @@ describe("Dfreelancer", function () {
   // release escrow funds to freelancer after job completion
   it("Should release escrow funds to a freelancer", async function () {
     const fund = '200'
-    await dfreelancer.connect(freelancer).registerFreelancer(freelancerName, freelancerSkills);
-    await dfreelancer.connect(employer).registerEmployer('Ahmod','technology') 
-    await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
+    await dfreelancer.connect(freelancer)
+    .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI);
+    await dfreelancer.connect(employer)
+    .registerEmployer('Ahmod','technology','United States','https://img.com') 
+    await dfreelancer.connect(employer)
+    .createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     await dfreelancer.connect(freelancer).applyForJob('1');
 
     await dfreelancer.connect(employer).hireFreelancer('1', freelancer.address);
@@ -114,9 +133,12 @@ describe("Dfreelancer", function () {
     const fund = '105' // job budget plus incentive
     const initialBalance = (await dfreelancer.freelancers(freelancer.address)).balance; // previous balance
 
-    await dfreelancer.connect(freelancer).registerFreelancer(freelancerName, freelancerSkills);
-    await dfreelancer.connect(employer).registerEmployer('Ahmod','technology') 
-    await dfreelancer.connect(employer).createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
+    await dfreelancer.connect(freelancer)
+    .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI);
+    await dfreelancer.connect(employer)
+    .registerEmployer('Ahmod','technology','United States','https://img.com') 
+    await dfreelancer.connect(employer)
+    .createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     await dfreelancer.connect(freelancer).applyForJob('1');
 
     await dfreelancer.connect(employer).hireFreelancer('1', freelancer.address);
