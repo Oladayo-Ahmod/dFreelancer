@@ -13,10 +13,10 @@ function Navbar(){
                             <div className="d-flex align-items-center justify-content-between">
                                 <div className="logos br-white-light pr30 pr5-xl">
                                     <a className="header-logo logo1" href="index.html">
-                                        <Image src="images/header-logo.svg" alt="Header Logo" />
+                                        <Image src="images/header-logo.svg" width={120} height={40} alt="Header Logo" />
                                     </a>
                                     <a className="header-logo logo2" href="index.html">
-                                        <Image src="images/header-logo2.svg" alt="Header Logo" />
+                                        <Image src="images/header-logo2.svg" width={120} height={40} alt="Header Logo" />
                                     </a>
                                 </div>
                                 <div className="home1_style">
