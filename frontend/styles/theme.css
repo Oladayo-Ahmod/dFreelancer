@@ -109,7 +109,8 @@ body {
 }
 
 body {
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
+    background-color : #6b7177;
     font-family: var(--body-font-family);
     font-size: 15px;
     font-weight: 400;
