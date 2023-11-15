@@ -1,6 +1,14 @@
+"use client"
+
 import Image from "next/image"
+import { useEffect } from "react"
 
 function MobileNavbar(){
+
+        // bootstrap
+        useEffect(()=>{
+            require('bootstrap/dist/js/bootstrap.bundle')
+        },[])
     return(
 
         <div id="page" className="mobilie_header_nav stylehome1">
