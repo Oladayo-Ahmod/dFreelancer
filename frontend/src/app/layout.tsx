@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import '../../styles/menu.css'
 import '../../styles/theme.css'
 import '../../styles/responsive-menu.css'
+import '../../styles/custom-spacing.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
