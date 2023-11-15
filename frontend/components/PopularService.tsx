@@ -38,12 +38,13 @@ function PopularService(){
                                     <hr className="my-2" />
                                     <div className="list-meta d-flex justify-content-between align-items-center mt15">
                                         <a className="d-flex" href="#">
-                  <span className="position-relative mr10">
-                    <Image className="rounded-circle wa" width={255} height={245} src="/images/team/fl-s-1.png" alt="Freelancer Photo" />
-                    <span className="online-badges"></span>
-                  </span>
-                  <span className="fz14">Jone Doe</span>
-                </a>
+                                        <span className="position-relative mr10">
+                                            <Image className="rounded-circle wa" 
+                                            width={28} height={28} src="/images/team/fl-s-1.png" alt="Freelancer Photo" />
+                                            <span className="online-badges"></span>
+                                        </span>
+                                        <span className="fz14">Jone Doe</span>
+                                        </a>
                                         <div className="budget">
                                             <p className="mb-0 body-color">Starting at<span className="fz17 fw500 dark-color ms-1">$799</span></p>
                                         </div>
@@ -69,7 +70,7 @@ function PopularService(){
                                     <div className="list-meta d-flex justify-content-between align-items-center mt15">
                                         <a className="d-flex" href="#">
                                             <span className="position-relative mr10">
-                                                <Image className="rounded-circle wa" width={255} height={245} src="/images/team/fl-s-2.png" alt="Freelancer Photo" />
+                                                <Image className="rounded-circle wa" width={28} height={28} src="/images/team/fl-s-2.png" alt="Freelancer Photo" />
                                                 <span className="online-badges"></span>
                                             </span>
                                             <span className="fz14">Angelica Pan</span>
@@ -101,8 +102,8 @@ function PopularService(){
                                     <div className="list-meta d-flex justify-content-between align-items-center mt15">
                                         <a className="d-flex" href="#">
                                             <span className="position-relative mr10">
-                                                <Image className="rounded-circle" width={255} height={245}
-                                                src="images/team/fl-s-3.png" alt="Freelancer Photo" />
+                                                <Image className="rounded-circle" width={28} height={28}
+                                                src="/images/team/fl-s-3.png" alt="Freelancer Photo" />
                                                 <span className="online-badges"></span>
                                             </span>
                                             <span className="fz14">Jone Doe</span>
@@ -133,7 +134,7 @@ function PopularService(){
                                     <div className="list-meta d-flex justify-content-between align-items-center mt15">
                                         <a className="d-flex" href="#">
                                         <span className="position-relative mr10">
-                                            <Image className="rounded-circle" width={255} height={245}
+                                            <Image className="rounded-circle" width={28} height={28}
                                              src="/images/team/fl-s-4.png" alt="Freelancer Photo" />
                                                 <span className="online-badges"></span>
                                             </span>
@@ -164,7 +165,7 @@ function PopularService(){
                                     <div className="list-meta d-flex justify-content-between align-items-center mt15">
                                         <a className="d-flex" href="#">
                                         <span className="position-relative mr10">
-                                            <Image width={255} height={245}
+                                            <Image width={28} height={28}
                                              className="rounded-circle" src="/images/team/fl-s-1.png" alt="Freelancer Photo" />
                                                 <span className="online-badges"></span>
                                             </span>
@@ -196,7 +197,7 @@ function PopularService(){
                                     <div className="list-meta d-flex justify-content-between align-items-center mt15">
                                         <a className="d-flex" href="#">
                                         <span className="position-relative mr10">
-                                            <Image className="rounded-circle" width={255} height={245}
+                                            <Image className="rounded-circle" width={28} height={28}
                                             src="/images/team/fl-s-2.png" alt="Freelancer Photo" />
                                                 <span className="online-badges"></span>
                                             </span>
