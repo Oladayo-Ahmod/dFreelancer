@@ -184,7 +184,7 @@
      top: 50%;
      margin-left: -40px;
      margin-top: -40px;
-     background: url(owl.video.play.html) no-repeat;
+     /* background: url(owl.video.play.html) no-repeat; */
      cursor: pointer;
      z-index: 1;
      -webkit-backface-visibility: hidden;
@@ -987,7 +987,7 @@
  
  .asRange .asRange-pointer:after {
      background: #fff;
-     background-image: url(../images/icons/smile-star.html);
+     background-image: url(/images/icons/smile-star.html);
      background-position: center center;
      background-repeat: no-repeat;
      border-radius: inherit;
@@ -1151,7 +1151,7 @@
  }
  
  .asRange-scale .asRange-scale {
-     background: url(../image/scale.html) no-repeat 0 center transparent;
+     background: url(/image/scale.html) no-repeat 0 center transparent;
      bottom: -22px;
      height: 20px;
      left: 0;
