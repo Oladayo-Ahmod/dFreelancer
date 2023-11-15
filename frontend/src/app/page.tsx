@@ -7,6 +7,9 @@ export default function Home() {
         {/* <div className="preloader"></div> */}
         <Navbar />
         <MobileNavbar />
+        <div className="body_content">
+      
+        </div>
       </main>
   )
 }
