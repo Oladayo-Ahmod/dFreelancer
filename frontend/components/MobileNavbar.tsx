@@ -9,12 +9,12 @@ function MobileNavbar(){
                 <div className="menu_and_widgets">
                     <div className="mobile_menu_bar d-flex justify-content-between align-items-center">
                         <a className="mobile_logo" href="#">
-                            <Image src="images/header-logo.svg" alt="" />
+                            <Image src="/images/header-logo.svg" width={120} height={40}  alt="" />
                        </a>
                         <div className="right-side text-end">
                             <a className="text-white" href="page-login.html">join</a>
                             <a className="menubar ml30" href="#menu">
-                                <Image src="images/white-nav-icon.svg" alt="" />
+                                <Image src="/images/white-nav-icon.svg" width={120} height={40}  alt="" />
                             </a>
                         </div>
                     </div>
