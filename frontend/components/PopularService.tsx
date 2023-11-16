@@ -30,14 +30,6 @@ function PopularService(){
     return (
         
         <section className="pb90 pb30-md bgc-thm3">
-            <style jsx>
-                {
-                    `
-                    
-                    
-                    `
-                }
-            </style>
         <div className="container">
             <div className="row align-items-center wow fadeInUp">
                 <div className="col-lg-9">
