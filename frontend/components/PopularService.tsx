@@ -9,15 +9,31 @@ import { Navigation,Scrollbar,Autoplay } from 'swiper/modules'
 
 
 function PopularService(){
+    const breakpoints:Record<number , {slidesPerView :number, spaceBetween? : number}> = {
+        320 :{
+            slidesPerView : 1,
+            spaceBetween : 20
+        },
+        480 :{
+            slidesPerView : 2,
+            spaceBetween : 20
+        },
+        768 :{
+            slidesPerView : 3,
+            spaceBetween : 30
+        },
+        1024 :{
+            slidesPerView : 4,
+            spaceBetween : 40
+        }
+    }
     return (
         
         <section className="pb90 pb30-md bgc-thm3">
             <style jsx>
                 {
                     `
-                    .listing-style1{
-                        width : 255px;
-                    }
+                    
                     
                     `
                 }
@@ -41,9 +57,26 @@ function PopularService(){
                 <div className="col-lg-12">
                 <Swiper
                     modules={[Navigation, Scrollbar,Autoplay]}
-                    
                     autoplay={{delay: 3000}}
                     slidesPerView={4}
+                    breakpoints={{
+                        320 :{
+                            slidesPerView : 1,
+                            spaceBetween : 20
+                        },
+                        480 :{
+                            slidesPerView : 2,
+                            spaceBetween : 20
+                        },
+                        768 :{
+                            slidesPerView : 3,
+                            spaceBetween : 30
+                        },
+                        1024 :{
+                            slidesPerView : 4,
+                            spaceBetween : 40
+                        }
+                    }}
                 >
 
                     <div className="slider-outer-dib vam_nav_style dots_none slider-4-grid2 owl-carousel owl-theme wow fadeInUp">
