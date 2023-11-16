@@ -39,7 +39,7 @@ function CTABanner(){
                 </div>
             </div>
             <Image className="cta-banner3-img wow fadeInLeft"
-             width={50} height={100} layout="responsive" style={{'width' : '50%', 'height' : '100%'}}
+             width={50} height={100} style={{'width' : '50%', 'height' : '100%'}}
             src="/images/about/about-5.jpg" alt="" data-wow-delay="300ms" />
         </div>
     </section>   

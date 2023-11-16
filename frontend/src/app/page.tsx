@@ -1,3 +1,4 @@
+import CTABanner from "../../components/CtaBanner"
 import HomeBanner from "../../components/HomeBanner"
 import MobileNavbar from "../../components/MobileNavbar"
 import Navbar from "../../components/Navbar"
@@ -14,6 +15,7 @@ export default function Home() {
           <HomeBanner />
           <TalentCategory />
           <PopularService />
+          <CTABanner />
         </div>
       </main>
   )

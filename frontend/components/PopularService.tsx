@@ -1,6 +1,12 @@
 "use client"
 
 import Image from "next/image"
+import { Swiper } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/bundle'
+import { SwiperSlide } from 'swiper/react'
+import { Navigation,Scrollbar,Autoplay } from 'swiper/modules'
+
 
 function PopularService(){
     return (
@@ -33,38 +39,49 @@ function PopularService(){
             </div>
             <div className="row">
                 <div className="col-lg-12">
+                <Swiper
+                    modules={[Navigation, Scrollbar,Autoplay]}
+                    
+                    autoplay={{delay: 3000}}
+                    slidesPerView={4}
+                >
+
                     <div className="slider-outer-dib vam_nav_style dots_none slider-4-grid2 owl-carousel owl-theme wow fadeInUp">
-                        <div className="item">
-                            <div className="listing-style1">
-                                <div className="list-thumb">
-                                    <Image width={255} height={245} className="w-100" style={{'width' : '255px !Important;'}}  src="/images/listings/g-1.jpg" alt="" />
-                                    <a href="#" className="listing-fav fz12"><span className="far fa-heart"></span></a>
-                                </div>
-                                <div className="list-content">
-                                    <p className="list-text body-color fz14 mb-1">Web & Logo Design</p>
-                                    <h5 className="list-title"><a href="page-service-single.html">I will convert figma to HTML CSS using
-                  bootstrap or tailwind</a></h5>
-                                    <div className="review-meta d-flex align-items-center">
-                                        <i className="fas fa-star fz10 review-color me-2"></i>
-                                        <p className="mb-0 body-color fz14"><span className="dark-color me-2">4.82</span>94 reviews</p>
+                        <SwiperSlide >
+                            <div className="item">
+                                <div className="listing-style1">
+                                    <div className="list-thumb">
+                                        <Image width={255} height={245} className="w-100" style={{'width' : '255px !Important;'}}  src="/images/listings/g-1.jpg" alt="" />
+                                        <a href="#" className="listing-fav fz12"><span className="far fa-heart"></span></a>
                                     </div>
-                                    <hr className="my-2" />
-                                    <div className="list-meta d-flex justify-content-between align-items-center mt15">
-                                        <a className="d-flex" href="#">
-                                        <span className="position-relative mr10">
-                                            <Image className="rounded-circle wa" 
-                                            width={28} height={28} src="/images/team/fl-s-1.png" alt="Freelancer Photo" />
-                                            <span className="online-badges"></span>
-                                        </span>
-                                        <span className="fz14">Jone Doe</span>
-                                        </a>
-                                        <div className="budget">
-                                            <p className="mb-0 body-color">Starting at<span className="fz17 fw500 dark-color ms-1">$799</span></p>
+                                    <div className="list-content">
+                                        <p className="list-text body-color fz14 mb-1">Web & Logo Design</p>
+                                        <h5 className="list-title"><a href="page-service-single.html">I will convert figma to HTML CSS using
+                    bootstrap or tailwind</a></h5>
+                                        <div className="review-meta d-flex align-items-center">
+                                            <i className="fas fa-star fz10 review-color me-2"></i>
+                                            <p className="mb-0 body-color fz14"><span className="dark-color me-2">4.82</span>94 reviews</p>
+                                        </div>
+                                        <hr className="my-2" />
+                                        <div className="list-meta d-flex justify-content-between align-items-center mt15">
+                                            <a className="d-flex" href="#">
+                                            <span className="position-relative mr10">
+                                                <Image className="rounded-circle wa" 
+                                                width={28} height={28} src="/images/team/fl-s-1.png" alt="Freelancer Photo" />
+                                                <span className="online-badges"></span>
+                                            </span>
+                                            <span className="fz14">Jone Doe</span>
+                                            </a>
+                                            <div className="budget">
+                                                <p className="mb-0 body-color">Starting at<span className="fz17 fw500 dark-color ms-1">$799</span></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </SwiperSlide >
+
+                        <SwiperSlide >
                         <div className="item">
                             <div className="listing-style1">
                                 <div className="list-thumb">
@@ -95,6 +112,9 @@ function PopularService(){
                                 </div>
                             </div>
                         </div>
+                        </SwiperSlide >
+
+                        <SwiperSlide >
                         <div className="item">
                             <div className="listing-style1">
                                 <div className="list-thumb">
@@ -128,6 +148,9 @@ function PopularService(){
                                 </div>
                             </div>
                         </div>
+                        </SwiperSlide >
+
+                        <SwiperSlide >
                         <div className="item">
                             <div className="listing-style1">
                                 <div className="list-thumb">
@@ -160,6 +183,9 @@ function PopularService(){
                                 </div>
                             </div>
                         </div>
+                        </SwiperSlide >
+
+                        <SwiperSlide >
                         <div className="item">
                             <div className="listing-style1">
                                 <div className="list-thumb">
@@ -191,6 +217,9 @@ function PopularService(){
                                 </div>
                             </div>
                         </div>
+                        </SwiperSlide >
+
+                        <SwiperSlide >
                         <div className="item">
                             <div className="listing-style1">
                                 <div className="list-thumb">
@@ -223,6 +252,9 @@ function PopularService(){
                                 </div>
                             </div>
                         </div>
+                        </SwiperSlide >
+
+                        <SwiperSlide >
                         <div className="item">
                             <div className="listing-style1">
                                 <div className="list-thumb">
@@ -254,7 +286,10 @@ function PopularService(){
                                 </div>
                             </div>
                         </div>
+                        </SwiperSlide >
+
                     </div>
+                    </Swiper>
                 </div>
             </div>
         </div>

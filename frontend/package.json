@@ -17,7 +17,8 @@
     "next": "14.0.2",
     "react": "^18",
     "react-dom": "^18",
-    "sweetalert2": "^11.9.0"
+    "sweetalert2": "^11.9.0",
+    "swiper": "^11.0.4"
   },
   "devDependencies": {
     "@types/node": "^20",
