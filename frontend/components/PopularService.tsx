@@ -1,8 +1,21 @@
+"use client"
+
 import Image from "next/image"
 
 function PopularService(){
     return (
+        
         <section className="pb90 pb30-md bgc-thm3">
+            <style jsx>
+                {
+                    `
+                    .listing-style1{
+                        width : 255px;
+                    }
+                    
+                    `
+                }
+            </style>
         <div className="container">
             <div className="row align-items-center wow fadeInUp">
                 <div className="col-lg-9">
@@ -20,11 +33,11 @@ function PopularService(){
             </div>
             <div className="row">
                 <div className="col-lg-12">
-                    <div className="slider-outer-dib vam_nav_style dots_none slider-4-grid2 owl-carousel owl-theme wow fadeInUp" data-wow-delay="300ms">
+                    <div className="slider-outer-dib vam_nav_style dots_none slider-4-grid2 owl-carousel owl-theme wow fadeInUp">
                         <div className="item">
                             <div className="listing-style1">
                                 <div className="list-thumb">
-                                    <Image className="w-100" width={255} height={245} src="/images/listings/g-1.jpg" alt="" />
+                                    <Image width={255} height={245} className="w-100" style={{'width' : '255px !Important;'}}  src="/images/listings/g-1.jpg" alt="" />
                                     <a href="#" className="listing-fav fz12"><span className="far fa-heart"></span></a>
                                 </div>
                                 <div className="list-content">
@@ -213,7 +226,7 @@ function PopularService(){
                         <div className="item">
                             <div className="listing-style1">
                                 <div className="list-thumb">
-                                    <Image className="w-100" src="/images/listings/g-7.jpg" alt="" />
+                                    <Image className="w-100" width={255} height={245} src="/images/listings/g-7.jpg" alt="" />
                                     <a href="#" className="listing-fav fz12"><span className="far fa-heart"></span></a>
                                 </div>
                                 <div className="list-content">
@@ -229,7 +242,7 @@ function PopularService(){
                                         <a className="d-flex" href="#">
                                         <span className="position-relative mr10">
                                             <Image className="rounded-circle"
-                                             src="/images/team/fl-s-3.png" alt="Freelancer Photo" />
+                                             src="/images/team/fl-s-3.png" alt="Freelancer Photo" width={28} height={28} />
                                             <span className="online-badges"></span>
                                         </span>
                                         <span className="fz14">Jone Doe</span>
