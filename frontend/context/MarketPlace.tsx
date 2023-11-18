@@ -6,8 +6,6 @@ import { ethers , BigNumber} from 'ethers';
 import Router from 'next/router';
 import Swal from 'sweetalert2';
 import FreelancerProps from '@/app/interfaces/freelancerProps';
-import FreelancerForm from '@/app/interfaces/freelancerForm';
-import EmployerForm from '@/app/interfaces/employerForm';
 
 export const FREELANCER_CONTEXT = createContext<FreelancerProps | undefined>(
     undefined
@@ -23,14 +21,14 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
     // states variables
     const [account, setAccount] = useState<string>()
     const [deployer, setDeployer] = useState<string>();
-    const [freelancerForm, setFreelancerForm] = useState<FreelancerForm>({
+    const [freelancerForm, setFreelancerForm] = useState<FreelancerProps["freelancerForm"]>({
         name : '',
         country : '',
         skills : '',
         imageURL : ''
 
     })
-    const [employerForm, setEmployerForm] = useState<EmployerForm>({
+    const [employerForm, setEmployerForm] = useState<FreelancerProps["employerForm"]>({
         name : '',
         country : '',
         industry : '',
