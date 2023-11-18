@@ -16,6 +16,7 @@ interface FreelancerProps{
         skills : string  | undefined,
         imageURL : string | undefined
     }>>
+    registerFreelancer : ()=> void
 }
 
 export default FreelancerProps

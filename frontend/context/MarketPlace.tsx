@@ -43,7 +43,7 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
         }
     }
 
-    const registerFreelancer = async function(){
+    const registerFreelancer : FreelancerProps["registerFreelancer"] = async function(){
        try {
             const provider = new ethers.providers.Web3Provider(connect)
             const signer = provider.getSigner()
@@ -57,6 +57,19 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
 
     }
 
+    const registerEmployer : FreelancerProps["registerFreelancer"] = async function(){
+        try {
+             const provider = new ethers.providers.Web3Provider(connect)
+             const signer = provider.getSigner()
+             const contract = new ethers.Contract(ADDRESS,ABI,signer)
+             const register = await contract.registerFreelancer()
+ 
+        } catch (error) {
+             console.log(error);
+         
+        }
+ 
+     }
 
 
     return(
@@ -65,7 +78,8 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
             account,
             connectWallet,
             freelancerForm,
-            setFreelancerForm
+            setFreelancerForm,
+            registerFreelancer
         }}
         >
 
