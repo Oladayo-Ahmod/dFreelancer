@@ -57,8 +57,23 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
             const register = await contract.registerFreelancer()
+            await register.wait()
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                text: `You have successfully registered as a freelancer`,
+                showConfirmButton: true,
+                timer: 4000
+            })    
 
        } catch (error) {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                text: `an error occured, try again.`,
+                showConfirmButton: true,
+                timer: 4000
+            })  
             console.log(error);
         
        }
@@ -71,13 +86,30 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
              const signer = provider.getSigner()
              const contract = new ethers.Contract(ADDRESS,ABI,signer)
              const register = await contract.registerFreelancer()
+             await register.wait()
+             Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                text: `You have successfully registered as an employer`,
+                showConfirmButton: true,
+                timer: 4000
+            })    
  
         } catch (error) {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                text: `an error occured, try again.`,
+                showConfirmButton: true,
+                timer: 4000
+            })    
              console.log(error);
          
         }
  
      }
+
+     
 
 
     return(
