@@ -1,6 +1,6 @@
 function HowItWorks(){
     return (
-        <section className="our-features pb90">
+        <section className="our-features pb90 bg-white">
         <div className="container wow fadeInUp">
             <div className="row">
                 <div className="col-lg-12">
