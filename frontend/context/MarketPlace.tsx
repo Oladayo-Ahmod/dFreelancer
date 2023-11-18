@@ -35,6 +35,7 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
         imageURL : ''
 
     })
+    const [jobCreationForm, setJobCreationForm] = useState<>()
 
       // wallet connection
       const connectWallet : FreelancerProps["connectWallet"] =async function(){

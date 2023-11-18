@@ -30,6 +30,13 @@ interface FreelancerProps{
     }>>
     registerFreelancer : ()=> void
     registerEmployer : ()=> void
+    jobCreationForm : {
+        title : string | undefined,
+        description : string | undefined,
+        budget : string | undefined
+    }
+
+    createJob : ()=> void
 }
 
 export default FreelancerProps
