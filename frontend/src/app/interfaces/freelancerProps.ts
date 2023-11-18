@@ -19,7 +19,7 @@ interface FreelancerProps{
     employerForm : {
         name : string | undefined,
         country : string | undefined,
-        skills : string  | undefined,
+        industry : string  | undefined,
         imageURL : string | undefined
     }
     setEmployerForm : React.Dispatch<SetStateAction<{
@@ -29,6 +29,7 @@ interface FreelancerProps{
         imageURL : string | undefined
     }>>
     registerFreelancer : ()=> void
+    registerEmployer : ()=> void
 }
 
 export default FreelancerProps

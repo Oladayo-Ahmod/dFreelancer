@@ -87,7 +87,10 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
             connectWallet,
             freelancerForm,
             setFreelancerForm,
-            registerFreelancer
+            registerFreelancer,
+            employerForm,
+            setEmployerForm,
+            registerEmployer
         }}
         >
 
