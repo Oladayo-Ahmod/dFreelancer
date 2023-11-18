@@ -1,4 +1,4 @@
-import CTABanner from "../../components/CtaBanner"
+import CTABanner from "../../components/CTABanner"
 import HomeBanner from "../../components/HomeBanner"
 import MobileNavbar from "../../components/MobileNavbar"
 import Navbar from "../../components/Navbar"
