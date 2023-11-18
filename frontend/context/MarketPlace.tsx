@@ -143,6 +143,44 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
         }
      }
 
+     const applyJob : FreelancerProps["applyJob"]=async ()=>{
+        try {
+            const provider = new ethers.providers.Web3Provider(connect)
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            await contract.applyForJob()
+        } catch (error : any) {
+            if(error.message.includes('Job does not exist')){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `Job does not exist`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
+            else if (error.message.includes('You have already applied for this job')) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `You have already applied for this job!`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
+            else{
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `an error occured`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
+    
+        }
+     }
+
      
 
 
@@ -159,7 +197,8 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
             registerEmployer,
             jobCreationForm,
             setJobCreationForm,
-            createJob
+            createJob,
+            applyJob
         }}
         >
 

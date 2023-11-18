@@ -42,6 +42,7 @@ interface FreelancerProps{
     }>>
 
     createJob : ()=> void
+    applyJob : ()=> void
 }
 
 export default FreelancerProps
