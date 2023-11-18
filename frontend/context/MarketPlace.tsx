@@ -149,6 +149,13 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
             await contract.applyForJob(jobId)
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                text: `You have successfully applied for this job`,
+                showConfirmButton: true,
+                timer: 4000
+            })
         } catch (error : any) {
             if(error.message.includes('Job does not exist')){
                 Swal.fire({
@@ -181,8 +188,19 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
         }
      }
 
-     const hireFreelancer : FreelancerProps["hireFreelancer"]=(jobId,address)=>{
+     const hireFreelancer : FreelancerProps["hireFreelancer"]= async(jobId,address)=>{
         try {
+            const provider = new ethers.providers.Web3Provider(connect)
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            await contract.hireFreelancer(jobId,address)
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                text: `You have successfully hired ${address.slice(0,6)}...${address.slice(address.length -4)} for this job`,
+                showConfirmButton: true,
+                timer: 4000
+            })
             
         } catch (error : any) {
             if(error.message.includes('Job does not exist')){
@@ -199,6 +217,15 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
                     position: 'top-end',
                     icon: 'warning',
                     text: `Freelancer is already hired for this job`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
+            else{
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `an error occured`,
                     showConfirmButton: true,
                     timer: 4000
                 })
@@ -226,7 +253,8 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
             jobCreationForm,
             setJobCreationForm,
             createJob,
-            applyJob
+            applyJob,
+            hireFreelancer
         }}
         >
 
