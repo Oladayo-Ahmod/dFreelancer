@@ -35,7 +35,11 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
         imageURL : ''
 
     })
-    const [jobCreationForm, setJobCreationForm] = useState<>()
+    const [jobCreationForm, setJobCreationForm] = useState<FreelancerProps["jobCreationForm"]>({
+        title : '',
+        description : '',
+        budget : ''
+    })
 
       // wallet connection
       const connectWallet : FreelancerProps["connectWallet"] =async function(){
@@ -108,6 +112,24 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
  
      }
 
+     const createJob : FreelancerProps["createJob"] =()=>{
+        try {
+            const provider = new ethers.providers.Web3Provider(connect)
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+        } catch (error) {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                text: `an error occured, try again.`,
+                showConfirmButton: true,
+                timer: 4000
+            })   
+            console.log(error);
+            
+        }
+     }
+
      
 
 
@@ -121,7 +143,10 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
             registerFreelancer,
             employerForm,
             setEmployerForm,
-            registerEmployer
+            registerEmployer,
+            jobCreationForm,
+            setJobCreationForm,
+            createJob
         }}
         >
 

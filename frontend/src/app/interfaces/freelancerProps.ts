@@ -35,6 +35,11 @@ interface FreelancerProps{
         description : string | undefined,
         budget : string | undefined
     }
+    setJobCreationForm : React.Dispatch<React.SetStateAction<{
+        title : string | undefined,
+        description : string | undefined,
+        budget : string | undefined
+    }>>
 
     createJob : ()=> void
 }
