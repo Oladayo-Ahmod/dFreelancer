@@ -1,5 +1,8 @@
-interface Freelancer{
+interface FreelancerProps{
+
+    account : string | undefined
+    connectWallet : ()=>void
 
 }
 
-export default Freelancer
+export default FreelancerProps
