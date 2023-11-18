@@ -1,4 +1,5 @@
 import CTABanner from "../../components/CTABanner"
+import Footer from "../../components/Footer"
 import HomeBanner from "../../components/HomeBanner"
 import HowItWorks from "../../components/HowItWorks"
 import MobileNavbar from "../../components/MobileNavbar"
@@ -18,6 +19,7 @@ export default function Home() {
           <PopularService />
           <HowItWorks />
           <CTABanner />
+          <Footer />
         </div>
       </main>
   )
