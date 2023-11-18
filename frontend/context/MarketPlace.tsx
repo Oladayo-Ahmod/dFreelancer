@@ -21,6 +21,7 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
     // states variables
     const [account, setAccount] = useState<string>()
     const [deployer, setDeployer] = useState<string>();
+    const [FreelancerForm, setFreelancerForm] = useState<string>()
 
       // wallet connection
       const connectWallet : FreelancerProps["connectWallet"] =async function(){
@@ -33,6 +34,20 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
         } catch (error) {
             console.log(error);
         }
+    }
+
+    const registerFreelancer = async function(){
+       try {
+            const provider = new ethers.providers.Web3Provider(connect)
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            const register = await contract.registerFreelancer()
+
+       } catch (error) {
+            console.log(error);
+        
+       }
+
     }
 
 
