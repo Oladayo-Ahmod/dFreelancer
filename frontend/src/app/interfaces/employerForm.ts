@@ -1,7 +1,7 @@
 interface EmployerForm{
     name : string | undefined,
     industry : string | undefined,
-    skills : string | undefined,
+    country : string | undefined,
     imageURL : string | undefined
 }
 

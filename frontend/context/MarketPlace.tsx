@@ -7,6 +7,7 @@ import Router from 'next/router';
 import Swal from 'sweetalert2';
 import FreelancerProps from '@/app/interfaces/freelancerProps';
 import FreelancerForm from '@/app/interfaces/freelancerForm';
+import EmployerForm from '@/app/interfaces/employerForm';
 
 export const FREELANCER_CONTEXT = createContext<FreelancerProps | undefined>(
     undefined
@@ -26,6 +27,13 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
         name : '',
         country : '',
         skills : '',
+        imageURL : ''
+
+    })
+    const [employerForm, setEmployerForm] = useState<EmployerForm>({
+        name : '',
+        country : '',
+        industry : '',
         imageURL : ''
 
     })
