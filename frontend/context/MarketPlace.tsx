@@ -143,12 +143,12 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
         }
      }
 
-     const applyJob : FreelancerProps["applyJob"]=async ()=>{
+     const applyJob : FreelancerProps["applyJob"]=async (jobId)=>{
         try {
             const provider = new ethers.providers.Web3Provider(connect)
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
-            await contract.applyForJob()
+            await contract.applyForJob(jobId)
         } catch (error : any) {
             if(error.message.includes('Job does not exist')){
                 Swal.fire({
@@ -180,6 +180,8 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
     
         }
      }
+
+
 
      
 
