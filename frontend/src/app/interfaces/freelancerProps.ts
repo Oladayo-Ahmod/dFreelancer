@@ -43,6 +43,7 @@ interface FreelancerProps{
 
     createJob : ()=> void
     applyJob : (jobId : number)=> void
+    hireFreelancer : (jobId : number, address: string)=> void
 }
 
 export default FreelancerProps

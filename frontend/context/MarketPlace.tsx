@@ -181,6 +181,32 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
         }
      }
 
+     const hireFreelancer : FreelancerProps["hireFreelancer"]=(jobId,address)=>{
+        try {
+            
+        } catch (error : any) {
+            if(error.message.includes('Job does not exist')){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `Job does not exist`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
+            else if(error.message.includes('Freelancer is already hired')){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `Freelancer is already hired for this job`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
+               
+        }
+     }
+
 
 
      
