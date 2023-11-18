@@ -234,6 +234,61 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
         }
      }
 
+     const depositFunds : FreelancerProps["depositFunds"] = async(jobId,amount)=>{
+        try {
+            const provider = new ethers.providers.Web3Provider(connect)
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            const parsedAmount = ethers.utils.parseEther(amount)
+            await contract.depositFunds(jobId, {value : parsedAmount})
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                text: `You have successfully applied for this job`,
+                showConfirmButton: true,
+                timer: 4000
+            })
+        } catch (error : any) {
+            if(error.message.includes('Job does not exist')){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `Job does not exist`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
+            else if(error.message.includes('Only the employer can deposit funds')){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `You are not an employer!`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
+            else if(error.message.includes('Insufficient amount')){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `Insufficient amount!`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
+            else{
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `an error occured!`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
+            
+        }
+     }
+
 
 
      
@@ -254,7 +309,8 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
             setJobCreationForm,
             createJob,
             applyJob,
-            hireFreelancer
+            hireFreelancer,
+            depositFunds
         }}
         >
 
