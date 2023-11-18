@@ -6,6 +6,7 @@ import { ethers , BigNumber} from 'ethers';
 import Router from 'next/router';
 import Swal from 'sweetalert2';
 import FreelancerProps from '@/app/interfaces/freelancerProps';
+import FreelancerForm from '@/app/interfaces/freelancerForm';
 
 export const FREELANCER_CONTEXT = createContext<FreelancerProps | undefined>(
     undefined
@@ -21,7 +22,13 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
     // states variables
     const [account, setAccount] = useState<string>()
     const [deployer, setDeployer] = useState<string>();
-    const [FreelancerForm, setFreelancerForm] = useState<string>()
+    const [freelancerForm, setFreelancerForm] = useState<FreelancerForm>({
+        name : '',
+        country : '',
+        skills : '',
+        imageURL : ''
+
+    })
 
       // wallet connection
       const connectWallet : FreelancerProps["connectWallet"] =async function(){
@@ -56,7 +63,9 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
         <FREELANCER_CONTEXT.Provider
         value={{
             account,
-            connectWallet
+            connectWallet,
+            freelancerForm,
+            setFreelancerForm
         }}
         >
 
