@@ -289,8 +289,24 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
         }
      }
 
-
-
+     const completeJob : FreelancerProps["completeJob"] = async(jobId, address)=>{
+        try {
+            const provider = new ethers.providers.Web3Provider(connect)
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            await contract.completeJob(jobId,address)
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                text: `You have successfully marked this job as completed!`,
+                showConfirmButton: true,
+                timer: 4000
+            })
+        } catch (error) {
+            console.log(error);
+            
+        }
+     }
      
 
 
@@ -310,7 +326,8 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
             createJob,
             applyJob,
             hireFreelancer,
-            depositFunds
+            depositFunds,
+            completeJob
         }}
         >
 

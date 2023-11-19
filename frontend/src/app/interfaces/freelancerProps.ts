@@ -45,6 +45,7 @@ interface FreelancerProps{
     applyJob : (jobId : number)=> void
     hireFreelancer : (jobId : number, address: string)=> void
     depositFunds : (jobId : number, amound : string) => void
+    completeJob : (jobId : number , address : string) => void
 
 }
 
