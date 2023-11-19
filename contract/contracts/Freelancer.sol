@@ -107,6 +107,15 @@ contract Dfreelancer {
 
     }
 
+    function allJobsCreatedByUser() external view returns(Job[] memory props){
+        props = new Job[](totalJobs);
+         for (uint i = 0; i < totalJobs; i++) {
+            if (jobs[i].employer == msg.sender) {
+                props[i] = jobs[i];
+            }
+        }
+    }
+
     /// @notice retrieves employer by address
     /// @param _employer, address
     /// @return props
