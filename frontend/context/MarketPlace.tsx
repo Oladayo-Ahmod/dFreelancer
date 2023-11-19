@@ -379,6 +379,26 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
         }
      }
 
+    const withdrawEarnings : FreelancerProps["withdrawEarnings"] = async()=>{
+        try {
+            const provider = new ethers.providers.Web3Provider(connect)
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            const availableBalance = await contract.freelancers(account).balance;
+            const withdraw = await contract.withdrawEarnings()
+            await withdraw.wait()
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                text: `You have successfully withdrawn ${ ethers.utils.formatEther(availableBalance.toString())} ETH!`,
+                showConfirmButton: true,
+                timer: 4000
+            })
+            
+        } catch (error) {
+            
+        }
+    }
     return(
         <FREELANCER_CONTEXT.Provider
         value={{
@@ -397,7 +417,8 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
             hireFreelancer,
             depositFunds,
             completeJob,
-            releaseEscrow
+            releaseEscrow,
+            withdrawEarnings
         }}
         >
 
