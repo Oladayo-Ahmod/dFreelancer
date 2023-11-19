@@ -395,8 +395,25 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
                 timer: 4000
             })
             
-        } catch (error) {
-            
+        } catch (error : any) {
+            if(error.message.includes('No balance to withdraw')){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `Sorry, your balance is empty`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
+            else{
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `An error occured!`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
         }
     }
     return(
