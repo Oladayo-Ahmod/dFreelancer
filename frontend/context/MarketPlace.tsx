@@ -334,7 +334,50 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
         }
      }
      
-
+     const releaseEscrow : FreelancerProps["releaseEscrow"] = async(jobId,address)=>{
+        try {
+            const provider = new ethers.providers.Web3Provider(connect)
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            await contract.releaseEscrow(jobId,address)
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                text: `You have successfully released escrow!`,
+                showConfirmButton: true,
+                timer: 4000
+            })
+        } catch (error : any) {
+            if(error.message.includes('Job does not exist')){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `Job does not exist`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
+            else if(error.message.includes('Job is not completed by freelancer')){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `This is not yet completed by freelancer!`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
+            else{
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `An error occured!`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
+            
+        }
+     }
 
     return(
         <FREELANCER_CONTEXT.Provider
@@ -353,7 +396,8 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
             applyJob,
             hireFreelancer,
             depositFunds,
-            completeJob
+            completeJob,
+            releaseEscrow
         }}
         >
 
