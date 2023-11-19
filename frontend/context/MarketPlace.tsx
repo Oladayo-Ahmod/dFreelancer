@@ -20,7 +20,9 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
 
     // states variables
     const [account, setAccount] = useState<string>()
+    const [balance, setBalance] = useState<string>()
     const [deployer, setDeployer] = useState<string>();
+    const [singleJob, setSingeJob] = useState<string>()
     const [freelancerForm, setFreelancerForm] = useState<FreelancerProps["freelancerForm"]>({
         name : '',
         country : '',
@@ -42,7 +44,7 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
     })
 
       // wallet connection
-      const connectWallet : FreelancerProps["connectWallet"] =async function(){
+    const connectWallet : FreelancerProps["connectWallet"] =async function(){
         try {
             if(connect){
                 const connector = await connect.request({method : 'eth_requestAccounts'})
@@ -416,6 +418,21 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
             }
         }
     }
+
+    const retrieveJob : FreelancerProps["retrieveJob"] = async(jobId)=>{
+        try {
+            const provider = new ethers.providers.Web3Provider(connect)
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            const job = await contract.getJobByID(jobId)
+            setSingeJob(job)
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
+
+    // const allJobs
     return(
         <FREELANCER_CONTEXT.Provider
         value={{
@@ -435,7 +452,8 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
             depositFunds,
             completeJob,
             releaseEscrow,
-            withdrawEarnings
+            withdrawEarnings,
+            retrieveJob
         }}
         >
 
