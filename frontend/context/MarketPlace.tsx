@@ -302,8 +302,34 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
                 showConfirmButton: true,
                 timer: 4000
             })
-        } catch (error) {
-            console.log(error);
+        } catch (error : any) {
+            if(error.message.includes('Job does not exist')){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `Job does not exist`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
+            else if(error.message.includes('Freelancer is not hired for this job')){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `Freelancer is not hired for this job!`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
+            else{
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `An error occured!`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
             
         }
      }
