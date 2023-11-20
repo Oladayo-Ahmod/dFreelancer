@@ -6,6 +6,7 @@ import { ethers , BigNumber} from 'ethers';
 import Router from 'next/router';
 import Swal from 'sweetalert2';
 import FreelancerProps from '@/app/interfaces/freelancerProps';
+import {uploadJSONToIPFS,uploadFileToIPFS} from '../constants/pinata.js'
 
 export const FREELANCER_CONTEXT = createContext<FreelancerProps | undefined>(
     undefined
@@ -23,6 +24,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
     const [balance, setBalance] = useState<string>()
     const [deployer, setDeployer] = useState<string>();
     const [singleJob, setSingeJob] = useState<string>()
+    const [profileImage, setProfileImage] = useState<string>()
     const [freelancerForm, setFreelancerForm] = useState<FreelancerProps["freelancerForm"]>({
         name : '',
         country : '',
@@ -432,6 +434,17 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         }
     }
 
+    const imageHandler = async function(e : any){
+        let file = e.target.files[0]
+        try {
+            const response = await uploadFileToIPFS(file)
+            console.log(response);
+            setProfileImage(response)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     // const allJobs
     return(
         <FREELANCER_CONTEXT.Provider
@@ -453,7 +466,8 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             completeJob,
             releaseEscrow,
             withdrawEarnings,
-            retrieveJob
+            retrieveJob,
+            imageHandler
         }}
         >
             {children}
