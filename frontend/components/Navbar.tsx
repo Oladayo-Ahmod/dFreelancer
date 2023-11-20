@@ -4,18 +4,19 @@ import Image from "next/image"
 import { useContext, useEffect, useRef, useState } from 'react'
 import { FREELANCER_CONTEXT} from '../context/MarketPlace'
 import FreelancerProps from "@/app/interfaces/freelancerProps"
+import { usePathname } from "next/navigation"
 
 
 function Navbar(){
-    
+    const pathname = usePathname()    
     const {
         account,
         connectWallet
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
     return (
         <>
-             <header className="header-nav nav-homepage-style stricky main-menu">
-            
+             <header className="header-nav nav-homepage-style stricky main-menu"
+              style={{'backgroundColor' : pathname !== '/' ? 'white' : 'transparent'}}>     
             <nav className="posr">
                 <div className="container-fluid posr menu_bdrt1 px30">
                     <div className="row align-items-center justify-content-between">
@@ -34,16 +35,23 @@ function Navbar(){
                         <div className="col-auto px-0">
                             <div className="d-flex align-items-center">
                                 <ul id="respMenu" className="ace-responsive-menu" data-menu-style="horizontal">
-                                    <li className="visible_list"> <a className="list-item" href="#"><span className="title">Home</span></a>
+                                    <li className="visible_list"> 
+                                    <a style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href="#"><span className="title">Home</span></a>
                                     </li>
-                                    <li className="visible_list"> <a className="list-item" href="#"><span className="title">Browse Jobs</span></a>
+                                    <li className="visible_list">
+                                         <a style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href="#"><span className="title">Browse Jobs</span></a>
                                     </li>
-                                    <li className="visible_list"> <a className="list-item" href="#"><span className="title">Users</span></a>
+                                    <li className="visible_list"> 
+                                    <a style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href="#"><span className="title">Users</span></a>
                                     </li>
-                                    <li> <a className="list-item" href="page-contact.html">Contact</a></li>
+                                    <li> 
+                                        <a style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href="page-contact.html">Contact</a></li>
                                 </ul>                              
                                 <a className="login-info mr15-lg mr30" href="page-login.html">Join</a>
-                                <button className="ud-btn btn-white add-joining" type="button" onClick={connectWallet}>
+                                <button style={{
+                                 'color' : pathname !== '/'? '#14A800' : 'white',
+                                 'backgroundColor' : pathname !== '/' ? 'rgb(224 255 224)' : 'green', 'border' : 'none'}}
+                                className="ud-btn btn-white add-joining" type="button" onClick={connectWallet}>
                                 {account ? `${account.slice(0,6)}...${account.slice(account.length -4)}` : 'connect wallet'}
                                 </button>
                             </div>

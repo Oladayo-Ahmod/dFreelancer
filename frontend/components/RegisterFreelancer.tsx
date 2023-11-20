@@ -1,6 +1,16 @@
 function RegisterFreelancer(){
     return (
-        <section className="our-register">
+        <section className="our-register" style={{'backgroundColor' : '#EAFBEF'}}>
+
+            <style jsx>
+                {
+                    `
+                    .visible-list a{
+                        color : #116E04;
+                    }
+                    `
+                }
+            </style>
         <div className="container">
             <div className="row">
                 <div className="col-lg-6 m-auto wow fadeInUp" data-wow-delay="300ms">

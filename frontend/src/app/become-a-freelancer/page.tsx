@@ -1,3 +1,5 @@
+"use client"
+
 import Footer from "../../../components/Footer"
 import MobileNavbar from "../../../components/MobileNavbar"
 import Navbar from "../../../components/Navbar"
@@ -9,7 +11,7 @@ function BecomeAFreelancer(){
               {/* <div className="preloader"></div> */}
             <Navbar />
             <MobileNavbar />
-            <div className="body_content">
+            <div className="body_content" >
                 <RegisterFreelancer />
             <Footer />
             </div>
