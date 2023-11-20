@@ -1,7 +1,17 @@
+"use client"
+
 import Image from "next/image"
+import { useContext, useEffect, useRef, useState } from 'react'
+import { FREELANCER_CONTEXT} from '../context/MarketPlace'
+import FreelancerProps from "@/app/interfaces/freelancerProps"
+
 
 function Navbar(){
     
+    const {
+        account,
+        connectWallet
+    } = useContext(FREELANCER_CONTEXT) as FreelancerProps
     return (
         <>
              <header className="header-nav nav-homepage-style stricky main-menu">
@@ -31,12 +41,11 @@ function Navbar(){
                                     <li className="visible_list"> <a className="list-item" href="#"><span className="title">Users</span></a>
                                     </li>
                                     <li> <a className="list-item" href="page-contact.html">Contact</a></li>
-                                </ul>
-                                <a className="login-info bdrl1 pl15-lg pl30" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><span className="flaticon-loupe"></span></a>
-                                <a className="login-info mx15-lg mx30" href="page-become-seller.html"><span
-                    className="d-none d-xl-inline-block">Become a</span> Seller</a>
-                                <a className="login-info mr15-lg mr30" href="page-login.html">Sign in</a>
-                                <a className="ud-btn btn-white add-joining" href="page-register.html">Join</a>
+                                </ul>                              
+                                <a className="login-info mr15-lg mr30" href="page-login.html">Join</a>
+                                <button className="ud-btn btn-white add-joining" type="button" onClick={connectWallet}>
+                                {account ? `${account.slice(0,6)}...${account.slice(account.length -4)}` : 'connect wallet'}
+                                </button>
                             </div>
                         </div>
                     </div>

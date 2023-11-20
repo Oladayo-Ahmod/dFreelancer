@@ -16,7 +16,7 @@ if(typeof window !=='undefined'){
     connect = (window as any).ethereum
 }
 
-const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
+export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
 
     // states variables
     const [account, setAccount] = useState<string>()
@@ -456,8 +456,10 @@ const FreelancerProvider:React.FC<{children : React.ReactNode}>=({children,})=>{
             retrieveJob
         }}
         >
-
+            {children}
         </FREELANCER_CONTEXT.Provider>
     )
 
 }
+
+// module.exports = FreelancerProvider

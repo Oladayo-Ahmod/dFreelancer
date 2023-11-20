@@ -5,6 +5,7 @@ import '../../styles/menu.css'
 import '../../styles/theme.css'
 import '../../styles/responsive-menu.css'
 import '../../styles/custom-spacing.css'
+import { FreelancerProvider } from '../../context/MarketPlace'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,7 +21,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+        <FreelancerProvider>
+      <body>
+        {children}
+      </body>
+      </FreelancerProvider>
+
     </html>
   )
 }
