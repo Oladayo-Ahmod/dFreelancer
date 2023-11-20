@@ -1,6 +1,7 @@
 import Footer from "../../../components/Footer"
 import MobileNavbar from "../../../components/MobileNavbar"
 import Navbar from "../../../components/Navbar"
+import RegisterFreelancer from "../../../components/RegisterFreelancer"
 
 function BecomeAFreelancer(){
     return (
@@ -9,7 +10,7 @@ function BecomeAFreelancer(){
             <Navbar />
             <MobileNavbar />
             <div className="body_content">
-                
+                <RegisterFreelancer />
             <Footer />
             </div>
         </main>
