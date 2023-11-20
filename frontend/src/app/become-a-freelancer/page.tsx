@@ -1,0 +1,19 @@
+import Footer from "../../../components/Footer"
+import MobileNavbar from "../../../components/MobileNavbar"
+import Navbar from "../../../components/Navbar"
+
+function BecomeAFreelancer(){
+    return (
+        <main className="wrapper ovh">
+              {/* <div className="preloader"></div> */}
+            <Navbar />
+            <MobileNavbar />
+            <div className="body_content">
+                
+            <Footer />
+            </div>
+        </main>
+    )
+}
+
+export default BecomeAFreelancer
