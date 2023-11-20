@@ -5,6 +5,7 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { FREELANCER_CONTEXT} from '../context/MarketPlace'
 import FreelancerProps from "@/app/interfaces/freelancerProps"
 import { usePathname } from "next/navigation"
+import Link from "next/link"
 
 
 function Navbar(){
@@ -47,7 +48,7 @@ function Navbar(){
                                     <li> 
                                         <a style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href="page-contact.html">Contact</a></li>
                                 </ul>                              
-                                <a className="login-info mr15-lg mr30" href="page-login.html">Join</a>
+                                <Link className="login-info mr15-lg mr30" href="/become-a-freelancer">Join</Link>
                                 <button style={{
                                  'color' : pathname !== '/'? '#14A800' : 'white',
                                  'backgroundColor' : pathname !== '/' ? 'rgb(224 255 224)' : 'green', 'border' : 'none'}}
