@@ -7,13 +7,13 @@ import FreelancerProps from "@/app/interfaces/freelancerProps"
 
 function RegisterEmployer(){
     const {
-        account,registerFreelancer,setEmployerForm,employerForm,imageHandler,freelancerDetails,currentUserDetails,connectWallet
+        account,registerFreelancer,setEmployerForm,employerForm,imageHandler,employerDetails,currentUserDetails,connectWallet
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{
         connectWallet()
         if (account) {
-            freelancerDetails(account)
+            employerDetails(account)
             // console.log(currentUserDetails?.registered);
         }
         
@@ -48,21 +48,21 @@ function RegisterEmployer(){
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Username</label>
                             <input type="text" readOnly={currentUserDetails?.registered} 
-                            onChange={(e)=>setFreelancerForm({...freelancerForm, name : e.target.value})} 
+                            onChange={(e)=>setEmployerForm({...employerForm, name : e.target.value})} 
                             value={currentUserDetails?.registered? currentUserDetails.name : ''}
                             className="form-control" placeholder="jonedoe"  />
                         </div>
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Country</label>
                             <input type="text" readOnly={currentUserDetails?.registered} 
-                            onChange={(e)=>setFreelancerForm({...freelancerForm, country : e.target.value})} 
+                            onChange={(e)=>setEmployerForm({...employerForm, country : e.target.value})} 
                             value={currentUserDetails?.registered? currentUserDetails.country : ''}
                             className="form-control" placeholder="Nigeria" />
                         </div>
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Skills</label>
                             <input type="text" readOnly={currentUserDetails?.registered}
-                              onChange={(e)=>setFreelancerForm({...freelancerForm, skills : e.target.value})} 
+                              onChange={(e)=>setEmployerForm({...employerForm, industry : e.target.value})} 
                               value={currentUserDetails?.registered? currentUserDetails.skills : ''}
                               className="form-control" placeholder="Solidity, Javascript, Python" />
                         </div>

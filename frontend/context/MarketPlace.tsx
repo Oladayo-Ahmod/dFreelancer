@@ -137,6 +137,19 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         }
     }
 
+    const employerDetails : FreelancerProps["employerDetails"] =async(account)=>{
+        try {
+            const provider = new ethers.providers.Web3Provider(connect)
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            const details = await contract.employers(account)
+            setCurrentUserDetails(details)
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
+
     const registerEmployer : FreelancerProps["registerFreelancer"] = async function(){
         const {name,country,industry} = employerForm
         if(name && country && industry && profileImage){
@@ -530,7 +543,8 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             retrieveJob,
             imageHandler,
             freelancerDetails,
-            currentUserDetails
+            currentUserDetails,
+            employerDetails
         }}
         >
             {children}

@@ -52,6 +52,7 @@ interface FreelancerProps{
     retrieveJob : (jobId : number)=> void
     imageHandler : (e : any) => void
     freelancerDetails : (address : string) => void
+    employerDetails : (address : string) => void
 
 }
 
