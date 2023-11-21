@@ -1,4 +1,13 @@
+import { useContext, useEffect, useRef, useState } from 'react'
+import { FREELANCER_CONTEXT} from '../context/MarketPlace'
+import FreelancerProps from "@/app/interfaces/freelancerProps"
+
+
 function RegisterFreelancer(){
+    const {
+        registerFreelancer,setFreelancerForm,freelancerForm
+    } = useContext(FREELANCER_CONTEXT) as FreelancerProps
+
     return (
         <section className="our-register" style={{'backgroundColor' : '#EAFBEF'}}>
 
@@ -28,18 +37,22 @@ function RegisterFreelancer(){
                         </div>
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Username</label>
-                            <input type="text" className="form-control" placeholder="jonedoe" />
+                            <input type="text" onChange={(e)=>setFreelancerForm({...freelancerForm, name : e.target.value})} className="form-control" placeholder="jonedoe" />
                         </div>
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Country</label>
-                            <input type="text" className="form-control" placeholder="Nigeria" />
+                            <input type="text"  onChange={(e)=>setFreelancerForm({...freelancerForm, country : e.target.value})} className="form-control" placeholder="Nigeria" />
+                        </div>
+                        <div className="mb25">
+                            <label className="form-label fw500 dark-color">Skills</label>
+                            <input type="text"  onChange={(e)=>setFreelancerForm({...freelancerForm, skills : e.target.value})} className="form-control" placeholder="Solidity, Javascript, Python" />
                         </div>
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Profile Picture</label>
                             <input type="file" className="form-control" />
                         </div>
                         <div className="d-grid mb20">
-                            <button className="ud-btn btn-thm default-box-shadow2" type="button">Create Account <i
+                            <button className="ud-btn btn-thm default-box-shadow2" onClick={()=>registerFreelancer()} type="button">Create Account <i
               className="fal fa-arrow-right-long"></i></button>
                         </div>
                     </div>
