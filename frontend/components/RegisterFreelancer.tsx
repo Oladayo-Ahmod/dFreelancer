@@ -7,13 +7,14 @@ import FreelancerProps from "@/app/interfaces/freelancerProps"
 
 function RegisterFreelancer(){
     const {
-        account,registerFreelancer,setFreelancerForm,freelancerForm,imageHandler,freelancerDetails,currentUserDetails
+        account,registerFreelancer,setFreelancerForm,freelancerForm,imageHandler,freelancerDetails,currentUserDetails,connectWallet
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{
+        connectWallet()
         if (account) {
             freelancerDetails(account)
-            // console.log(currentUserDetails);
+            // console.log(currentUserDetails?.registered);
         }
         
     })
@@ -61,7 +62,8 @@ function RegisterFreelancer(){
                             <input type="file" onChange={(e)=>imageHandler(e)} className="form-control" />
                         </div>
                         <div className="d-grid mb20">
-                            <button className="ud-btn btn-thm default-box-shadow2" disabled={currentUserDetails?.registered} onClick={()=>registerFreelancer()} type="button">Create Account <i
+                            <button style={{'display' : currentUserDetails?.registered ? 'none' : 'block'}}
+                             className="ud-btn btn-thm default-box-shadow2" disabled={currentUserDetails?.registered} onClick={()=>registerFreelancer()} type="button">Create Account <i
               className="fal fa-arrow-right-long"></i></button>
                         </div>
                     </div>
