@@ -1,3 +1,5 @@
+"use client"
+
 import { useContext, useEffect, useRef, useState } from 'react'
 import { FREELANCER_CONTEXT} from '../context/MarketPlace'
 import FreelancerProps from "@/app/interfaces/freelancerProps"
@@ -5,9 +7,16 @@ import FreelancerProps from "@/app/interfaces/freelancerProps"
 
 function RegisterFreelancer(){
     const {
-        registerFreelancer,setFreelancerForm,freelancerForm,imageHandler
+        account,registerFreelancer,setFreelancerForm,freelancerForm,imageHandler,freelancerDetails,currentUserDetails
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
+    useEffect(()=>{
+        if (account) {
+            freelancerDetails(account)
+            // console.log(currentUserDetails);
+        }
+        
+    })
     return (
         <section className="our-register" style={{'backgroundColor' : '#EAFBEF'}}>
 
@@ -52,7 +61,7 @@ function RegisterFreelancer(){
                             <input type="file" onChange={(e)=>imageHandler(e)} className="form-control" />
                         </div>
                         <div className="d-grid mb20">
-                            <button className="ud-btn btn-thm default-box-shadow2" onClick={()=>registerFreelancer()} type="button">Create Account <i
+                            <button className="ud-btn btn-thm default-box-shadow2" disabled={currentUserDetails?.registered} onClick={()=>registerFreelancer()} type="button">Create Account <i
               className="fal fa-arrow-right-long"></i></button>
                         </div>
                     </div>

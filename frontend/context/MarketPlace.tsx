@@ -22,9 +22,10 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
     // states variables
     const [account, setAccount] = useState<string>()
     const [balance, setBalance] = useState<string>()
-    const [deployer, setDeployer] = useState<string>();
+    const [deployer, setDeployer] = useState<string>()
     const [singleJob, setSingeJob] = useState<string>()
     const [profileImage, setProfileImage] = useState<string>()
+    const [currentUserDetails, setCurrentUserDetails] = useState<any>()
     const [freelancerForm, setFreelancerForm] = useState<FreelancerProps["freelancerForm"]>({
         name : '',
         country : '',
@@ -76,15 +77,26 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
                    timer: 4000
                })    
    
-          } catch (error) {
-               Swal.fire({
-                   position: 'top-end',
-                   icon: 'warning',
-                   text: `an error occured, try again.`,
-                   showConfirmButton: true,
-                   timer: 4000
-               })  
-               console.log(error);
+          } catch (error : any) {
+            if(error.message.includes('already registered')){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `You have already registered!`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
+            else{
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `an error occured, try again.`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })  
+                console.log(error);
+            }            
            
           }
            }
@@ -110,6 +122,19 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
        
       
 
+    }
+
+    const freelancerDetails : FreelancerProps["freelancerDetails"] =async(account)=>{
+        try {
+            const provider = new ethers.providers.Web3Provider(connect)
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            const details = await contract.freelancers(account)
+            setCurrentUserDetails(details)
+        } catch (error) {
+            console.log(error);
+            
+        }
     }
 
     const registerEmployer : FreelancerProps["registerFreelancer"] = async function(){
@@ -503,7 +528,9 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             releaseEscrow,
             withdrawEarnings,
             retrieveJob,
-            imageHandler
+            imageHandler,
+            freelancerDetails,
+            currentUserDetails
         }}
         >
             {children}

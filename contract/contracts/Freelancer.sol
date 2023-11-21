@@ -27,6 +27,7 @@ contract Dfreelancer {
         uint balance;
         string country;
         string image;
+        bool registered;
     }
 
     
@@ -37,6 +38,7 @@ contract Dfreelancer {
         uint balance;
         string country;
         string image;
+        bool registered;
     }
 
     // Job[] public jobs;
@@ -64,13 +66,13 @@ contract Dfreelancer {
 
     
     modifier onlyEmployer(address _employerAddress){
-        require(employers[msg.sender].employerAddress == _employerAddress, "Only employer can create job");
+        require(employers[msg.sender].employerAddress == _employerAddress, "Only employer can call this function");
 
         _;
     }
 
      modifier onlyFreelancer(address _freelancerAddress){
-        require(freelancers[msg.sender].freelancerAddress == _freelancerAddress, "Only freelancer can withdraw fund");
+        require(freelancers[msg.sender].freelancerAddress == _freelancerAddress, "Only freelancer can call this function");
         _;
     }
 
@@ -179,21 +181,28 @@ contract Dfreelancer {
     /// @param _name , @param _skills
     function registerFreelancer
     (string memory _name, string memory _skills, string memory _country, string memory _imageURI) public {
+        require(freelancers[msg.sender].registered == false, 'already registered');
         require(bytes(_name).length > 0, "Name cannot be empty.");
         require(bytes(_skills).length > 0, "Skills cannot be empty.");
         totalFreelancers++;
-        freelancers[msg.sender] = Freelancer(msg.sender, _name, _skills, 0,_country, _imageURI);
+        freelancers[msg.sender] = Freelancer(msg.sender, _name, _skills, 0,_country, _imageURI,true);
         emit FreelancerRegistered(msg.sender, _name);
     }
+
+        // function updateFreelancer() external onlyFreelancer(msg.sender){
+        //     address _freelancer = freelancers[msg.sender];
+
+        // }
 
         /// @notice process employer registration
         /// @param _name , @param _industry
       function registerEmployer
       (string memory _name, string memory _industry,string memory _country, string memory _imageURI) public {
+        require(employers[msg.sender].registered == false, 'already registered');
         require(bytes(_name).length > 0, "Name cannot be empty.");
         require(bytes(_industry).length > 0, "Skills cannot be empty.");
         totalEmployers++;
-        employers[msg.sender] = Employer(msg.sender, _name, _industry, 0,_country, _imageURI);
+        employers[msg.sender] = Employer(msg.sender, _name, _industry, 0,_country, _imageURI,true);
         emit EmployerRegistered(msg.sender, _name);
     }
 

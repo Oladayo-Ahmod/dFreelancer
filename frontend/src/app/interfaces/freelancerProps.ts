@@ -3,6 +3,7 @@ import React, { SetStateAction } from "react"
 interface FreelancerProps{
 
     account : string | undefined
+    currentUserDetails : any | undefined
     connectWallet : ()=>void
     freelancerForm : {
         name : string | undefined,
@@ -50,6 +51,7 @@ interface FreelancerProps{
     withdrawEarnings : ()=> void 
     retrieveJob : (jobId : number)=> void
     imageHandler : (e : any) => void
+    freelancerDetails : (address : string) => void
 
 }
 
