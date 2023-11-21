@@ -5,7 +5,7 @@ import FreelancerProps from "@/app/interfaces/freelancerProps"
 
 function RegisterFreelancer(){
     const {
-        registerFreelancer,setFreelancerForm,freelancerForm
+        registerFreelancer,setFreelancerForm,freelancerForm,imageHandler
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     return (
@@ -49,7 +49,7 @@ function RegisterFreelancer(){
                         </div>
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Profile Picture</label>
-                            <input type="file" className="form-control" />
+                            <input type="file" onChange={(e)=>imageHandler(e)} className="form-control" />
                         </div>
                         <div className="d-grid mb20">
                             <button className="ud-btn btn-thm default-box-shadow2" onClick={()=>registerFreelancer()} type="button">Create Account <i

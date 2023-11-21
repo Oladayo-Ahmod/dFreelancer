@@ -59,14 +59,14 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
     }
 
     const registerFreelancer : FreelancerProps["registerFreelancer"] = async function(){
-        const {name,country,skills,imageURL} = freelancerForm
+        const {name,country,skills} = freelancerForm
         if(account){
-            if(name && country && skills && imageURL){
+            if(name && country && skills && profileImage){
                 try {
                const provider = new ethers.providers.Web3Provider(connect)
                const signer = provider.getSigner()
                const contract = new ethers.Contract(ADDRESS,ABI,signer)
-               const register = await contract.registerFreelancer(name,skills,country,imageURL)
+               const register = await contract.registerFreelancer(name,skills,country,profileImage)
                await register.wait()
                Swal.fire({
                    position: 'top-end',
@@ -113,13 +113,13 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
     }
 
     const registerEmployer : FreelancerProps["registerFreelancer"] = async function(){
-        const {name,country,industry,imageURL} = employerForm
-        if(name && country && industry && imageURL){
+        const {name,country,industry} = employerForm
+        if(name && country && industry && profileImage){
              try {
              const provider = new ethers.providers.Web3Provider(connect)
              const signer = provider.getSigner()
              const contract = new ethers.Contract(ADDRESS,ABI,signer)
-             const register = await contract.registerFreelancer(name,industry,country,imageURL)
+             const register = await contract.registerFreelancer(name,industry,country,profileImage)
              await register.wait()
              Swal.fire({
                 position: 'top-end',
