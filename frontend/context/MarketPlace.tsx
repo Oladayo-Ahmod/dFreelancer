@@ -25,7 +25,8 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
     const [deployer, setDeployer] = useState<string>()
     const [singleJob, setSingeJob] = useState<string>()
     const [profileImage, setProfileImage] = useState<string>()
-    const [currentUserDetails, setCurrentUserDetails] = useState<any>()
+    const [currentEmployerDetails, setCurrentEmployerDetails] = useState<any>()
+    const [currentFreelancerDetails, setCurrentFreelancerDetails] = useState<any>()
     const [freelancerForm, setFreelancerForm] = useState<FreelancerProps["freelancerForm"]>({
         name : '',
         country : '',
@@ -130,7 +131,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
             const details = await contract.freelancers(account)
-            setCurrentUserDetails(details)
+            setCurrentFreelancerDetails(details)
         } catch (error) {
             console.log(error);
             
@@ -143,7 +144,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
             const details = await contract.employers(account)
-            setCurrentUserDetails(details)
+            setCurrentEmployerDetails(details)
         } catch (error) {
             console.log(error);
             
@@ -543,7 +544,8 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             retrieveJob,
             imageHandler,
             freelancerDetails,
-            currentUserDetails,
+            currentEmployerDetails,
+            currentFreelancerDetails,
             employerDetails
         }}
         >

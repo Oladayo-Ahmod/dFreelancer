@@ -3,7 +3,8 @@ import React, { SetStateAction } from "react"
 interface FreelancerProps{
 
     account : string | undefined
-    currentUserDetails : any | undefined
+    currentEmployerDetails : any | undefined
+    currentFreelancerDetails : any | undefined
     connectWallet : ()=>void
     freelancerForm : {
         name : string | undefined,

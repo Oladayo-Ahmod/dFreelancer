@@ -7,14 +7,14 @@ import FreelancerProps from "@/app/interfaces/freelancerProps"
 
 function RegisterEmployer(){
     const {
-        account,registerFreelancer,setEmployerForm,employerForm,imageHandler,employerDetails,currentUserDetails,connectWallet
+        account,registerFreelancer,setEmployerForm,employerForm,imageHandler,employerDetails,currentEmployerDetails,connectWallet
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{
         connectWallet()
         if (account) {
             employerDetails(account)
-            // console.log(currentUserDetails?.registered);
+            // console.log(currentEmployerDetails?.registered);
         }
         
     })
@@ -34,7 +34,7 @@ function RegisterEmployer(){
             <div className="row">
                 <div className="col-lg-6 m-auto wow fadeInUp" data-wow-delay="300ms">
                     <div className="main-title text-center">
-                        <h2 className="title">Register as a Freelancer</h2>
+                        <h2 className="title">Register as an Employer</h2>
                         {/* <p className="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus illo.</p> */}
                     </div>
                 </div>
@@ -43,36 +43,36 @@ function RegisterEmployer(){
                 <div className="col-xl-6 mx-auto">
                     <div className="log-reg-form search-modal form-style1 bgc-white p50 p30-sm default-box-shadow1 bdrs12">
                         <div className="mb30">
-                            <h4> {currentUserDetails?.registered? "Your Profile Information" : "Let's create your account!"}</h4>
+                            <h4> {currentEmployerDetails?.registered? "Your Profile Information" : "Let's create your account!"}</h4>
                         </div>
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Username</label>
-                            <input type="text" readOnly={currentUserDetails?.registered} 
+                            <input type="text" readOnly={currentEmployerDetails?.registered} 
                             onChange={(e)=>setEmployerForm({...employerForm, name : e.target.value})} 
-                            value={currentUserDetails?.registered? currentUserDetails.name : ''}
+                            value={currentEmployerDetails?.registered? currentEmployerDetails.name : ''}
                             className="form-control" placeholder="jonedoe"  />
                         </div>
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Country</label>
-                            <input type="text" readOnly={currentUserDetails?.registered} 
+                            <input type="text" readOnly={currentEmployerDetails?.registered} 
                             onChange={(e)=>setEmployerForm({...employerForm, country : e.target.value})} 
-                            value={currentUserDetails?.registered? currentUserDetails.country : ''}
+                            value={currentEmployerDetails?.registered? currentEmployerDetails.country : ''}
                             className="form-control" placeholder="Nigeria" />
                         </div>
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Skills</label>
-                            <input type="text" readOnly={currentUserDetails?.registered}
+                            <input type="text" readOnly={currentEmployerDetails?.registered}
                               onChange={(e)=>setEmployerForm({...employerForm, industry : e.target.value})} 
-                              value={currentUserDetails?.registered? currentUserDetails.skills : ''}
+                              value={currentEmployerDetails?.registered? currentEmployerDetails.skills : ''}
                               className="form-control" placeholder="Solidity, Javascript, Python" />
                         </div>
-                        <div className="mb25" style={{'display' : currentUserDetails?.registered ? 'none' : 'block'}}>
+                        <div className="mb25" style={{'display' : currentEmployerDetails?.registered ? 'none' : 'block'}}>
                             <label className="form-label fw500 dark-color">Profile Picture</label>
                             <input type="file" onChange={(e)=>imageHandler(e)} className="form-control" />
                         </div>
                         <div className="d-grid mb20">
-                            <button style={{'display' : currentUserDetails?.registered ? 'none' : 'block'}}
-                             className="ud-btn btn-thm default-box-shadow2" disabled={currentUserDetails?.registered}
+                            <button style={{'display' : currentEmployerDetails?.registered ? 'none' : 'block'}}
+                             className="ud-btn btn-thm default-box-shadow2" disabled={currentEmployerDetails?.registered}
                               onClick={()=>registerFreelancer()} type="button">Create Account <i
               className="fal fa-arrow-right-long"></i></button>
                         </div>
