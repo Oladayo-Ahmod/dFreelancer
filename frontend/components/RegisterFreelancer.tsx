@@ -43,27 +43,37 @@ function RegisterFreelancer(){
                 <div className="col-xl-6 mx-auto">
                     <div className="log-reg-form search-modal form-style1 bgc-white p50 p30-sm default-box-shadow1 bdrs12">
                         <div className="mb30">
-                            <h4>Let's create your account!</h4>
+                            <h4> {currentUserDetails?.registered? "Your Profile Information" : "Let's create your account!"}</h4>
                         </div>
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Username</label>
-                            <input type="text" onChange={(e)=>setFreelancerForm({...freelancerForm, name : e.target.value})} className="form-control" placeholder="jonedoe" />
+                            <input type="text" readOnly={currentUserDetails?.registered} 
+                            onChange={(e)=>setFreelancerForm({...freelancerForm, name : e.target.value})} 
+                            value={currentUserDetails?.registered? currentUserDetails.name : ''}
+                            className="form-control" placeholder="jonedoe"  />
                         </div>
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Country</label>
-                            <input type="text"  onChange={(e)=>setFreelancerForm({...freelancerForm, country : e.target.value})} className="form-control" placeholder="Nigeria" />
+                            <input type="text" readOnly={currentUserDetails?.registered} 
+                            onChange={(e)=>setFreelancerForm({...freelancerForm, country : e.target.value})} 
+                            value={currentUserDetails?.registered? currentUserDetails.country : ''}
+                            className="form-control" placeholder="Nigeria" />
                         </div>
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Skills</label>
-                            <input type="text"  onChange={(e)=>setFreelancerForm({...freelancerForm, skills : e.target.value})} className="form-control" placeholder="Solidity, Javascript, Python" />
+                            <input type="text" readOnly={currentUserDetails?.registered}
+                              onChange={(e)=>setFreelancerForm({...freelancerForm, skills : e.target.value})} 
+                              value={currentUserDetails?.registered? currentUserDetails.skills : ''}
+                              className="form-control" placeholder="Solidity, Javascript, Python" />
                         </div>
-                        <div className="mb25">
+                        <div className="mb25" style={{'display' : currentUserDetails?.registered ? 'none' : 'block'}}>
                             <label className="form-label fw500 dark-color">Profile Picture</label>
                             <input type="file" onChange={(e)=>imageHandler(e)} className="form-control" />
                         </div>
                         <div className="d-grid mb20">
                             <button style={{'display' : currentUserDetails?.registered ? 'none' : 'block'}}
-                             className="ud-btn btn-thm default-box-shadow2" disabled={currentUserDetails?.registered} onClick={()=>registerFreelancer()} type="button">Create Account <i
+                             className="ud-btn btn-thm default-box-shadow2" disabled={currentUserDetails?.registered}
+                              onClick={()=>registerFreelancer()} type="button">Create Account <i
               className="fal fa-arrow-right-long"></i></button>
                         </div>
                     </div>
