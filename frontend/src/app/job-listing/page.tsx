@@ -1,3 +1,4 @@
+import AllJobs from "../../../components/AllJobs"
 import Footer from "../../../components/Footer"
 import JobListing from "../../../components/JobListing"
 import MobileNavbar from "../../../components/MobileNavbar"
@@ -11,6 +12,7 @@ function ListingPage(){
             <MobileNavbar />
             <div className="body_content">
                <JobListing />
+               <AllJobs />
                 <Footer />
             </div>
         </main>
