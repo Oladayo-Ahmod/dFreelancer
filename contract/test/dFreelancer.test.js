@@ -53,7 +53,8 @@ describe("Dfreelancer", function () {
   // applying for job
   it("Should apply for a job", async function () {
     await dfreelancer.connect(freelancer)
-    .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI);
+    .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
+      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle);
     await dfreelancer.connect(employer)
     .registerEmployer('Ahmod','technology','United States','https://img.com')
     await dfreelancer.connect(employer)
@@ -92,8 +93,6 @@ describe("Dfreelancer", function () {
     await dfreelancer.connect(employer).hireFreelancer('1', freelancer.address);
     await dfreelancer.connect(employer).completeJob('1', freelancer.address);
     const job = await dfreelancer.getJobByID('1');
-    const user = await dfreelancer.connect(freelancer).freelancers
-    console.log(user);
     expect(job.completed).to.be.true;
     expect(job.hiredFreelancer).to.equal(freelancer.address)
   });
