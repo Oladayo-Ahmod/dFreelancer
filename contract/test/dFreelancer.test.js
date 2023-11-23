@@ -10,6 +10,8 @@ describe("Dfreelancer", function () {
   const freelancerGigTitle = 'I will design and develop a dApp'
   const freelancerProfileTitle = 'Solidity developer'
   const freelancerGigDesc = 'Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using '
+  const date = new Date().toLocaleString('default', {month : 'long'}) + ',' + new Date().getFullYear()
+  
   let freelancer;
   let employer;
   let jobTitle = "Sample Job";
@@ -27,7 +29,7 @@ describe("Dfreelancer", function () {
   // creating job
   it("Should create a job", async function () {
       await dfreelancer.connect(employer)
-      .registerEmployer('Ahmod','technology','United States','https://img.com')
+      .registerEmployer('Ahmod','technology','United States','https://img.com',date)
       await dfreelancer.connect(employer)
       .createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
       const job = await dfreelancer.getJobByID('1');
@@ -36,13 +38,15 @@ describe("Dfreelancer", function () {
       expect(job.description).to.equal(jobDescription);
       expect(job.budget.toString()).to.equal(ethers.utils.parseEther(jobBudget));
       expect(job.completed).to.be.false;
+  console.log(date)
+
   });
 
   //  registering freelancer
   it("Should register a freelancer", async function () {
     await dfreelancer.connect(freelancer)
     .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
-      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle);
+      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle, date);
     const registeredFreelancer = await dfreelancer.freelancers(freelancer.address);
     expect(registeredFreelancer.freelancerAddress).to.equal(freelancer.address);
     expect(registeredFreelancer.name).to.equal(freelancerName);
@@ -54,9 +58,9 @@ describe("Dfreelancer", function () {
   it("Should apply for a job", async function () {
     await dfreelancer.connect(freelancer)
     .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
-      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle);
+      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle, date);
     await dfreelancer.connect(employer)
-    .registerEmployer('Ahmod','technology','United States','https://img.com')
+    .registerEmployer('Ahmod','technology','United States','https://img.com',date)
     await dfreelancer.connect(employer)
     .createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     const apply = await dfreelancer.connect(freelancer).applyForJob('1');
@@ -69,9 +73,9 @@ describe("Dfreelancer", function () {
   it("Should hire a freelancer", async function () {
     await dfreelancer.connect(freelancer)
     .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
-      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle);
+      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle, date);
     await dfreelancer.connect(employer)
-    .registerEmployer('Ahmod','technology','United States','https://img.com')
+    .registerEmployer('Ahmod','technology','United States','https://img.com',date)
     await dfreelancer.connect(employer)
     .createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     await dfreelancer.connect(freelancer).applyForJob('1');
@@ -84,9 +88,9 @@ describe("Dfreelancer", function () {
   it("Should complete a job", async function () {
     await dfreelancer.connect(freelancer)
     .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
-      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle);
+      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle, date);
     await dfreelancer.connect(employer)
-    .registerEmployer('Ahmod','technology','United States','https://img.com')
+    .registerEmployer('Ahmod','technology','United States','https://img.com',date)
     await dfreelancer.connect(employer).
     createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     await dfreelancer.connect(freelancer).applyForJob('1');
@@ -102,9 +106,9 @@ describe("Dfreelancer", function () {
     const fund = '100' 
     await dfreelancer.connect(freelancer)
     .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
-      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle);
+      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle, date);
     await dfreelancer.connect(employer)
-    .registerEmployer('Ahmod','technology','United States','https://img.com')
+    .registerEmployer('Ahmod','technology','United States','https://img.com',date)
     await dfreelancer.connect(employer)
     .createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     await dfreelancer.connect(employer).depositFunds('1', { value: ethers.utils.parseEther(fund)});
@@ -120,9 +124,9 @@ describe("Dfreelancer", function () {
     const fund = '200'
     await dfreelancer.connect(freelancer)
     .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
-      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle);
+      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle, date);
     await dfreelancer.connect(employer)
-    .registerEmployer('Ahmod','technology','United States','https://img.com') 
+    .registerEmployer('Ahmod','technology','United States','https://img.com',date) 
     await dfreelancer.connect(employer)
     .createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     await dfreelancer.connect(freelancer).applyForJob('1');
@@ -144,9 +148,9 @@ describe("Dfreelancer", function () {
 
     await dfreelancer.connect(freelancer)
     .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
-      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle);
+      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle, date);
     await dfreelancer.connect(employer)
-    .registerEmployer('Ahmod','technology','United States','https://img.com') 
+    .registerEmployer('Ahmod','technology','United States','https://img.com',date) 
     await dfreelancer.connect(employer)
     .createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
     await dfreelancer.connect(freelancer).applyForJob('1');

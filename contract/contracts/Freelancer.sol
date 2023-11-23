@@ -32,6 +32,7 @@ contract Dfreelancer {
         string profileTitle;
         uint jobsCompleted;
         bool registered;
+        string registration_date;
     }
 
     
@@ -43,6 +44,8 @@ contract Dfreelancer {
         string country;
         string image;
         bool registered;
+        string registration_date;
+
     }
 
     // Job[] public jobs;
@@ -186,13 +189,13 @@ contract Dfreelancer {
     /// @param _name , @param _skills
     function registerFreelancer
     (string memory _name, string memory _skills, string memory _country,string memory _imageURI,
-    string memory _gigTitle, string memory _gigDesc, string memory _profileTitle) public {
+    string memory _gigTitle, string memory _gigDesc, string memory _profileTitle,string memory _date) public {
         require(freelancers[msg.sender].registered == false, 'already registered');
         require(bytes(_name).length > 0, "Name cannot be empty.");
         require(bytes(_skills).length > 0, "Skills cannot be empty.");
         totalFreelancers++;
         freelancers[msg.sender] = Freelancer(msg.sender, _name, _skills, 0,_country, 
-        _imageURI,_gigTitle,_gigDesc,_profileTitle,0,true);
+        _imageURI,_gigTitle,_gigDesc,_profileTitle,0,true,_date);
 
         emit FreelancerRegistered(msg.sender, _name);
     }
@@ -205,12 +208,12 @@ contract Dfreelancer {
         /// @notice process employer registration
         /// @param _name , @param _industry
       function registerEmployer
-      (string memory _name, string memory _industry,string memory _country, string memory _imageURI) public {
+      (string memory _name, string memory _industry,string memory _country, string memory _imageURI, string memory _date) public {
         require(employers[msg.sender].registered == false, 'already registered');
         require(bytes(_name).length > 0, "Name cannot be empty.");
         require(bytes(_industry).length > 0, "Skills cannot be empty.");
         totalEmployers++;
-        employers[msg.sender] = Employer(msg.sender, _name, _industry, 0,_country, _imageURI,true);
+        employers[msg.sender] = Employer(msg.sender, _name, _industry, 0,_country, _imageURI,true,_date);
         emit EmployerRegistered(msg.sender, _name);
     }
 
