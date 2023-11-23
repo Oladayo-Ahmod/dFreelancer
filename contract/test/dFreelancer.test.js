@@ -11,6 +11,7 @@ describe("Dfreelancer", function () {
   const freelancerProfileTitle = 'Solidity developer'
   const freelancerGigDesc = 'Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using '
   const date = new Date().toLocaleString('default', {month : 'long'}) + ',' + new Date().getFullYear()
+  const starting_price = '100'
   
   let freelancer;
   let employer;
@@ -38,7 +39,6 @@ describe("Dfreelancer", function () {
       expect(job.description).to.equal(jobDescription);
       expect(job.budget.toString()).to.equal(ethers.utils.parseEther(jobBudget));
       expect(job.completed).to.be.false;
-  console.log(date)
 
   });
 
@@ -46,7 +46,7 @@ describe("Dfreelancer", function () {
   it("Should register a freelancer", async function () {
     await dfreelancer.connect(freelancer)
     .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
-      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle, date);
+      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle, date,starting_price);
     const registeredFreelancer = await dfreelancer.freelancers(freelancer.address);
     expect(registeredFreelancer.freelancerAddress).to.equal(freelancer.address);
     expect(registeredFreelancer.name).to.equal(freelancerName);
@@ -58,7 +58,7 @@ describe("Dfreelancer", function () {
   it("Should apply for a job", async function () {
     await dfreelancer.connect(freelancer)
     .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
-      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle, date);
+      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle, date,starting_price);
     await dfreelancer.connect(employer)
     .registerEmployer('Ahmod','technology','United States','https://img.com',date)
     await dfreelancer.connect(employer)
@@ -73,7 +73,7 @@ describe("Dfreelancer", function () {
   it("Should hire a freelancer", async function () {
     await dfreelancer.connect(freelancer)
     .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
-      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle, date);
+      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle, date,starting_price);
     await dfreelancer.connect(employer)
     .registerEmployer('Ahmod','technology','United States','https://img.com',date)
     await dfreelancer.connect(employer)
@@ -88,7 +88,7 @@ describe("Dfreelancer", function () {
   it("Should complete a job", async function () {
     await dfreelancer.connect(freelancer)
     .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
-      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle, date);
+      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle, date,starting_price);
     await dfreelancer.connect(employer)
     .registerEmployer('Ahmod','technology','United States','https://img.com',date)
     await dfreelancer.connect(employer).
@@ -106,7 +106,7 @@ describe("Dfreelancer", function () {
     const fund = '100' 
     await dfreelancer.connect(freelancer)
     .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
-      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle, date);
+      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle, date, starting_price);
     await dfreelancer.connect(employer)
     .registerEmployer('Ahmod','technology','United States','https://img.com',date)
     await dfreelancer.connect(employer)
@@ -124,7 +124,7 @@ describe("Dfreelancer", function () {
     const fund = '200'
     await dfreelancer.connect(freelancer)
     .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
-      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle, date);
+      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle, date, starting_price);
     await dfreelancer.connect(employer)
     .registerEmployer('Ahmod','technology','United States','https://img.com',date) 
     await dfreelancer.connect(employer)
@@ -148,7 +148,7 @@ describe("Dfreelancer", function () {
 
     await dfreelancer.connect(freelancer)
     .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
-      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle, date);
+      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle, date, starting_price);
     await dfreelancer.connect(employer)
     .registerEmployer('Ahmod','technology','United States','https://img.com',date) 
     await dfreelancer.connect(employer)
