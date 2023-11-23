@@ -47,24 +47,52 @@ function RegisterFreelancer(){
                         </div>
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Username</label>
-                            <input type="text" readOnly={currentFreelancerDetails?.registered} 
-                            onChange={(e)=>setFreelancerForm({...freelancerForm, name : e.target.value})} 
-                            value={currentFreelancerDetails?.registered? currentFreelancerDetails.name : ''}
-                            className="form-control" placeholder="jonedoe"  />
+                            {currentFreelancerDetails?.registered ? (
+                                <input type="text" readOnly={currentFreelancerDetails?.registered} 
+                                onChange={(e)=>setFreelancerForm({...freelancerForm, name : e.target.value})} 
+                                value={currentFreelancerDetails.name}
+                                className="form-control" placeholder="jonedoe"  />
+                            )
+                            :
+                            (
+                                <input type="text"
+                                 onChange={(e)=>setFreelancerForm({...freelancerForm, name : e.target.value})} 
+                                className="form-control" placeholder="jonedoe"  />
+                            )
+                        }
+                            
                         </div>
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Country</label>
-                            <input type="text" readOnly={currentFreelancerDetails?.registered} 
-                            onChange={(e)=>setFreelancerForm({...freelancerForm, country : e.target.value})} 
-                            value={currentFreelancerDetails?.registered? currentFreelancerDetails.country : ''}
-                            className="form-control" placeholder="Nigeria" />
+                            {currentFreelancerDetails?.registered? (
+                                <input type="text" readOnly={currentFreelancerDetails?.registered} 
+                                onChange={(e)=>setFreelancerForm({...freelancerForm, country : e.target.value})} 
+                                value={currentFreelancerDetails.country}
+                                className="form-control" placeholder="Nigeria" />
+                            )
+                            :(
+                                <input type="text"
+                                onChange={(e)=>setFreelancerForm({...freelancerForm, country : e.target.value})} 
+                                className="form-control" placeholder="Nigeria" />
+                            )
+                        }
+                            
                         </div>
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Skills</label>
+                            {currentFreelancerDetails?.registered ? (
                             <input type="text" readOnly={currentFreelancerDetails?.registered}
-                              onChange={(e)=>setFreelancerForm({...freelancerForm, skills : e.target.value})} 
-                              value={currentFreelancerDetails?.registered? currentFreelancerDetails.skills : ''}
-                              className="form-control" placeholder="Solidity, Javascript, Python" />
+                            onChange={(e)=>setFreelancerForm({...freelancerForm, skills : e.target.value})} 
+                            value={currentFreelancerDetails?.registered? currentFreelancerDetails.skills : ''}
+                            className="form-control" placeholder="Solidity, Javascript, Python" />
+                            ):
+                            (
+                                <input type="text"
+                                onChange={(e)=>setFreelancerForm({...freelancerForm, skills : e.target.value})} 
+                                className="form-control" placeholder="Solidity, Javascript, Python" />
+                            )
+                        }
+                           
                         </div>
                         <div className="mb25" style={{'display' : currentFreelancerDetails?.registered ? 'none' : 'block'}}>
                             <label className="form-label fw500 dark-color">Profile Picture</label>

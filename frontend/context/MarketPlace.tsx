@@ -33,7 +33,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         skills : '',
         gitDesc : '',
         gitTitle : '',
-        price : undefined,
+        starting_price : undefined,
 
     })
     const [employerForm, setEmployerForm] = useState<FreelancerProps["employerForm"]>({
@@ -63,15 +63,15 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
     }
 
     const registerFreelancer : FreelancerProps["registerFreelancer"] = async function(){
-        const {name,country,skills,gitDesc,gitTitle,price} = freelancerForm
+        const {name,country,skills,gitDesc,gitTitle,starting_price} = freelancerForm
         const date = new Date().toLocaleString('default', {month : 'long'}) + ',' + new Date().getFullYear()
         if(account){
-            if(name && country && skills && profileImage && gitDesc && gitTitle && price){
+            if(name && country && skills && profileImage && gitDesc && gitTitle && starting_price){
                 try {
                const provider = new ethers.providers.Web3Provider(connect)
                const signer = provider.getSigner()
                const contract = new ethers.Contract(ADDRESS,ABI,signer)
-               const register = await contract.registerFreelancer(name,skills,country,profileImage,gitTitle,gitDesc,date,price)
+               const register = await contract.registerFreelancer(name,skills,country,profileImage,gitTitle,gitDesc,date,starting_price)
                await register.wait()
                Swal.fire({
                    position: 'top-end',

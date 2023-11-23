@@ -51,7 +51,7 @@ function RegisterEmployer(){
                                 <input type="text" 
                                 onChange={(e)=>setEmployerForm({...employerForm, name : e.target.value})} 
                                 readOnly={currentEmployerDetails?.registered} 
-                                value={currentEmployerDetails?.registered? currentEmployerDetails.name : ''} 
+                                value={currentEmployerDetails.name} 
                                 className="form-control" placeholder="jonedoe" />
                             ) : (
                                 <input type="text" 
@@ -67,7 +67,7 @@ function RegisterEmployer(){
                                 <input type="text" 
                                 onChange={(e)=>setEmployerForm({...employerForm, country : e.target.value})} 
                                 readOnly={currentEmployerDetails?.registered} 
-                                value={currentEmployerDetails?.registered? currentEmployerDetails.country : ''} 
+                                value={ currentEmployerDetails.country} 
                                 className="form-control" placeholder="jonedoe" />
                             ) : (
                                 <input type="text" 
@@ -83,7 +83,7 @@ function RegisterEmployer(){
                                 <input type="text" 
                                 onChange={(e)=>setEmployerForm({...employerForm, industry : e.target.value})} 
                                 readOnly={currentEmployerDetails?.registered} 
-                                value={currentEmployerDetails?.registered? currentEmployerDetails.industry : ''} 
+                                value={currentEmployerDetails.industry} 
                                 className="form-control" placeholder="Finance, Technology, Agriculture" />
                             ) : (
                                 <input type="text" 

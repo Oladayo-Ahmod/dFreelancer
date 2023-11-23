@@ -12,7 +12,7 @@ interface FreelancerProps{
         skills : string  | undefined,
         gitDesc : string | undefined,
         gitTitle : string | undefined,
-        price : number | undefined,
+        starting_price : number | undefined,
         
     }
     setFreelancerForm : React.Dispatch<SetStateAction<{
@@ -21,7 +21,7 @@ interface FreelancerProps{
         skills : string  | undefined,
         gitDesc : string | undefined,
         gitTitle : string | undefined,
-        price : number | undefined,
+        starting_price : number | undefined,
     }>>
     employerForm : {
         name : string | undefined,
