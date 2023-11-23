@@ -29,7 +29,6 @@ contract Dfreelancer {
         string image;
         string gigTitle;
         string gitDescription;
-        string profileTitle;
         uint jobsCompleted;
         bool registered;
         string registration_date;
@@ -190,13 +189,13 @@ contract Dfreelancer {
     /// @param _name , @param _skills
     function registerFreelancer
     (string memory _name, string memory _skills, string memory _country,string memory _imageURI,
-    string memory _gigTitle, string memory _gigDesc, string memory _profileTitle,string memory _date, string memory _starting_price) public {
+    string memory _gigTitle, string memory _gigDesc,string memory _date, string memory _starting_price) public {
         require(freelancers[msg.sender].registered == false, 'already registered');
         require(bytes(_name).length > 0, "Name cannot be empty.");
         require(bytes(_skills).length > 0, "Skills cannot be empty.");
         totalFreelancers++;
         freelancers[msg.sender] = Freelancer(msg.sender, _name, _skills, 0,_country, 
-        _imageURI,_gigTitle,_gigDesc,_profileTitle,0,true,_date,_starting_price);
+        _imageURI,_gigTitle,_gigDesc,0,true,_date,_starting_price);
 
         emit FreelancerRegistered(msg.sender, _name);
     }
