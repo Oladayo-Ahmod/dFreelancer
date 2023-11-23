@@ -6,9 +6,17 @@ import 'swiper/css'
 import 'swiper/css/bundle'
 import { SwiperSlide } from 'swiper/react'
 import { Navigation,Scrollbar,Autoplay } from 'swiper/modules'
+import { useContext, useEffect, useRef, useState } from 'react'
+import { FREELANCER_CONTEXT} from '../context/MarketPlace'
+import FreelancerProps from "@/app/interfaces/freelancerProps"
 
 
 function PopularService(){
+    const {
+        account,
+        connectWallet
+    } = useContext(FREELANCER_CONTEXT) as FreelancerProps
+    
     const breakpoints:Record<number , {slidesPerView :number, spaceBetween? : number}> = {
         320 :{
             slidesPerView : 1,
