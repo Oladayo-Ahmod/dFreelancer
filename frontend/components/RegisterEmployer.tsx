@@ -45,6 +45,8 @@ function RegisterEmployer(){
                         <div className="mb30">
                             <h4> {currentEmployerDetails?.registered? "Your Profile Information" : "Let's create your account!"}</h4>
                         </div>
+
+                        {/* username */}
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Username</label>
                             {currentEmployerDetails?.registered? (
@@ -60,6 +62,8 @@ function RegisterEmployer(){
                             )}
                            
                         </div>
+
+                        {/* country */}
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Country</label>
                             
@@ -76,6 +80,8 @@ function RegisterEmployer(){
                             )}
 
                         </div>
+
+                        {/* industry */}
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Industry</label>
                              
@@ -92,10 +98,14 @@ function RegisterEmployer(){
                             )}
                             
                         </div>
+
+                        {/* profile picture */}
                         <div className="mb25" style={{'display' : currentEmployerDetails?.registered ? 'none' : 'block'}}>
                             <label className="form-label fw500 dark-color">Profile Picture</label>
                             <input type="file" onChange={(e)=>imageHandler(e)} className="form-control" />
                         </div> 
+
+                        {/* submit button */}
                         <div className="d-grid mb20">
                             <button style={{'display' : currentEmployerDetails?.registered ? 'none' : 'block'}}
                              className="ud-btn btn-thm default-box-shadow2" disabled={currentEmployerDetails?.registered}

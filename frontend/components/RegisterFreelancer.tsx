@@ -45,6 +45,8 @@ function RegisterFreelancer(){
                         <div className="mb30">
                             <h4> {currentFreelancerDetails?.registered? "Your Profile Information" : "Let's create your account!"}</h4>
                         </div>
+
+                        {/* username */}
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Username</label>
                             {currentFreelancerDetails?.registered ? (
@@ -62,6 +64,8 @@ function RegisterFreelancer(){
                         }
                             
                         </div>
+
+                        {/* country */}
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Country</label>
                             {currentFreelancerDetails?.registered? (
@@ -78,6 +82,62 @@ function RegisterFreelancer(){
                         }
                             
                         </div>
+
+                        {/* gig title */}
+
+                        <div className="mb25">
+                            <label className="form-label fw500 dark-color">Gig Title</label>
+                            {currentFreelancerDetails?.registered? (
+                                <input type="text" readOnly={currentFreelancerDetails?.registered} 
+                                onChange={(e)=>setFreelancerForm({...freelancerForm, gitTitle : e.target.value})} 
+                                value={currentFreelancerDetails.gitTitle}
+                                className="form-control" placeholder="I will build a dApp" />
+                            )
+                            :(
+                                <input type="text"
+                                onChange={(e)=>setFreelancerForm({...freelancerForm, gitTitle : e.target.value})} 
+                                className="form-control" placeholder="I will build a dApp" />
+                            )
+                        }
+                            
+                        </div>
+
+                        {/* starting price */}
+                        <div className="mb25">
+                            <label className="form-label fw500 dark-color">Starting Price</label>
+                            {currentFreelancerDetails?.registered? (
+                                <input type="number" readOnly={currentFreelancerDetails?.registered} 
+                                onChange={(e)=>setFreelancerForm({...freelancerForm, starting_price : Number(e.target.value) })} 
+                                value={currentFreelancerDetails.starting_price}
+                                className="form-control" />
+                            )
+                            :(
+                                <input type="number"
+                                onChange={(e)=>setFreelancerForm({...freelancerForm, starting_price : Number(e.target.value)})} 
+                                className="form-control" placeholder="e.g 100 KLAY" />
+                            )
+                        }
+                            
+                        </div>
+
+                        {/* gig description */}
+                        <div className="mb25">
+                            <label className="form-label fw500 dark-color">Gig Description</label>
+                            {currentFreelancerDetails?.registered? (
+                                <input type="text" readOnly={currentFreelancerDetails?.registered} 
+                                onChange={(e)=>setFreelancerForm({...freelancerForm, gitDesc : e.target.value})} 
+                                value={currentFreelancerDetails.gitDesc}
+                                className="form-control" />
+                            )
+                            :(
+                                <input type="text"
+                                onChange={(e)=>setFreelancerForm({...freelancerForm, gitDesc : e.target.value})} 
+                                className="form-control" placeholder="dApp description" />
+                            )
+                        }
+                        </div>
+
+                        {/* skills */}
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Skills</label>
                             {currentFreelancerDetails?.registered ? (
@@ -92,12 +152,15 @@ function RegisterFreelancer(){
                                 className="form-control" placeholder="Solidity, Javascript, Python" />
                             )
                         }
-                           
                         </div>
+
+                        {/* profile picture */}
                         <div className="mb25" style={{'display' : currentFreelancerDetails?.registered ? 'none' : 'block'}}>
                             <label className="form-label fw500 dark-color">Profile Picture</label>
                             <input type="file" onChange={(e)=>imageHandler(e)} className="form-control" />
                         </div>
+
+                        {/* create button */}
                         <div className="d-grid mb20">
                             <button style={{'display' : currentFreelancerDetails?.registered ? 'none' : 'block'}}
                              className="ud-btn btn-thm default-box-shadow2" disabled={currentFreelancerDetails?.registered}
