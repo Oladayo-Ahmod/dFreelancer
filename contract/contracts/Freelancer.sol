@@ -27,6 +27,10 @@ contract Dfreelancer {
         uint balance;
         string country;
         string image;
+        string gigTitle;
+        string gitDescription;
+        string profileTitle;
+        uint jobsCompleted;
         bool registered;
     }
 
@@ -174,18 +178,22 @@ contract Dfreelancer {
         uint payment = job.budget;
         job.completed = true;
         totalCompletedJobs++;
+        freelancers[freelancerAddress].jobsCompleted++;
         emit JobCompleted(jobId, freelancerAddress, payment);
     }
 
     /// @notice process freelancer registration
     /// @param _name , @param _skills
     function registerFreelancer
-    (string memory _name, string memory _skills, string memory _country, string memory _imageURI) public {
+    (string memory _name, string memory _skills, string memory _country,string memory _imageURI,
+    string memory _gigTitle, string memory _gigDesc, string memory _profileTitle) public {
         require(freelancers[msg.sender].registered == false, 'already registered');
         require(bytes(_name).length > 0, "Name cannot be empty.");
         require(bytes(_skills).length > 0, "Skills cannot be empty.");
         totalFreelancers++;
-        freelancers[msg.sender] = Freelancer(msg.sender, _name, _skills, 0,_country, _imageURI,true);
+        freelancers[msg.sender] = Freelancer(msg.sender, _name, _skills, 0,_country, 
+        _imageURI,_gigTitle,_gigDesc,_profileTitle,0,true);
+
         emit FreelancerRegistered(msg.sender, _name);
     }
 

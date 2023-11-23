@@ -7,6 +7,9 @@ describe("Dfreelancer", function () {
   const freelancerSkills = "Solidity, JavaScript";
   const freelancerCountry = 'Nigeria'
   const freelancerImageURI = 'https://image.com'
+  const freelancerGigTitle = 'I will design and develop a dApp'
+  const freelancerProfileTitle = 'Solidity developer'
+  const freelancerGigDesc = 'Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using '
   let freelancer;
   let employer;
   let jobTitle = "Sample Job";
@@ -38,7 +41,8 @@ describe("Dfreelancer", function () {
   //  registering freelancer
   it("Should register a freelancer", async function () {
     await dfreelancer.connect(freelancer)
-    .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerCountry);
+    .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
+      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle);
     const registeredFreelancer = await dfreelancer.freelancers(freelancer.address);
     expect(registeredFreelancer.freelancerAddress).to.equal(freelancer.address);
     expect(registeredFreelancer.name).to.equal(freelancerName);
@@ -63,7 +67,8 @@ describe("Dfreelancer", function () {
   // hiring freelancer
   it("Should hire a freelancer", async function () {
     await dfreelancer.connect(freelancer)
-    .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI);
+    .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
+      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle);
     await dfreelancer.connect(employer)
     .registerEmployer('Ahmod','technology','United States','https://img.com')
     await dfreelancer.connect(employer)
@@ -77,7 +82,8 @@ describe("Dfreelancer", function () {
 // job completion
   it("Should complete a job", async function () {
     await dfreelancer.connect(freelancer)
-    .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI);
+    .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
+      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle);
     await dfreelancer.connect(employer)
     .registerEmployer('Ahmod','technology','United States','https://img.com')
     await dfreelancer.connect(employer).
@@ -86,6 +92,8 @@ describe("Dfreelancer", function () {
     await dfreelancer.connect(employer).hireFreelancer('1', freelancer.address);
     await dfreelancer.connect(employer).completeJob('1', freelancer.address);
     const job = await dfreelancer.getJobByID('1');
+    const user = await dfreelancer.connect(freelancer).freelancers
+    console.log(user);
     expect(job.completed).to.be.true;
     expect(job.hiredFreelancer).to.equal(freelancer.address)
   });
@@ -94,7 +102,8 @@ describe("Dfreelancer", function () {
   it("Should deposit funds to a job", async function () {
     const fund = '100' 
     await dfreelancer.connect(freelancer)
-    .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI);
+    .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
+      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle);
     await dfreelancer.connect(employer)
     .registerEmployer('Ahmod','technology','United States','https://img.com')
     await dfreelancer.connect(employer)
@@ -111,7 +120,8 @@ describe("Dfreelancer", function () {
   it("Should release escrow funds to a freelancer", async function () {
     const fund = '200'
     await dfreelancer.connect(freelancer)
-    .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI);
+    .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
+      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle);
     await dfreelancer.connect(employer)
     .registerEmployer('Ahmod','technology','United States','https://img.com') 
     await dfreelancer.connect(employer)
@@ -134,7 +144,8 @@ describe("Dfreelancer", function () {
     const initialBalance = (await dfreelancer.freelancers(freelancer.address)).balance; // previous balance
 
     await dfreelancer.connect(freelancer)
-    .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI);
+    .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
+      freelancerGigTitle,freelancerGigDesc,freelancerProfileTitle);
     await dfreelancer.connect(employer)
     .registerEmployer('Ahmod','technology','United States','https://img.com') 
     await dfreelancer.connect(employer)
