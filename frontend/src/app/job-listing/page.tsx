@@ -1,8 +1,9 @@
 import Footer from "../../../components/Footer"
+import JobListing from "../../../components/JobListing"
 import MobileNavbar from "../../../components/MobileNavbar"
 import Navbar from "../../../components/Navbar"
 
-function JobListing(){
+function ListingPage(){
     return (
         <main className="wrapper ovh">
               {/* <div className="preloader"></div> */}
@@ -16,4 +17,4 @@ function JobListing(){
     )
 }
 
-export default JobListing
+export default ListingPage

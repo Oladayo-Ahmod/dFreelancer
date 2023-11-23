@@ -1,5 +1,7 @@
 function JobListing(){
     return(
+        <>
+        {/* breadcum section */}
         <section className="breadcumb-section pt-0">
              <style>
                 {
@@ -72,19 +74,7 @@ function JobListing(){
                                         </form>
                                     </div>
                                 </div>
-                                <div className="col-md-4 col-lg-4 col-xl-3">
-                                    <div className="bselect-style1">
-                                        <select className="selectpicker" data-width="100%">
-                                            <option>City, state, or zip</option>
-                                            <option data-tokens="Graphics&Design">Graphics & Design</option>
-                                            <option data-tokens="DigitlMarketing">Digital Marketing</option>
-                                            <option data-tokens="Writing&Translation">Writing & Translation</option>
-                                            <option data-tokens="Video&Animation">Video & Animation</option>
-                                            <option data-tokens="Music&Audio">Music & Audio</option>
-                                            <option data-tokens="Programming&Tech">Programming & Tech</option>
-                                        </select>
-                                    </div>
-                                </div>
+                              
                                 <div className="col-md-3 col-lg-2 col-xl-3">
                                     <div className="text-center text-xl-start">
                                         <a className="ud-btn btn-thm2 w-100 vam" href="#">Search</a>
@@ -96,7 +86,12 @@ function JobListing(){
                 </div>
             </div>
         </div>
-    </section>
+        </section>
+    
+
+        </>
+
+
     )
 }
 
