@@ -4,7 +4,17 @@ function FreelancerPage(){
         {/* breadcumb section */}
         <section className="breadcumb-section pt-0">
             <style>
-                
+                {
+                    `
+                    .breadcumb-section{
+                        background-color: #eafbef;
+                        padding-top: 80px !important;
+                    }
+                    .service-details{
+                        background-color : white;
+                    }
+                    `
+                }
             </style>
                 <div className="cta-service-v1 freelancer-single-style mx-auto maxw1700 pt120 pt60-sm pb120 pb60-sm bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg px30-lg">
                     <img className="left-top-img wow zoomIn" src="/images/vector-img/left-top.png" alt="" />
@@ -36,7 +46,7 @@ function FreelancerPage(){
         </section>
 
         {/* service details section  */}
-        <section className="pt10 pb90 pb30-md">
+        <section className="service-details pt10 pb90 pb30-md">
                 <div className="container">
                     <div className="row wow fadeInUp">
                         <div className="col-lg-8">
