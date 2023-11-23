@@ -37,18 +37,17 @@ function Navbar(){
                             <div className="d-flex align-items-center">
                                 <ul id="respMenu" className="ace-responsive-menu" data-menu-style="horizontal">
                                     <li className="visible_list"> 
-                                    <a style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href="#"><span className="title">Home</span></a>
+                                    <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href={'/'}><span className="title">Home</span></Link>
                                     </li>
                                     <li className="visible_list">
-                                         <a style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href="#"><span className="title">Browse Jobs</span></a>
+                                         <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href={'/job-listing'}><span className="title">Browse Jobs</span></Link>
                                     </li>
                                     <li className="visible_list"> 
-                                    <a style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href="#"><span className="title">Users</span></a>
+                                    <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href={'/become-an-employer'}><span className="title">Join as employer</span></Link>
                                     </li>
                                     <li> 
-                                        <a style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href="page-contact.html">Contact</a></li>
+                                        <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href={'/become-a-freelancer'}>Join as freelancer</Link></li>
                                 </ul>                              
-                                <Link className="login-info mr15-lg mr30" href="/become-a-freelancer">Join</Link>
                                 <button style={{
                                  'color' : pathname !== '/'? '#14A800' : 'white',
                                  'backgroundColor' : pathname !== '/' ? 'rgb(224 255 224)' : 'green', 'border' : 'none'}}

@@ -11,6 +11,7 @@ export default function Home() {
   return (
       <main className="wrapper ovh">
         {/* <div className="preloader"></div> */}
+
         <Navbar />
         <MobileNavbar />
         <div className="body_content">
