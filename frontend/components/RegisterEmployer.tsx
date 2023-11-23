@@ -7,17 +7,17 @@ import FreelancerProps from "@/app/interfaces/freelancerProps"
 
 function RegisterEmployer(){
     const {
-        account,registerFreelancer,setEmployerForm,employerForm,imageHandler,employerDetails,currentEmployerDetails,connectWallet
+        account,registerEmployer,setEmployerForm,employerForm,imageHandler,employerDetails,currentEmployerDetails,connectWallet
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{
         connectWallet()
         if (account) {
             employerDetails(account)
-            // console.log(currentEmployerDetails?.registered);
+            // console.log(currentEmployerDetails);
         }
         
-    })
+    },[account])
     return (
         <section className="our-register" style={{'backgroundColor' : '#EAFBEF'}}>
 
@@ -47,33 +47,59 @@ function RegisterEmployer(){
                         </div>
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Username</label>
-                            <input type="text" readOnly={currentEmployerDetails?.registered} 
-                            onChange={(e)=>setEmployerForm({...employerForm, name : e.target.value})} 
-                            value={currentEmployerDetails?.registered? currentEmployerDetails.name : ''}
-                            className="form-control" placeholder="jonedoe"  />
+                            {currentEmployerDetails?.registered? (
+                                <input type="text" 
+                                onChange={(e)=>setEmployerForm({...employerForm, name : e.target.value})} 
+                                readOnly={currentEmployerDetails?.registered} 
+                                value={currentEmployerDetails?.registered? currentEmployerDetails.name : ''} 
+                                className="form-control" placeholder="jonedoe" />
+                            ) : (
+                                <input type="text" 
+                                onChange={(e)=>setEmployerForm({...employerForm, name : e.target.value})} 
+                                className="form-control" placeholder="jonedoe" />
+                            )}
+                           
                         </div>
                         <div className="mb25">
                             <label className="form-label fw500 dark-color">Country</label>
-                            <input type="text" readOnly={currentEmployerDetails?.registered} 
-                            onChange={(e)=>setEmployerForm({...employerForm, country : e.target.value})} 
-                            value={currentEmployerDetails?.registered? currentEmployerDetails.country : ''}
-                            className="form-control" placeholder="Nigeria" />
+                            
+                            {currentEmployerDetails?.registered? (
+                                <input type="text" 
+                                onChange={(e)=>setEmployerForm({...employerForm, country : e.target.value})} 
+                                readOnly={currentEmployerDetails?.registered} 
+                                value={currentEmployerDetails?.registered? currentEmployerDetails.country : ''} 
+                                className="form-control" placeholder="jonedoe" />
+                            ) : (
+                                <input type="text" 
+                                onChange={(e)=>setEmployerForm({...employerForm, country : e.target.value})} 
+                                className="form-control" placeholder="Nigeria" />
+                            )}
+
                         </div>
                         <div className="mb25">
-                            <label className="form-label fw500 dark-color">Skills</label>
-                            <input type="text" readOnly={currentEmployerDetails?.registered}
-                              onChange={(e)=>setEmployerForm({...employerForm, industry : e.target.value})} 
-                              value={currentEmployerDetails?.registered? currentEmployerDetails.skills : ''}
-                              className="form-control" placeholder="Solidity, Javascript, Python" />
+                            <label className="form-label fw500 dark-color">Industry</label>
+                             
+                            {currentEmployerDetails?.registered? (
+                                <input type="text" 
+                                onChange={(e)=>setEmployerForm({...employerForm, industry : e.target.value})} 
+                                readOnly={currentEmployerDetails?.registered} 
+                                value={currentEmployerDetails?.registered? currentEmployerDetails.industry : ''} 
+                                className="form-control" placeholder="Finance, Technology, Agriculture" />
+                            ) : (
+                                <input type="text" 
+                                onChange={(e)=>setEmployerForm({...employerForm, industry : e.target.value})} 
+                                className="form-control" placeholder="Finance, Technology, Agriculture" />
+                            )}
+                            
                         </div>
                         <div className="mb25" style={{'display' : currentEmployerDetails?.registered ? 'none' : 'block'}}>
                             <label className="form-label fw500 dark-color">Profile Picture</label>
                             <input type="file" onChange={(e)=>imageHandler(e)} className="form-control" />
-                        </div>
+                        </div> 
                         <div className="d-grid mb20">
                             <button style={{'display' : currentEmployerDetails?.registered ? 'none' : 'block'}}
                              className="ud-btn btn-thm default-box-shadow2" disabled={currentEmployerDetails?.registered}
-                              onClick={()=>registerFreelancer()} type="button">Create Account <i
+                              onClick={()=>registerEmployer()} type="button">Create Account <i
               className="fal fa-arrow-right-long"></i></button>
                         </div>
                     </div>
