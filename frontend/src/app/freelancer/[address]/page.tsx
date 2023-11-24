@@ -14,7 +14,7 @@ function Freelancer({params} : {
             <Navbar />
             <MobileNavbar />
             <div className="body_content">
-                <FreelancerPage />
+                <FreelancerPage address={params} />
                 <Footer />
             </div>
         </main>

@@ -1,7 +1,28 @@
-function FreelancerPage(){
+"use client"
+
+import { useContext, useEffect, useRef, useState } from 'react'
+import { FREELANCER_CONTEXT} from '../context/MarketPlace'
+import FreelancerProps from "@/app/interfaces/freelancerProps"
+import Link from 'next/link'
+
+function FreelancerPage({address} : any){
+
+    const {
+        account,hireFreelancer
+        ,freelancerDetails,currentFreelancerDetails
+    } = useContext(FREELANCER_CONTEXT) as FreelancerProps
+
+    useEffect(()=>{
+        freelancerDetails(address.address)        
+    },[])
+    console.log(currentFreelancerDetails);
+    
     return(
         <>
         {/* breadcumb section */}
+        {currentFreelancerDetails ? (
+         <>
+
         <section className="breadcumb-section pt-0">
             <style>
                 {
@@ -17,35 +38,36 @@ function FreelancerPage(){
                 }
             </style>
                 <div className="cta-service-v1 freelancer-single-style mx-auto maxw1700 pt120 pt60-sm pb120 pb60-sm bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg px30-lg">
-                    <img className="left-top-img wow zoomIn" src="/images/vector-img/left-top.png" alt="" />
-                    <img className="right-bottom-img wow zoomIn" src="/images/vector-img/right-bottom.png" alt="" />
-                    <div className="container">
-                        <div className="row wow fadeInUp">
-                            <div className="col-xl-7">
-                                <div className="position-relative">
-                                    <h2>I will design and develop a fully HTML website</h2>
-                                    <div className="list-meta d-sm-flex align-items-center mt30">
-                                        <a className="position-relative freelancer-single-style" href="#">
-                      <span className="online"></span>
-                      <img className="rounded-circle w-100 wa-sm mb15-sm" src="/images/team/fl-1.png" alt="Freelancer Photo" />
-                    </a>
-                                        <div className="ml20 ml0-xs">
-                                            <h5 className="title mb-1">Alexander Doe</h5>
-                                            <p className="mb-0">UI/UX Designer</p>
-                                            <p className="mb-0 dark-color fz15 fw500 list-inline-item mb5-sm"><i className="fas fa-star vam fz10 review-color me-2"></i> 4.82 94 reviews</p>
-                                            <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs"><i className="flaticon-place vam fz20 me-2"></i> Newyork, USA</p>
-                                            <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs"><i className="flaticon-30-days vam fz20 me-2"></i> Member since April 1, 2023</p>
-                                        </div>
+                <img className="left-top-img wow zoomIn" src="/images/vector-img/left-top.png" alt="" />
+                <img className="right-bottom-img wow zoomIn" src="/images/vector-img/right-bottom.png" alt="" />
+                <div className="container">
+                    <div className="row wow fadeInUp">
+                        <div className="col-xl-7">
+                            <div className="position-relative">
+                                <h2>{currentFreelancerDetails.gigTitle}</h2>
+                                <div className="list-meta d-sm-flex align-items-center mt30">
+                                    <a className="position-relative freelancer-single-style" href="#">
+                  <span className="online"></span>
+                  <img className="rounded-circle w-100 wa-sm mb15-sm" src="/images/team/fl-1.png" alt="Freelancer Photo" />
+                </a>
+                                    <div className="ml20 ml0-xs">
+                                        <h5 className="title mb-1">{currentFreelancerDetails.name}</h5>
+                                        <p className="mb-0">UI/UX Designer</p>
+                                        <p className="mb-0 dark-color fz15 fw500 list-inline-item mb5-sm"><i className="fas fa-star vam fz10 review-color me-2"></i> 4.82 94 reviews</p>
+                                        <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs"><i className="flaticon-place vam fz20 me-2"></i> Newyork, USA</p>
+                                        <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs"><i className="flaticon-30-days vam fz20 me-2"></i> Member since April 1, 2023</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
                 </div>
+                
+            </div>
+                
         </section>
 
-        {/* service details section  */}
+       
         <section className="service-details pt10 pb90 pb30-md">
                 <div className="container">
                     <div className="row wow fadeInUp">
@@ -72,65 +94,80 @@ function FreelancerPage(){
                             </div>
                             <div className="service-about">
                                 <h4>Description</h4>
-                                <p className="text mb30">Readable when looking at its layout. content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content
-                                    here', content of a page when looking at its layout. The point of using Lorem Ipsum is thatsed to using 'Content here, content here', making it look like readable English. </p>
-                                <p className="text mb30">And web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Readable when looking at its layout. content of a page when looking
-                                    at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'ontent.
-                                </p>                                
+                                <p className="text mb30"> {currentFreelancerDetails.gitDescription}</p>
                             </div>
                         </div>
                         <div className="col-lg-4">
                             <div className="blog-sidebar ms-lg-auto">
                                 <div className="price-widget pt25 widget-mt-minus bdrs8">
-                                    <h3 className="widget-title">$29 <small className="fz15 fw500">/per hour</small></h3>
+                                    <h3 className="widget-title">{currentFreelancerDetails.starting_price} <small className="fz15 fw500">KLAY</small></h3>
                                     <div className="category-list mt20">
                                         <a className="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
                       <span className="text"><i className="flaticon-place text-thm2 pe-2 vam"></i>Location</span> <span
-                        className="">Newyork, USA</span>
+                        className="">{currentFreelancerDetails.country}</span>
                     </a>
                                         <a className="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
                       <span className="text"><i className="flaticon-30-days text-thm2 pe-2 vam"></i>Member since</span> <span
-                        className="">April 2023</span>
+                        className="">{currentFreelancerDetails.registration_date}</span>
                     </a>
-                                        <a className="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
-                      <span className="text"><i className="flaticon-calendar text-thm2 pe-2 vam"></i>Last Delivery</span> <span
-                        className="">5 days</span>
-                    </a>
-                                        <a className="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
-                      <span className="text"><i className="flaticon-mars text-thm2 pe-2 vam"></i>Gender</span> <span
-                        className="">Male</span>
-                    </a>
-                                        <a className="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
+                        <a className="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
                       <span className="text"><i className="flaticon-translator text-thm2 pe-2 vam"></i>Languages</span> <span
                         className="">English</span>
                     </a>
-                                        <a className="d-flex align-items-center justify-content-between mb-3" href="#">
-                      <span className="text"><i className="flaticon-sliders text-thm2 pe-2 vam"></i>English Level</span> <span
-                        className="">Fluent</span>
-                    </a>
                                     </div>
                                     <div className="d-grid">
-                                        <a href="page-contact.html" className="ud-btn btn-thm">Contact Me<i
+                                        <a href="#" className="ud-btn btn-thm" onClick={()=>hireFreelancer(1,'add')} >Hire Me<i
                         className="fal fa-arrow-right-long"></i></a>
                                     </div>
                                 </div>
                                 <div className="sidebar-widget mb30 pb20 bdrs8">
                                     <h4 className="widget-title">My Skills</h4>
                                     <div className="tag-list mt30">
+                                        {currentFreelancerDetails.skills.split(',').map((value : string,key : string)=>{
+                                            <a href="#" key={key}>{value}</a>
+                                        })}
                                         <a href="#">Figma</a>
-                                        <a href="#">Sketch</a>
-                                        <a href="#">HTML5</a>
-                                        <a href="#">Software Design</a>
-                                        <a href="#">Prototyping</a>
-                                        <a href="#">SaaS</a>
-                                        <a href="#">Design Writing</a>
+
+                                        {/* Modal trigger button  */}
+                                        <button type="button" className="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalId">
+                                          Launch
+                                        </button>
+                                        
+                                        {/* Modal Body  */}
+                                        <div className="modal fade" id="modalId" tabIndex={1} data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                                            <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                                                <div className="modal-content">
+                                                    <div className="modal-header">
+                                                        <h5 className="modal-title" id="modalTitleId">Modal title</h5>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                        Body
+                                                    </div>
+                                                    <div className="modal-footer">
+                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" className="btn btn-primary">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+        </section>
+        </>
+            ):
+            (
+            <>
+                <h1 className='text-center'>User not found</h1>
+                <Link className='text-center' href={'/'}>Home Page</Link> 
+            </>
+            )
+            }
         </>
             
     )
