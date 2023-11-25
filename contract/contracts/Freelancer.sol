@@ -7,6 +7,7 @@ contract Dfreelancer {
     uint public totalFreelancers;
     uint public totalEmployers;
     uint public totalCompletedJobs;
+    address[] public allFreelancerAddresses;
 
     struct Job {
         uint8 id;
@@ -158,17 +159,6 @@ contract Dfreelancer {
         props = freelancers[_freelancer];
     }
 
-    /// @notice retrieves all freelancers
-    /// @return props
-
-    // function getAllFreelancers() external view returns(Freelancer[] memory props){
-    //      props = new Freelancer[](totalFreelancers);
-    //     for (uint i = 0; i < totalFreelancers; i++) {
-    //         props[i] = freelancers[i];
-    //     }
-    // }
-
-
      /// @notice retrieves employer escrow balance
     /// @param _employer, @param _job_id
     /// @return uint
@@ -234,14 +224,22 @@ contract Dfreelancer {
         totalFreelancers++;
         freelancers[msg.sender] = Freelancer(msg.sender, _name, _skills, 0,_country, 
         _imageURI,_gigTitle,_gigDesc,0,true,_date,_starting_price);
+         // Add the freelancer address to the array
+        allFreelancerAddresses.push(msg.sender);
 
         emit FreelancerRegistered(msg.sender, _name);
     }
 
-        // function updateFreelancer() external onlyFreelancer(msg.sender){
-        //     address _freelancer = freelancers[msg.sender];
+         /// @notice return all freelancers
+    function getAllFreelancers() public view returns (Freelancer[] memory) {
+        Freelancer[] memory allFreelancers = new Freelancer[](totalFreelancers);
 
-        // }
+        for (uint256 i = 0; i < totalFreelancers; i++) {
+            allFreelancers[i] = freelancers[allFreelancerAddresses[i]];
+        }
+
+        return allFreelancers;
+    }
 
         /// @notice process employer registration
         /// @param _name , @param _industry
