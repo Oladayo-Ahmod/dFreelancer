@@ -73,11 +73,12 @@ module.exports = {
         settings : {
             optimizer : {
                 enabled : true,
-                runs : 10000,
+                runs : 200,
                 details : {
                     yul : true
                 }
-            }
+            },
+            "viaIR" : true
         }
     },
     mocha: {
