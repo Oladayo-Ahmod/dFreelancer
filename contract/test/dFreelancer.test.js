@@ -29,10 +29,9 @@ describe("Dfreelancer", function () {
 
   // creating job
   it("Should create a job", async function () {
-      await dfreelancer.connect(employer)
       .registerEmployer('Ahmod','technology','United States','https://img.com',date)
       await dfreelancer.connect(employer)
-      .createJob(jobTitle, jobDescription, ethers.utils.parseEther('100'));
+      .createJob(jobTitle, jobDescription, ethers.utils.parseEther('300'));
       const job = await dfreelancer.getJobByID('1');
       expect(job.employer).to.equal(employer.address);
       expect(job.title).to.equal(jobTitle);
@@ -47,6 +46,9 @@ describe("Dfreelancer", function () {
     await dfreelancer.connect(freelancer)
     .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
       freelancerGigTitle,freelancerGigDesc, date,starting_price);
+      await dfreelancer.connect(owner)
+      .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,freelancerImageURI,
+        freelancerGigTitle,freelancerGigDesc, date,starting_price);
     const registeredFreelancer = await dfreelancer.freelancers(freelancer.address);
     expect(registeredFreelancer.freelancerAddress).to.equal(freelancer.address);
     expect(registeredFreelancer.name).to.equal(freelancerName);

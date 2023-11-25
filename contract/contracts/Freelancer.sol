@@ -117,6 +117,33 @@ contract Dfreelancer {
 
     }
 
+     /// @notice retrieves all uncompleted jobs by employer
+    /// @return props
+
+    function allUncompletedJobsByEmployer() external view returns(Job[] memory props){
+        uint totalEmployerJobs = 0;
+        uint currentIndex = 0;
+
+        // count total jobs created and uncompleted by employer
+        for (uint i = 0; i < totalJobs; i++) {
+            if (jobs[i +1].employer == msg.sender && jobs[i+1].completed == false) {
+                totalEmployerJobs++;
+            }
+        }
+
+        // get the jobs created and uncompleted by employer
+        props = new Job[](totalEmployerJobs);
+        for (uint i = 0; i < totalJobs; i++) {
+            if (jobs[i+1].employer == msg.sender && jobs[i+1].completed == false) {
+                uint currentId = i + 1;
+                Job storage currentJob = jobs[currentId];
+                props[currentIndex] = currentJob;
+                currentIndex++;
+            }
+
+        }
+    }
+
     /// @notice retrieves employer by address
     /// @param _employer, address
     /// @return props
@@ -130,6 +157,17 @@ contract Dfreelancer {
     function getFreelancerByAddress(address _freelancer) external view returns(Freelancer memory props){
         props = freelancers[_freelancer];
     }
+
+    /// @notice retrieves all freelancers
+    /// @return props
+
+    // function getAllFreelancers() external view returns(Freelancer[] memory props){
+    //      props = new Freelancer[](totalFreelancers);
+    //     for (uint i = 0; i < totalFreelancers; i++) {
+    //         props[i] = freelancers[i];
+    //     }
+    // }
+
 
      /// @notice retrieves employer escrow balance
     /// @param _employer, @param _job_id
