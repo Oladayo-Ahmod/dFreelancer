@@ -92,7 +92,8 @@ function PopularService(){
                             <div className="item">
                                 <div className="listing-style1">
                                     <div className="list-thumb">
-                                        <Image width={255} height={245} className="w-100" style={{'width' : '255px !Important;'}}  src="/images/listings/g-1.jpg" alt="" />
+                                        <Image width={255} height={245} className="w-100" loader={()=>freelancer.images[1]}
+                                         style={{'width' : '255px !Important;'}}  src={freelancer.images[1]} alt="Gig Image" />
                                         <a href="#" className="listing-fav fz12"><span className="far fa-heart"></span></a>
                                     </div>
                                     <div className="list-content">
@@ -107,7 +108,7 @@ function PopularService(){
                                             <Link className="d-flex" href={'/freelancer/'+freelancer.freelancerAddress}>
                                             <span className="position-relative mr10">
                                                 <Image className="rounded-circle wa" 
-                                                width={28} height={28} src={freelancer.image} loader={()=>freelancer.image} alt="Freelancer Photo" />
+                                                width={28} height={28} src={freelancer.image[0]} loader={()=>freelancer.images[0]} alt="Freelancer Photo" />
                                                 <span className="online-badges"></span>
                                             </span>
                                             <span className="fz14">{freelancer.name}</span>
@@ -123,7 +124,7 @@ function PopularService(){
                         )):
                         (
                            <div>
-                            <h1 className="text-warning text-center"> Loading gif </h1>
+                            <h1 className="text-warning text-center"> No freelancer found </h1>
                            </div>
                         )
                     }

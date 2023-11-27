@@ -4,6 +4,7 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { FREELANCER_CONTEXT} from '../context/MarketPlace'
 import FreelancerProps from "@/app/interfaces/freelancerProps"
 import Link from 'next/link'
+import Image from 'next/image'
 
 function FreelancerPage({address} : any){
 
@@ -48,14 +49,15 @@ function FreelancerPage({address} : any){
                                 <div className="list-meta d-sm-flex align-items-center mt30">
                                     <a className="position-relative freelancer-single-style" href="#">
                   <span className="online"></span>
-                  <img className="rounded-circle w-100 wa-sm mb15-sm" src="/images/team/fl-1.png" alt="Freelancer Photo" />
+                  <Image width={90} height={90} className="rounded-circle w-100 wa-sm mb15-sm"
+                   src={currentFreelancerDetails.images[0]} loader={()=>currentFreelancerDetails.images[0]} alt="Freelancer Photo" />
                 </a>
                                     <div className="ml20 ml0-xs">
                                         <h5 className="title mb-1">{currentFreelancerDetails.name}</h5>
                                         <p className="mb-0">UI/UX Designer</p>
                                         <p className="mb-0 dark-color fz15 fw500 list-inline-item mb5-sm"><i className="fas fa-star vam fz10 review-color me-2"></i> 4.82 94 reviews</p>
-                                        <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs"><i className="flaticon-place vam fz20 me-2"></i> Newyork, USA</p>
-                                        <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs"><i className="flaticon-30-days vam fz20 me-2"></i> Member since April 1, 2023</p>
+                                        <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs"><i className="flaticon-place vam fz20 me-2"></i> {currentFreelancerDetails.country}</p>
+                                        <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs"><i className="flaticon-30-days vam fz20 me-2"></i> Member since {currentFreelancerDetails.starting_date}</p>
                                     </div>
                                 </div>
                             </div>
