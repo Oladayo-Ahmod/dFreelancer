@@ -156,7 +156,7 @@ function RegisterFreelancer(){
 
                         {/* Gig picture */}
                         <div className="mb25" style={{'display' : currentFreelancerDetails?.registered ? 'none' : 'block'}}>
-                            <label className="form-label fw500 dark-color">Profile Picture</label>
+                            <label className="form-label fw500 dark-color">Gig Picture</label>
                             <input type="file" onChange={(e)=>gigImageHandler(e)} className="form-control" />
                         </div>
 

@@ -39,7 +39,7 @@ function PopularService(){
     useEffect(()=>{
         allFreelancers()
         console.log(freelancers);
-    },[])
+    },[freelancers])
     return (
         
         <section className="pb90 pb30-md bgc-thm3">
@@ -107,11 +107,11 @@ function PopularService(){
                                         <div className="list-meta d-flex justify-content-between align-items-center mt15">
                                             <Link className="d-flex" href={'/freelancer/'+freelancer.freelancerAddress}>
                                             <span className="position-relative mr10">
-                                                <Image className="rounded-circle wa" 
-                                                width={28} height={28} src={freelancer.image[0]} loader={()=>freelancer.images[0]} alt="Freelancer Photo" />
+                                                {/* <Image className="rounded-circle wa" 
+                                                width={28} height={28} src={freelancer.image[0]} loader={()=>freelancer.images[0]} alt="Freelancer Photo" /> */}
                                                 <span className="online-badges"></span>
                                             </span>
-                                            <span className="fz14">{freelancer.name}</span>
+                                            {/* <span className="fz14">{freelancer.name}</span> */}
                                             </Link>
                                             <div className="budget">
                                                 <p className="mb-0 body-color">Starting at<span className="fz17 fw500 dark-color ms-1">{freelancer.starting_price} KLAY</span></p>
@@ -129,7 +129,7 @@ function PopularService(){
                         )
                     }
                        
-                        <SwiperSlide >
+                        {/* <SwiperSlide >
                         <div className="item">
                             <div className="listing-style1">
                                 <div className="list-thumb">
@@ -159,181 +159,8 @@ function PopularService(){
                                 </div>
                             </div>
                         </div>
-                        </SwiperSlide >
+                        </SwiperSlide > */}
 
-                        <SwiperSlide >
-                        <div className="item">
-                            <div className="listing-style1">
-                                <div className="list-thumb">
-                                    <Image className="w-100" width={255} height={245} src="/images/listings/g-3.jpg" alt="" />
-                                    <a href="#" className="listing-fav fz12"><span className="far fa-heart"></span></a>
-                                </div>
-                                <div className="list-content">
-                                    <p className="list-text body-color fz14 mb-1">Creative & Design </p>
-                                    <h5 className="list-title line-clamp2">
-                                        <a href="page-service-single.html">I will design mobile app UI
-                                    UX for ios and android with figma or xd</a>
-                                    </h5>
-                                    <div className="review-meta d-flex align-items-center">
-                                        <i className="fas fa-star fz10 review-color me-2"></i>
-                                        <p className="mb-0 body-color fz14"><span className="dark-color me-2">4.82</span>94 reviews</p>
-                                    </div>
-                                    <hr className="my-2" />
-                                    <div className="list-meta d-flex justify-content-between align-items-center mt15">
-                                        <a className="d-flex" href="#">
-                                            <span className="position-relative mr10">
-                                                <Image className="rounded-circle" width={28} height={28}
-                                                src="/images/team/fl-s-3.png" alt="Freelancer Photo" />
-                                                <span className="online-badges"></span>
-                                            </span>
-                                            <span className="fz14">Jone Doe</span>
-                                        </a>
-                                        <div className="budget">
-                                            <p className="mb-0 body-color">Starting at<span className="fz17 fw500 dark-color ms-1">$799</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </SwiperSlide >
-
-                        <SwiperSlide >
-                        <div className="item">
-                            <div className="listing-style1">
-                                <div className="list-thumb">
-                                    <Image className="w-100" width={255} height={245}
-                                     src="/images/listings/g-4.jpg" alt="" />
-                                    <a href="#" className="listing-fav fz12"><span className="far fa-heart"></span></a>
-                                </div>
-                                <div className="list-content">
-                                    <p className="list-text body-color fz14 mb-1">Web & Logo Design</p>
-                                    <h5 className="list-title line-clamp2"><a href="page-service-single.html">I will create 5 an amazing
-                  4k videos animated logo intro</a></h5>
-                                    <div className="review-meta d-flex align-items-center">
-                                        <i className="fas fa-star fz10 review-color me-2"></i>
-                                        <p className="mb-0 body-color fz14"><span className="dark-color me-2">4.82</span>94 reviews</p>
-                                    </div>
-                                    <hr className="my-2" />
-                                    <div className="list-meta d-flex justify-content-between align-items-center mt15">
-                                        <a className="d-flex" href="#">
-                                        <span className="position-relative mr10">
-                                            <Image className="rounded-circle" width={28} height={28}
-                                             src="/images/team/fl-s-4.png" alt="Freelancer Photo" />
-                                                <span className="online-badges"></span>
-                                            </span>
-                                            <span className="fz14">Jone Doe</span>
-                                        </a>
-                                        <div className="budget">
-                                            <p className="mb-0 body-color">Starting at<span className="fz17 fw500 dark-color ms-1">$799</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </SwiperSlide >
-
-                        <SwiperSlide >
-                        <div className="item">
-                            <div className="listing-style1">
-                                <div className="list-thumb">
-                                    <Image className="w-100" width={255} height={245} src="/images/listings/g-5.jpg" alt="" />
-                                    <a href="#" className="listing-fav fz12"><span className="far fa-heart"></span></a>
-                                </div>
-                                <div className="list-content">
-                                    <p className="list-text body-color fz14 mb-1">Web & Logo Design</p>
-                                    <h5 className="list-title"><a href="page-service-single.html">I will convert figma to HTML CSS using
-                  bootstrap or tailwind</a></h5>
-                                    <div className="review-meta d-flex align-items-center">
-                                        <i className="fas fa-star fz10 review-color me-2"></i>
-                                        <p className="mb-0 body-color fz14"><span className="dark-color me-2">4.82</span>94 reviews</p>
-                                    </div>
-                                    <hr className="my-2" />
-                                    <div className="list-meta d-flex justify-content-between align-items-center mt15">
-                                        <a className="d-flex" href="#">
-                                        <span className="position-relative mr10">
-                                            <Image width={28} height={28}
-                                             className="rounded-circle" src="/images/team/fl-s-1.png" alt="Freelancer Photo" />
-                                                <span className="online-badges"></span>
-                                            </span>
-                                            <span className="fz14">Jone Doe</span>
-                                        </a>
-                                        <div className="budget">
-                                            <p className="mb-0 body-color">Starting at<span className="fz17 fw500 dark-color ms-1">$799</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </SwiperSlide >
-
-                        <SwiperSlide >
-                        <div className="item">
-                            <div className="listing-style1">
-                                <div className="list-thumb">
-                                    <Image className="w-100" width={255} height={245}
-                                     src="/images/listings/g-6.jpg" alt="" />
-                                    <a href="#" className="listing-fav fz12"><span className="far fa-heart"></span></a>
-                                </div>
-                                <div className="list-content">
-                                    <p className="list-text body-color fz14 mb-1">Web & Logo Design</p>
-                                    <h5 className="list-title"><a href="page-service-single.html">I will convert figma to HTML CSS using
-                  bootstrap or tailwind</a></h5>
-                                    <div className="review-meta d-flex align-items-center">
-                                        <i className="fas fa-star fz10 review-color me-2"></i>
-                                        <p className="mb-0 body-color fz14"><span className="dark-color me-2">4.82</span>94 reviews</p>
-                                    </div>
-                                    <hr className="my-2" />
-                                    <div className="list-meta d-flex justify-content-between align-items-center mt15">
-                                        <a className="d-flex" href="#">
-                                        <span className="position-relative mr10">
-                                            <Image className="rounded-circle" width={28} height={28}
-                                            src="/images/team/fl-s-2.png" alt="Freelancer Photo" />
-                                                <span className="online-badges"></span>
-                                            </span>
-                                            <span className="fz14">Jone Doe</span>
-                                        </a>
-                                        <div className="budget">
-                                            <p className="mb-0 body-color">Starting at<span className="fz17 fw500 dark-color ms-1">$799</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </SwiperSlide >
-
-                        <SwiperSlide >
-                        <div className="item">
-                            <div className="listing-style1">
-                                <div className="list-thumb">
-                                    <Image className="w-100" width={255} height={245} src="/images/listings/g-7.jpg" alt="" />
-                                    <a href="#" className="listing-fav fz12"><span className="far fa-heart"></span></a>
-                                </div>
-                                <div className="list-content">
-                                    <p className="list-text body-color fz14 mb-1">Creative & Design </p>
-                                    <h5 className="list-title line-clamp2"><a href="page-service-single.html">I will design mobile app UI
-                  UX for ios and android with figma or xd</a></h5>
-                                    <div className="review-meta d-flex align-items-center">
-                                        <i className="fas fa-star fz10 review-color me-2"></i>
-                                        <p className="mb-0 body-color fz14"><span className="dark-color me-2">4.82</span>94 reviews</p>
-                                    </div>
-                                    <hr className="my-2" />
-                                    <div className="list-meta d-flex justify-content-between align-items-center mt15">
-                                        <a className="d-flex" href="#">
-                                        <span className="position-relative mr10">
-                                            <Image className="rounded-circle"
-                                             src="/images/team/fl-s-3.png" alt="Freelancer Photo" width={28} height={28} />
-                                            <span className="online-badges"></span>
-                                        </span>
-                                        <span className="fz14">Jone Doe</span>
-                                        </a>
-                                        <div className="budget">
-                                            <p className="mb-0 body-color">Starting at<span className="fz17 fw500 dark-color ms-1">$799</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </SwiperSlide >
 
                     </div>
                     </Swiper>
