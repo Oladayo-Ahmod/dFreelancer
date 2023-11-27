@@ -57,7 +57,8 @@ interface FreelancerProps{
     releaseEscrow : (jobId : number, address : string) => void
     withdrawEarnings : ()=> void 
     retrieveJob : (jobId : number)=> void
-    imageHandler : (e : any) => void
+    profileImageHandler : (e : any) => void
+    gigImageHandler : (e : any) => void
     freelancerDetails : (address : string) => void
     employerDetails : (address : string) => void
     allFreelancers : ()=> void

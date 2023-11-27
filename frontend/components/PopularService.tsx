@@ -9,6 +9,7 @@ import { Navigation,Scrollbar,Autoplay } from 'swiper/modules'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { FREELANCER_CONTEXT} from '../context/MarketPlace'
 import FreelancerProps from "@/app/interfaces/freelancerProps"
+import Link from "next/link"
 
 
 function PopularService(){
@@ -84,7 +85,8 @@ function PopularService(){
                 >
 
                     <div className="slider-outer-dib vam_nav_style dots_none slider-4-grid2 owl-carousel owl-theme wow fadeInUp">
-                        {freelancers ? freelancers.map((freelancer : any)=>(
+                        {freelancers ? 
+                        freelancers.map((freelancer : any)=>(
 
                             <SwiperSlide >
                             <div className="item">
@@ -95,34 +97,33 @@ function PopularService(){
                                     </div>
                                     <div className="list-content">
                                         <p className="list-text body-color fz14 mb-1">Web & Logo Design</p>
-                                        <h5 className="list-title"><a href="page-service-single.html">I will convert figma to HTML CSS using
-                            bootstrap or tailwind</a></h5>
+                                        <h5 className="list-title"><a href="page-service-single.html">{freelancer.gigTitle}</a></h5>
                                         <div className="review-meta d-flex align-items-center">
                                             <i className="fas fa-star fz10 review-color me-2"></i>
                                             <p className="mb-0 body-color fz14"><span className="dark-color me-2">4.82</span>94 reviews</p>
                                         </div>
                                         <hr className="my-2" />
                                         <div className="list-meta d-flex justify-content-between align-items-center mt15">
-                                            <a className="d-flex" href="#">
+                                            <Link className="d-flex" href={'/freelancer/'+freelancer.freelancerAddress}>
                                             <span className="position-relative mr10">
                                                 <Image className="rounded-circle wa" 
-                                                width={28} height={28} src="/images/team/fl-s-1.png" alt="Freelancer Photo" />
+                                                width={28} height={28} src={freelancer.image} loader={()=>freelancer.image} alt="Freelancer Photo" />
                                                 <span className="online-badges"></span>
                                             </span>
                                             <span className="fz14">{freelancer.name}</span>
-                                            </a>
+                                            </Link>
                                             <div className="budget">
-                                                <p className="mb-0 body-color">Starting at<span className="fz17 fw500 dark-color ms-1">$799</span></p>
+                                                <p className="mb-0 body-color">Starting at<span className="fz17 fw500 dark-color ms-1">{freelancer.starting_price} KLAY</span></p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             </SwiperSlide >
-                        ):
+                        )):
                         (
                            <div>
-                            <h1 className="text-warning text-center"> No freelancer found </h1>
+                            <h1 className="text-warning text-center"> Loading gif </h1>
                            </div>
                         )
                     }
@@ -136,8 +137,7 @@ function PopularService(){
                                 </div>
                                 <div className="list-content">
                                     <p className="list-text body-color fz14 mb-1">Art & Illustration</p>
-                                    <h5 className="list-title"><a href="page-service-single.html">I will create custom isometric flat
-                  design illustration</a></h5>
+                                    <h5 className="list-title"><a href="page-service-single.html">I will create custom isometric flat  design illustration</a></h5>
                                     <div className="review-meta d-flex align-items-center">
                                         <i className="fas fa-star fz10 review-color me-2"></i>
                                         <p className="mb-0 body-color fz14"><span className="dark-color me-2">4.82</span>94 reviews</p>

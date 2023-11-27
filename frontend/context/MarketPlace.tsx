@@ -25,6 +25,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
     const [deployer, setDeployer] = useState<string>()
     const [singleJob, setSingeJob] = useState<string>()
     const [profileImage, setProfileImage] = useState<string>()
+    const [gigImage, setGigImage] = useState<string>()
     const [currentEmployerDetails, setCurrentEmployerDetails] = useState<any>()
     const [currentFreelancerDetails, setCurrentFreelancerDetails] = useState<any>()
     const [freelancers, setFreelancers] = useState<any>()
@@ -65,14 +66,14 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
 
     const registerFreelancer : FreelancerProps["registerFreelancer"] = async function(){
         const {name,country,skills,gitDesc,gitTitle,starting_price} = freelancerForm
-        const date = new Date().toLocaleString('default', {month : 'long'}) + ',' + new Date().getFullYear()
         if(account){
-            if(name && country && skills && profileImage && gitDesc && gitTitle && starting_price){
+            if(name && country && skills && profileImage && gigImage &&gitDesc && gitTitle && starting_price){
+                const images = [profileImage,gigImage]
                 try {
                const provider = new ethers.providers.Web3Provider(connect)
                const signer = provider.getSigner()
                const contract = new ethers.Contract(ADDRESS,ABI,signer)
-               const register = await contract.registerFreelancer(name,skills,country,profileImage,gitTitle,gitDesc,date,starting_price)
+               const register = await contract.registerFreelancer(name,skills,country,gitTitle,gitDesc,images,starting_price)
                await register.wait()
                Swal.fire({
                    position: 'top-end',
@@ -513,12 +514,23 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         }
     }
 
-    const imageHandler = async function(e : any){
+    const profileImageHandler = async function(e : any){
         let file = e.target.files[0]
         try {
             const response = await uploadFileToIPFS(file)
             console.log(response);
             setProfileImage(response)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const gigImageHandler = async function(e : any){
+        let file = e.target.files[0]
+        try {
+            const response = await uploadFileToIPFS(file)
+            // console.log(response);
+            setGigImage(response)
         } catch (error) {
             console.log(error);
         }
@@ -558,7 +570,8 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             releaseEscrow,
             withdrawEarnings,
             retrieveJob,
-            imageHandler,
+            profileImageHandler,
+            gigImageHandler,
             freelancerDetails,
             currentEmployerDetails,
             currentFreelancerDetails,

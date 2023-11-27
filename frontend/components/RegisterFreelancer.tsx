@@ -7,7 +7,7 @@ import FreelancerProps from "@/app/interfaces/freelancerProps"
 
 function RegisterFreelancer(){
     const {
-        account,registerFreelancer,setFreelancerForm,freelancerForm,imageHandler,freelancerDetails,currentFreelancerDetails,connectWallet
+        account,registerFreelancer,setFreelancerForm,freelancerForm,profileImageHandler,gigImageHandler,freelancerDetails,currentFreelancerDetails,connectWallet
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{
@@ -154,10 +154,16 @@ function RegisterFreelancer(){
                         }
                         </div>
 
+                        {/* Gig picture */}
+                        <div className="mb25" style={{'display' : currentFreelancerDetails?.registered ? 'none' : 'block'}}>
+                            <label className="form-label fw500 dark-color">Profile Picture</label>
+                            <input type="file" onChange={(e)=>gigImageHandler(e)} className="form-control" />
+                        </div>
+
                         {/* profile picture */}
                         <div className="mb25" style={{'display' : currentFreelancerDetails?.registered ? 'none' : 'block'}}>
                             <label className="form-label fw500 dark-color">Profile Picture</label>
-                            <input type="file" onChange={(e)=>imageHandler(e)} className="form-control" />
+                            <input type="file" onChange={(e)=>profileImageHandler(e)} className="form-control" />
                         </div>
 
                         {/* create button */}
