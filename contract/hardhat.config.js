@@ -78,7 +78,7 @@ module.exports = {
                     yul : true
                 }
             },
-            "viaIR" : true
+            viaIR : true
         }
     },
     mocha: {

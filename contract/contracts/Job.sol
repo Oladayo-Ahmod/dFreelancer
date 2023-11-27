@@ -27,12 +27,12 @@ contract Djob{
         string skills;
         uint balance;
         string country;
-        string image;
         string gigTitle;
         string gitDescription;
+        string[] images; // [0]= profileImage, [1]= gigImage
         uint jobsCompleted;
         bool registered;
-        string registration_date;
+        uint256 registration_date;
         string starting_price;
     }
 
