@@ -27,6 +27,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
     const [profileImage, setProfileImage] = useState<string>()
     const [currentEmployerDetails, setCurrentEmployerDetails] = useState<any>()
     const [currentFreelancerDetails, setCurrentFreelancerDetails] = useState<any>()
+    const [freelancers, setFreelancers] = useState<any>()
     const [freelancerForm, setFreelancerForm] = useState<FreelancerProps["freelancerForm"]>({
         name : '',
         country : '',
@@ -239,7 +240,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
                 timer: 4000
             })
         } catch (error : any) {
-            if(error.message.includes('Job does not exist')){
+            if(error.message.includes('JDE')){
                 Swal.fire({
                     position: 'top-end',
                     icon: 'warning',
@@ -285,7 +286,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             })
             
         } catch (error : any) {
-            if(error.message.includes('Job does not exist')){
+            if(error.message.includes('JDE')){
                 Swal.fire({
                     position: 'top-end',
                     icon: 'warning',
@@ -331,7 +332,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
                 timer: 4000
             })
         } catch (error : any) {
-            if(error.message.includes('Job does not exist')){
+            if(error.message.includes('JDE')){
                 Swal.fire({
                     position: 'top-end',
                     icon: 'warning',
@@ -349,7 +350,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
                     timer: 4000
                 })
             }
-            else if(error.message.includes('Insufficient amount')){
+            else if(error.message.includes('IA')){
                 Swal.fire({
                     position: 'top-end',
                     icon: 'warning',
@@ -385,7 +386,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
                 timer: 4000
             })
         } catch (error : any) {
-            if(error.message.includes('Job does not exist')){
+            if(error.message.includes('JDE')){
                 Swal.fire({
                     position: 'top-end',
                     icon: 'warning',
@@ -394,7 +395,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
                     timer: 4000
                 })
             }
-            else if(error.message.includes('Freelancer is not hired for this job')){
+            else if(error.message.includes('FNH')){
                 Swal.fire({
                     position: 'top-end',
                     icon: 'warning',
@@ -430,7 +431,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
                 timer: 4000
             })
         } catch (error : any) {
-            if(error.message.includes('Job does not exist')){
+            if(error.message.includes('JDE')){
                 Swal.fire({
                     position: 'top-end',
                     icon: 'warning',
@@ -523,6 +524,18 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         }
     }
 
+    const allFreelancers : FreelancerProps["allFreelancers"] = async ()=>{
+        try {
+            const provider = new ethers.providers.Web3Provider(connect)
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            const freelancers = await contract.getAllFreelancers()
+           setFreelancers(freelancers)
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
     // const allJobs
     return(
         <FREELANCER_CONTEXT.Provider
@@ -549,7 +562,9 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             freelancerDetails,
             currentEmployerDetails,
             currentFreelancerDetails,
-            employerDetails
+            employerDetails,
+            allFreelancers,
+            freelancers
         }}
         >
             {children}

@@ -5,6 +5,7 @@ interface FreelancerProps{
     account : string | undefined
     currentEmployerDetails : any | undefined
     currentFreelancerDetails : any | undefined
+    freelancers : any | undefined
     connectWallet : ()=>void
     freelancerForm : {
         name : string | undefined,
@@ -59,6 +60,7 @@ interface FreelancerProps{
     imageHandler : (e : any) => void
     freelancerDetails : (address : string) => void
     employerDetails : (address : string) => void
+    allFreelancers : ()=> void
 
 }
 

@@ -14,7 +14,7 @@ function RegisterFreelancer(){
         connectWallet()
         if (account) {
             freelancerDetails(account)
-            // console.log(currentFreelancerDetails?.registered);
+            // console.log(currentFreelancerDetails);
         }
         
     })
@@ -108,7 +108,7 @@ function RegisterFreelancer(){
                             {currentFreelancerDetails?.registered? (
                                 <input type="number" readOnly={currentFreelancerDetails?.registered} 
                                 onChange={(e)=>setFreelancerForm({...freelancerForm, starting_price : Number(e.target.value) })} 
-                                value={currentFreelancerDetails.starting_price}
+                                value={Number(currentFreelancerDetails.starting_price)}
                                 className="form-control" />
                             )
                             :(

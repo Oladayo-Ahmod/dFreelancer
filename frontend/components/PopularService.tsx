@@ -13,8 +13,7 @@ import FreelancerProps from "@/app/interfaces/freelancerProps"
 
 function PopularService(){
     const {
-        account,
-        connectWallet
+        allFreelancers,freelancers
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
     
     const breakpoints:Record<number , {slidesPerView :number, spaceBetween? : number}> = {
@@ -35,6 +34,11 @@ function PopularService(){
             spaceBetween : 40
         }
     }
+
+    useEffect(()=>{
+        allFreelancers()
+        console.log(freelancers);
+    },[])
     return (
         
         <section className="pb90 pb30-md bgc-thm3">
@@ -80,7 +84,9 @@ function PopularService(){
                 >
 
                     <div className="slider-outer-dib vam_nav_style dots_none slider-4-grid2 owl-carousel owl-theme wow fadeInUp">
-                        <SwiperSlide >
+                        {freelancers ? freelancers.map((freelancer : any)=>(
+
+                            <SwiperSlide >
                             <div className="item">
                                 <div className="listing-style1">
                                     <div className="list-thumb">
@@ -90,7 +96,7 @@ function PopularService(){
                                     <div className="list-content">
                                         <p className="list-text body-color fz14 mb-1">Web & Logo Design</p>
                                         <h5 className="list-title"><a href="page-service-single.html">I will convert figma to HTML CSS using
-                    bootstrap or tailwind</a></h5>
+                            bootstrap or tailwind</a></h5>
                                         <div className="review-meta d-flex align-items-center">
                                             <i className="fas fa-star fz10 review-color me-2"></i>
                                             <p className="mb-0 body-color fz14"><span className="dark-color me-2">4.82</span>94 reviews</p>
@@ -103,7 +109,7 @@ function PopularService(){
                                                 width={28} height={28} src="/images/team/fl-s-1.png" alt="Freelancer Photo" />
                                                 <span className="online-badges"></span>
                                             </span>
-                                            <span className="fz14">Jone Doe</span>
+                                            <span className="fz14">{freelancer.name}</span>
                                             </a>
                                             <div className="budget">
                                                 <p className="mb-0 body-color">Starting at<span className="fz17 fw500 dark-color ms-1">$799</span></p>
@@ -112,8 +118,15 @@ function PopularService(){
                                     </div>
                                 </div>
                             </div>
-                        </SwiperSlide >
-
+                            </SwiperSlide >
+                        ):
+                        (
+                           <div>
+                            <h1 className="text-warning text-center"> No freelancer found </h1>
+                           </div>
+                        )
+                    }
+                       
                         <SwiperSlide >
                         <div className="item">
                             <div className="listing-style1">
