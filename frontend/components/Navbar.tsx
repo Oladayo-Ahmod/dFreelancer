@@ -11,9 +11,18 @@ import Link from "next/link"
 function Navbar(){
     const pathname = usePathname()    
     const {
-        account,
+        account,employerDetails,currentEmployerDetails,
         connectWallet
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
+
+    useEffect(()=>{
+        connectWallet()
+        if (account) {
+            employerDetails(account)
+            // console.log(currentEmployerDetails);
+        }
+        
+    })
     return (
         <>
              <header className="header-nav nav-homepage-style stricky main-menu"
@@ -43,7 +52,15 @@ function Navbar(){
                                          <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href={'/job-listing'}><span className="title">Browse Jobs</span></Link>
                                     </li>
                                     <li className="visible_list"> 
-                                    <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href={'/become-an-employer'}><span className="title">Join as employer</span></Link>
+                                    {!currentEmployerDetails?.registered?
+                                    (
+                                        <button className="btn btn-primary btn-sm text-white" 
+                                        data-bs-toggle="modal" data-bs-target="#modalId">create job</button>
+                                    ):(
+                                        <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href={'/become-an-employer'}><span className="title">Join as employer</span></Link>
+
+                                    )
+                                }
                                     </li>
                                     <li> 
                                         <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href={'/become-a-freelancer'}>Join as freelancer</Link></li>
@@ -61,27 +78,33 @@ function Navbar(){
             </nav>
         </header>
 
-         {/* Search Modal  */}
-        <div className="search-modal">
-            <div className="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabIndex={1}>
-                <div className="modal-dialog modal-lg">
-                    <div className="modal-content">
+         {/* Job Modal  */}
+       
+       
+        
+         {/* Modal  */}
+        <div className="modal fade" id="modalId" tabIndex={1} role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div className="modal-dialog" role="document">
+                <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalToggleLabel"></h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
-                  className="fal fa-xmark"></i></button>
-                        </div>
-                        <div className="modal-body">
-                            <div className="popup-search-field search_area">
-                                <input type="text" className="form-control border-0" placeholder="What service are you looking for today?" />
-                                <label><span className="far fa-magnifying-glass"></span></label>
-                                <button className="ud-btn btn-thm" type="submit">Search</button>
+                                <h5 className="modal-title" id="modalTitleId">Modal title</h5>
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
+                    <div className="modal-body">
+                        <div className="container-fluid">
+                            Add rows here
                         </div>
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-primary">Save</button>
                     </div>
                 </div>
             </div>
         </div>
+        
+        
+        
 
         <div className="hiddenbar-body-ovelay"></div>
         </>
