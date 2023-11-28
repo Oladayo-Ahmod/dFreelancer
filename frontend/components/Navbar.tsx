@@ -12,7 +12,7 @@ function Navbar(){
     const pathname = usePathname()    
     const {
         account,employerDetails,currentEmployerDetails,setJobCreationForm,
-        connectWallet,jobCreationForm
+        connectWallet,jobCreationForm,createJob
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{
@@ -94,24 +94,24 @@ function Navbar(){
                         <div className="container-fluid">
                            <div className="mb-3">
                              <label  className="form-label">Title</label>
-                             <input type="text" className="form-control" placeholder="" 
+                             <input type="text" className="form-control" placeholder="job title" 
                              aria-describedby="helpId" onChange={(e)=>setJobCreationForm({...jobCreationForm, title : e.target.value})}  />                      
                            </div>
                            <div className="mb-3">
                              <label  className="form-label">Description</label>
-                             <input type="text" className="form-control" placeholder="" 
+                             <input type="text" className="form-control" placeholder="job description" 
                              aria-describedby="helpId" onChange={(e)=>setJobCreationForm({...jobCreationForm, description : e.target.value})}  />                      
                            </div>
                            <div className="mb-3">
                              <label  className="form-label">Budget</label>
-                             <input type="number" className="form-control" placeholder="" 
+                             <input type="number" className="form-control" placeholder="job budget" 
                              aria-describedby="helpId" onChange={(e)=>setJobCreationForm({...jobCreationForm, budget : Number(e.target.value)})}  />                      
                            </div>
                         </div>
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary">Save</button>
+                        <button type="button" onClick={()=>createJob()} className="btn btn-primary">Create</button>
                     </div>
                 </div>
             </div>

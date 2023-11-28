@@ -206,31 +206,43 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
 
      const createJob : FreelancerProps["createJob"] =async ()=>{
         const {title,description,budget} = jobCreationForm
-        try {
+        if (title && description && budget) {
+            try {
 
-            const parsedBudget = ethers.utils.parseEther(budget as string)
-            const provider = new ethers.providers.Web3Provider(connect)
-            const signer = provider.getSigner()
-            const contract = new ethers.Contract(ADDRESS,ABI,signer)
-            await contract.createJob(title,description,parsedBudget)
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                text: `You have successfully created a job`,
-                showConfirmButton: true,
-                timer: 4000
-            })   
-        } catch (error) {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'warning',
-                text: `an error occured, try again.`,
-                showConfirmButton: true,
-                timer: 4000
-            })   
-            console.log(error);
-            
+                const parsedBudget = ethers.utils.parseEther(budget.toString())
+                const provider = new ethers.providers.Web3Provider(connect)
+                const signer = provider.getSigner()
+                const contract = new ethers.Contract(ADDRESS,ABI,signer)
+                await contract.createJob(title,description,parsedBudget)
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    text: `You have successfully created a job`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })   
+            } catch (error) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `an error occured, try again.`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })   
+                console.log(error);
+                
+            }
         }
+       else{
+        Swal.fire({
+            position: 'top-end',
+            icon: 'warning',
+            text: `All fields are required`,
+            showConfirmButton: true,
+            timer: 4000
+        })  
+       } 
+       
      }
 
      const applyJob : FreelancerProps["applyJob"]=async (jobId)=>{
