@@ -11,8 +11,8 @@ import Link from "next/link"
 function Navbar(){
     const pathname = usePathname()    
     const {
-        account,employerDetails,currentEmployerDetails,
-        connectWallet
+        account,employerDetails,currentEmployerDetails,setJobCreationForm,
+        connectWallet,jobCreationForm
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{
@@ -87,12 +87,26 @@ function Navbar(){
             <div className="modal-dialog" role="document">
                 <div className="modal-content">
                         <div className="modal-header">
-                                <h5 className="modal-title" id="modalTitleId">Modal title</h5>
+                                <h5 className="modal-title" id="modalTitleId">Create Job</h5>
                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                     <div className="modal-body">
                         <div className="container-fluid">
-                            Add rows here
+                           <div className="mb-3">
+                             <label  className="form-label">Title</label>
+                             <input type="text" className="form-control" placeholder="" 
+                             aria-describedby="helpId" onChange={(e)=>setJobCreationForm({...jobCreationForm, title : e.target.value})}  />                      
+                           </div>
+                           <div className="mb-3">
+                             <label  className="form-label">Description</label>
+                             <input type="text" className="form-control" placeholder="" 
+                             aria-describedby="helpId" onChange={(e)=>setJobCreationForm({...jobCreationForm, description : e.target.value})}  />                      
+                           </div>
+                           <div className="mb-3">
+                             <label  className="form-label">Budget</label>
+                             <input type="number" className="form-control" placeholder="" 
+                             aria-describedby="helpId" onChange={(e)=>setJobCreationForm({...jobCreationForm, budget : Number(e.target.value)})}  />                      
+                           </div>
                         </div>
                     </div>
                     <div className="modal-footer">

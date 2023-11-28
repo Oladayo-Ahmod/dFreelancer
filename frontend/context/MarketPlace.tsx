@@ -48,7 +48,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
     const [jobCreationForm, setJobCreationForm] = useState<FreelancerProps["jobCreationForm"]>({
         title : '',
         description : '',
-        budget : ''
+        budget : undefined
     })
 
       // wallet connection

@@ -41,12 +41,12 @@ interface FreelancerProps{
     jobCreationForm : {
         title : string | undefined,
         description : string | undefined,
-        budget : string | undefined
+        budget : number | undefined
     }
     setJobCreationForm : React.Dispatch<React.SetStateAction<{
         title : string | undefined,
         description : string | undefined,
-        budget : string | undefined
+        budget : number | undefined
     }>>
 
     createJob : ()=> void
