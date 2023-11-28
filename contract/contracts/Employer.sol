@@ -25,12 +25,12 @@ contract Employers is Djob{
      /// @notice process employer registration
         /// @param _name , @param _industry
       function registerEmployer
-      (string memory _name, string memory _industry,string memory _country, string memory _imageURI, string memory _date) public {
+      (string memory _name, string memory _industry,string memory _country, string memory _imageURI) public {
         require(employers[msg.sender].registered == false, 'AR'); // already registered
         require(bytes(_name).length > 0);
         require(bytes(_industry).length > 0);
         totalEmployers++;
-        employers[msg.sender] = Employer(msg.sender, _name, _industry, 0,_country, _imageURI,true,_date);
+        employers[msg.sender] = Employer(msg.sender, _name, _industry, 0,_country, _imageURI,true,block.timestamp);
         emit EmployerRegistered(msg.sender, _name);
     }
 

@@ -33,7 +33,7 @@ contract Djob{
         uint jobsCompleted;
         bool registered;
         uint256 registration_date;
-        string starting_price;
+        uint256 starting_price;
     }
 
     
@@ -45,7 +45,7 @@ contract Djob{
         string country;
         string image;
         bool registered;
-        string registration_date;
+        uint256 registration_date;
 
     }
 
@@ -59,7 +59,7 @@ contract Djob{
 
 
     event JobCreated(uint jobId, string title);
-    event FreelancerRegistered(address freelancerAddress, string name);
+    event FreelancerRegistered(address freelancerAddress, string[] name, uint256 amount);
     event EmployerRegistered(address EmployerAddress, string name);
     event JobCompleted(uint jobId, address freelancerAddress, uint payment);
     event FundsDeposited(uint jobId, address sender, uint amount);

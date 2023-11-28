@@ -16,7 +16,7 @@ contract Dfreelancer is Employers {
     /// @param _name , @param _skills
     function registerFreelancer
     (string memory _name, string memory _skills, string memory _country,
-    string memory _gigTitle, string memory _gigDesc, string[] memory _images, string memory _starting_price) public {
+    string memory _gigTitle, string memory _gigDesc, string[] memory _images, uint256 _starting_price) public {
         require(freelancers[msg.sender].registered == false, 'AR'); // already registered
         require(bytes(_name).length > 0);
         require(bytes(_skills).length > 0);
@@ -27,7 +27,8 @@ contract Dfreelancer is Employers {
          // Add the freelancer address to the array
         allFreelancerAddresses.push(msg.sender);
 
-        emit FreelancerRegistered(msg.sender, _name);
+        emit FreelancerRegistered(msg.sender, _images, _starting_price);
+        
     }
 
          /// @notice return all freelancers

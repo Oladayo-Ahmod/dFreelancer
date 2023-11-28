@@ -15,7 +15,7 @@ function FreelancerPage({address} : any){
 
     useEffect(()=>{
         freelancerDetails(address.address)        
-    },[])
+    })
     console.log(currentFreelancerDetails);
     
     return(
@@ -38,7 +38,8 @@ function FreelancerPage({address} : any){
                     `
                 }
             </style>
-                <div className="cta-service-v1 freelancer-single-style mx-auto maxw1700 pt120 pt60-sm pb120 pb60-sm bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg px30-lg">
+                {currentFreelancerDetails ? (
+                    <div className="cta-service-v1 freelancer-single-style mx-auto maxw1700 pt120 pt60-sm pb120 pb60-sm bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg px30-lg">
                 <img className="left-top-img wow zoomIn" src="/images/vector-img/left-top.png" alt="" />
                 <img className="right-bottom-img wow zoomIn" src="/images/vector-img/right-bottom.png" alt="" />
                 <div className="container">
@@ -50,7 +51,7 @@ function FreelancerPage({address} : any){
                                     <a className="position-relative freelancer-single-style" href="#">
                   <span className="online"></span>
                   <Image width={90} height={90} className="rounded-circle w-100 wa-sm mb15-sm"
-                   src={currentFreelancerDetails.images[0]} loader={()=>currentFreelancerDetails.images[0]} alt="Freelancer Photo" />
+                   src={currentFreelancerDetails.images['1']} loader={()=>currentFreelancerDetails.images['1']} alt="Freelancer Photo" />
                 </a>
                                     <div className="ml20 ml0-xs">
                                         <h5 className="title mb-1">{currentFreelancerDetails.name}</h5>
@@ -66,6 +67,11 @@ function FreelancerPage({address} : any){
                 </div>
                 
             </div>
+                ):
+                (
+                    <h3 className='text-warning text-center'>User does not exist</h3>
+                )
+            }
                 
         </section>
 

@@ -70,13 +70,16 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         if(account){
             if(name && country && skills && profileImage && gigImage &&gitDesc && gitTitle && starting_price){
                 const price = starting_price.toString()
-                const images = [profileImage,gigImage]
+                const images = [profileImage.toString() ,gigImage.toString()]                
                 try {
                const provider = new ethers.providers.Web3Provider(connect)
                const signer = provider.getSigner()
                const contract = new ethers.Contract(ADDRESS,ABI,signer)
                const register = await contract.registerFreelancer(name,skills,country,gitTitle,gitDesc,images,price)
                await register.wait()
+            //    const events = receipt.events.find(event => event.event === 'FreelancerRegistered');
+            //    console.log(events);
+               
                Swal.fire({
                    position: 'top-end',
                    icon: 'success',
@@ -161,11 +164,12 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
     const registerEmployer : FreelancerProps["registerFreelancer"] = async function(){
         const {name,country,industry} = employerForm
         if(name && country && industry && profileImage){
+            const image = profileImage.toString()
              try {
              const provider = new ethers.providers.Web3Provider(connect)
              const signer = provider.getSigner()
              const contract = new ethers.Contract(ADDRESS,ABI,signer)
-             const register = await contract.registerFreelancer(name,industry,country,profileImage)
+             const register = await contract.registerEmployer(name,industry,country,image)
              await register.wait()
              Swal.fire({
                 position: 'top-end',
@@ -520,8 +524,8 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         let file = e.target.files[0]
         try {
             const response = await uploadFileToIPFS(file)
-            console.log(response);
-            setProfileImage(response)
+            console.log(response.pinataURL);
+            setProfileImage(response.pinataURL)
         } catch (error) {
             console.log(error);
         }
@@ -532,7 +536,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         try {
             const response = await uploadFileToIPFS(file)
             // console.log(response);
-            setGigImage(response)
+            setGigImage(response.pinataURL)
         } catch (error) {
             console.log(error);
         }

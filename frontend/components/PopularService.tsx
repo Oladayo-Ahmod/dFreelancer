@@ -38,7 +38,10 @@ function PopularService(){
 
     useEffect(()=>{
         allFreelancers()
-        console.log(freelancers);
+        if(freelancers){
+            console.log(freelancers);
+
+        }
     },[freelancers])
     return (
         
@@ -97,24 +100,24 @@ function PopularService(){
                                         <a href="#" className="listing-fav fz12"><span className="far fa-heart"></span></a>
                                     </div>
                                     <div className="list-content">
-                                        <p className="list-text body-color fz14 mb-1">Web & Logo Design</p>
-                                        <h5 className="list-title"><a href="page-service-single.html">{freelancer.gigTitle}</a></h5>
+                                        {/* <p className="list-text body-color fz14 mb-1">Web & Logo Design</p> */}
+                                        <h5 className="list-title"><Link href={'/freelancer/'+freelancer.freelancerAddress}>{freelancer.gigTitle}</Link></h5>
                                         <div className="review-meta d-flex align-items-center">
                                             <i className="fas fa-star fz10 review-color me-2"></i>
-                                            <p className="mb-0 body-color fz14"><span className="dark-color me-2">4.82</span>94 reviews</p>
+                                            {/* <p className="mb-0 body-color fz14"><span className="dark-color me-2">4.82</span>94 reviews</p> */}
                                         </div>
                                         <hr className="my-2" />
                                         <div className="list-meta d-flex justify-content-between align-items-center mt15">
                                             <Link className="d-flex" href={'/freelancer/'+freelancer.freelancerAddress}>
                                             <span className="position-relative mr10">
-                                                {/* <Image className="rounded-circle wa" 
-                                                width={28} height={28} src={freelancer.image[0]} loader={()=>freelancer.images[0]} alt="Freelancer Photo" /> */}
+                                                <Image className="rounded-circle wa"  loader={()=>freelancer.images['0']}
+                                                width={28} height={28} src={freelancer.images['0']} alt="Freelancer Photo" />
                                                 <span className="online-badges"></span>
                                             </span>
                                             {/* <span className="fz14">{freelancer.name}</span> */}
                                             </Link>
                                             <div className="budget">
-                                                <p className="mb-0 body-color">Starting at<span className="fz17 fw500 dark-color ms-1">{freelancer.starting_price} KLAY</span></p>
+                                                <p className="mb-0 body-color">Starting at<span className="fz17 fw500 dark-color ms-1">{freelancer.starting_price.toString()}</span><small>klay</small></p>
                                             </div>
                                         </div>
                                     </div>

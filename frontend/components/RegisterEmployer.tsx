@@ -7,7 +7,7 @@ import FreelancerProps from "@/app/interfaces/freelancerProps"
 
 function RegisterEmployer(){
     const {
-        account,registerEmployer,setEmployerForm,employerForm,imageHandler,employerDetails,currentEmployerDetails,connectWallet
+        account,registerEmployer,setEmployerForm,employerForm,profileImageHandler,employerDetails,currentEmployerDetails,connectWallet
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{
@@ -17,7 +17,7 @@ function RegisterEmployer(){
             // console.log(currentEmployerDetails);
         }
         
-    },[account])
+    })
     return (
         <section className="our-register" style={{'backgroundColor' : '#EAFBEF'}}>
 
@@ -102,7 +102,7 @@ function RegisterEmployer(){
                         {/* profile picture */}
                         <div className="mb25" style={{'display' : currentEmployerDetails?.registered ? 'none' : 'block'}}>
                             <label className="form-label fw500 dark-color">Profile Picture</label>
-                            <input type="file" onChange={(e)=>imageHandler(e)} className="form-control" />
+                            <input type="file" onChange={(e)=>profileImageHandler(e)} className="form-control" />
                         </div> 
 
                         {/* submit button */}
