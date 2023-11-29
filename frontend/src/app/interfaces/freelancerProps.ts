@@ -64,6 +64,7 @@ interface FreelancerProps{
     employerDetails : (address : string) => void
     allFreelancers : ()=> void
     retrieveAllJobs :()=> void
+    retrieveJobsByEmployer : (address : number)=> void
 
 }
 

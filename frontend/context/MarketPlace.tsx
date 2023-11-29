@@ -567,6 +567,16 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         }
     }
 
+    // get all jobs by currrent employer
+    const retrieveJobsByEmployer : FreelancerProps["retrieveJobsByEmployer"] = async(address)=>{
+        retrieveAllJobs()
+        const filteredJobs = jobs.filter((job : any) => Number(job.employer) === Number(address));
+        setJobs(filteredJobs)
+
+    }
+
+
+
     // handle profile image uploading to IPFS
     const profileImageHandler = async function(e : any){
         let file = e.target.files[0]
@@ -635,7 +645,8 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             allFreelancers,
             freelancers,
             retrieveAllJobs,
-            jobs
+            jobs,
+            retrieveJobsByEmployer
         }}
         >
             {children}
