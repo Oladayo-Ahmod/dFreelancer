@@ -5,6 +5,7 @@ interface FreelancerProps{
     account : string | undefined
     currentEmployerDetails : any | undefined
     currentFreelancerDetails : any | undefined
+    jobs : any | undefined
     freelancers : any | undefined
     connectWallet : ()=>void
     freelancerForm : {
@@ -62,6 +63,7 @@ interface FreelancerProps{
     freelancerDetails : (address : string) => void
     employerDetails : (address : string) => void
     allFreelancers : ()=> void
+    retrieveAllJobs :()=> void
 
 }
 

@@ -29,6 +29,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
     const [currentEmployerDetails, setCurrentEmployerDetails] = useState<any>()
     const [currentFreelancerDetails, setCurrentFreelancerDetails] = useState<any>()
     const [freelancers, setFreelancers] = useState<any>()
+    const [jobs, setJobs] = useState<any>()
     const [freelancerForm, setFreelancerForm] = useState<FreelancerProps["freelancerForm"]>({
         name : '',
         country : '',
@@ -51,6 +52,8 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         budget : undefined
     })
 
+
+
       // wallet connection
     const connectWallet : FreelancerProps["connectWallet"] =async function(){
         try {
@@ -64,6 +67,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         }
     }
 
+        // registration for freeelancer
     const registerFreelancer : FreelancerProps["registerFreelancer"] = async function(){
         const {name,country,skills,gitDesc,gitTitle,starting_price} = freelancerForm
         
@@ -135,6 +139,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
 
     }
 
+    // get freelancer details by address
     const freelancerDetails : FreelancerProps["freelancerDetails"] =async(account)=>{
         try {
             const provider = new ethers.providers.Web3Provider(connect)
@@ -148,6 +153,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         }
     }
 
+    // get empployer details by address
     const employerDetails : FreelancerProps["employerDetails"] =async(account)=>{
         try {
             const provider = new ethers.providers.Web3Provider(connect)
@@ -161,6 +167,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         }
     }
 
+    // registration for employer
     const registerEmployer : FreelancerProps["registerFreelancer"] = async function(){
         const {name,country,industry} = employerForm
         if(name && country && industry && profileImage){
@@ -204,6 +211,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
  
      }
 
+    //   create job by employer
      const createJob : FreelancerProps["createJob"] =async (modalRef : React.RefObject<HTMLElement>)=>{
         const {title,description,budget} = jobCreationForm
         if (title && description && budget) {
@@ -251,6 +259,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
        
      }
 
+    //  apply for job by freelancer
      const applyJob : FreelancerProps["applyJob"]=async (jobId)=>{
         try {
             const provider = new ethers.providers.Web3Provider(connect)
@@ -296,6 +305,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         }
      }
 
+    //  hire freelancer by employer
      const hireFreelancer : FreelancerProps["hireFreelancer"]= async(jobId,address)=>{
         try {
             const provider = new ethers.providers.Web3Provider(connect)
@@ -342,6 +352,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         }
      }
 
+    //  deposit funds by employer
      const depositFunds : FreelancerProps["depositFunds"] = async(jobId,amount)=>{
         try {
             const provider = new ethers.providers.Web3Provider(connect)
@@ -397,6 +408,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         }
      }
 
+    //  complete job by employer
      const completeJob : FreelancerProps["completeJob"] = async(jobId, address)=>{
         try {
             const provider = new ethers.providers.Web3Provider(connect)
@@ -442,6 +454,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         }
      }
      
+    //  release escrow by employer
      const releaseEscrow : FreelancerProps["releaseEscrow"] = async(jobId,address)=>{
         try {
             const provider = new ethers.providers.Web3Provider(connect)
@@ -487,6 +500,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         }
      }
 
+    //  withdraw earnings by freelancer
     const withdrawEarnings : FreelancerProps["withdrawEarnings"] = async()=>{
         try {
             const provider = new ethers.providers.Web3Provider(connect)
@@ -525,6 +539,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         }
     }
 
+    // get single job by id
     const retrieveJob : FreelancerProps["retrieveJob"] = async(jobId)=>{
         try {
             const provider = new ethers.providers.Web3Provider(connect)
@@ -538,6 +553,21 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         }
     }
 
+    // get all jobs
+    const retrieveAllJobs : FreelancerProps["retrieveAllJobs"] = async()=>{
+        try {
+            const provider = new ethers.providers.Web3Provider(connect)
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            const job = await contract.allJobs()
+            setJobs(job)
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
+
+    // handle profile image uploading to IPFS
     const profileImageHandler = async function(e : any){
         let file = e.target.files[0]
         try {
@@ -549,6 +579,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         }
     }
 
+    // handle gig image uploading to IPFS
     const gigImageHandler = async function(e : any){
         let file = e.target.files[0]
         try {
@@ -560,6 +591,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         }
     }
 
+    // get all registered freelancers
     const allFreelancers : FreelancerProps["allFreelancers"] = async ()=>{
         try {
             const provider = new ethers.providers.Web3Provider(connect)
@@ -572,7 +604,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             
         }
     }
-    // const allJobs
+
     return(
         <FREELANCER_CONTEXT.Provider
         value={{
@@ -601,7 +633,9 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             currentFreelancerDetails,
             employerDetails,
             allFreelancers,
-            freelancers
+            freelancers,
+            retrieveAllJobs,
+            jobs
         }}
         >
             {children}
