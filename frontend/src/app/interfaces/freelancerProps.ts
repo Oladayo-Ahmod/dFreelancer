@@ -49,7 +49,7 @@ interface FreelancerProps{
         budget : number | undefined
     }>>
 
-    createJob : ()=> void
+    createJob : (modalRef : React.RefObject<HTMLElement>)=> void
     applyJob : (jobId : number)=> void
     hireFreelancer : (jobId : number, address: string)=> void
     depositFunds : (jobId : number, amound : string) => void

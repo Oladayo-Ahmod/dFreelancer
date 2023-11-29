@@ -9,7 +9,8 @@ import Link from "next/link"
 
 
 function Navbar(){
-    const pathname = usePathname()    
+    const pathname = usePathname()  
+    const modalRef = useRef(null) // boostrap modal  
     const {
         account,employerDetails,currentEmployerDetails,setJobCreationForm,
         connectWallet,jobCreationForm,createJob
@@ -83,7 +84,7 @@ function Navbar(){
        
         
          {/* Modal  */}
-        <div className="modal fade" id="modalId" tabIndex={1} role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div className="modal fade"  ref={modalRef} id="modalId" tabIndex={1} role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
             <div className="modal-dialog" role="document">
                 <div className="modal-content">
                         <div className="modal-header">
@@ -110,8 +111,8 @@ function Navbar(){
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" onClick={()=>createJob()} className="btn btn-primary">Create</button>
+                        <button type="button" className="btn btn-secondary text-white" data-bs-dismiss="modal">Close</button>
+                        <button type="button" onClick={()=>createJob(modalRef)} className="btn btn-primary text-white">Create</button>
                     </div>
                 </div>
             </div>

@@ -204,7 +204,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
  
      }
 
-     const createJob : FreelancerProps["createJob"] =async ()=>{
+     const createJob : FreelancerProps["createJob"] =async (modalRef : React.RefObject<HTMLElement>)=>{
         const {title,description,budget} = jobCreationForm
         if (title && description && budget) {
             try {
@@ -214,6 +214,12 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
                 const signer = provider.getSigner()
                 const contract = new ethers.Contract(ADDRESS,ABI,signer)
                 await contract.createJob(title,description,parsedBudget)
+                 const modalElement = modalRef.current ? modalRef.current : ''
+                if(modalElement instanceof HTMLElement){
+                    modalElement.classList.remove('show')
+                    modalElement.style.display = 'none'
+                }
+
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
