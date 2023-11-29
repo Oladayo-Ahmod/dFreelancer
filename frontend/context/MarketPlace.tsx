@@ -23,6 +23,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
     const [account, setAccount] = useState<string>()
     const [balance, setBalance] = useState<string>()
     const [deployer, setDeployer] = useState<string>()
+    const [jobEscrow, setJobEscrow] = useState<string>()
     const [singleJob, setSingeJob] = useState<string>()
     const [profileImage, setProfileImage] = useState<string>()
     const [gigImage, setGigImage] = useState<string>()
@@ -539,6 +540,22 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         }
     }
 
+    // get employer escrow
+    const retrieveEscrow : FreelancerProps["retrieveEscrow"] = async(jobId)=>{
+        try {
+            const provider = new ethers.providers.Web3Provider(connect)
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            const tx = await contract.getEmployerEscrow(account,jobId.toString())
+            const escrow =  ethers.utils.formatUnits(tx.toString(), 'ether')
+            setJobEscrow(escrow)
+            // setSingeJob(job)
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
+
     // get single job by id
     const retrieveJob : FreelancerProps["retrieveJob"] = async(jobId)=>{
         try {
@@ -660,7 +677,8 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             jobs,
             retrieveJobsByEmployer,
             retrieveUncompletedJobsByEmployer,
-            getFreelancerHiredJobs
+            getFreelancerHiredJobs,
+            retrieveEscrow
         }}
         >
             {children}

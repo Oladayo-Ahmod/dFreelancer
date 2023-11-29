@@ -61,6 +61,7 @@ function MyJobs(){
                                         onClick={()=>completeJob(job.id.toString(),job.hiredFreelancer)}>Mark as completed</button>
                                     )}</p>
                                     <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p>
+                                    <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p>
                                 </div>
                             </div>
                             </div>

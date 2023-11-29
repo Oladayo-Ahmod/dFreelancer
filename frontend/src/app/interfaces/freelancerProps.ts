@@ -67,6 +67,7 @@ interface FreelancerProps{
     retrieveJobsByEmployer : (address : string)=> void
     retrieveUncompletedJobsByEmployer : (address : string)=> void
     getFreelancerHiredJobs : (address : string) => void
+    retrieveEscrow : (jobId : number)=> void
 
 }
 
