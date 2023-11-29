@@ -583,7 +583,6 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
     }
 
 
-
     // handle profile image uploading to IPFS
     const profileImageHandler = async function(e : any){
         let file = e.target.files[0]

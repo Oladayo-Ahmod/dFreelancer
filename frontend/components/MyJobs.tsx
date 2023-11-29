@@ -6,7 +6,7 @@ import FreelancerProps from "@/app/interfaces/freelancerProps"
 
 function MyJobs(){
     const {
-        account,retrieveJobsByEmployer,jobs
+        account,retrieveJobsByEmployer,jobs,completeJob
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{
@@ -56,7 +56,10 @@ function MyJobs(){
                                     <p>{job.description}</p>
                                     <h4 className="mb-3 text-thm">{job.title}</h4>
                                     <p className="list-inline-item mb-0">{job.budget.toString()} KLAY</p>
-                                    <p className="list-inline-item mb-0 bdrl1 pl15">{job.completed ? 'Expired' : ''}</p>
+                                    <p className="list-inline-item mb-0 bdrl1 pl15">{job.completed ? 'Expired' : (
+                                        <button className="btn-warning btn" type='button'
+                                        onClick={()=>completeJob(job.id.toString(),job.hiredFreelancer)}>Mark as completed</button>
+                                    )}</p>
                                     <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p>
                                 </div>
                             </div>
