@@ -23,7 +23,7 @@ function JobListing(){
                     <div className="col-xl-7">
                         <div className="position-relative">
                             <h2>Job Listings</h2>
-                            <p className="text">Similique nemo ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            {/* <p className="text">Similique nemo ipsum dolor sit amet, consectetur adipisicing elit.</p> */}
                         </div>
                         <div className="advance-search-tab bgc-white p10 bdrs4 mt30">
                             <div className="row">

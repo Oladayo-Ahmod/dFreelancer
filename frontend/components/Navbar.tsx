@@ -94,8 +94,8 @@ function Navbar(){
                     <div className="modal-body">
                         <div className="container-fluid">
                            <div className="mb-3">
-                             <label  className="form-label">Title</label>
-                             <input type="text" className="form-control" placeholder="job title" 
+                             <label  className="form-label">Company Name</label>
+                             <input type="text" className="form-control" placeholder="company name" 
                              aria-describedby="helpId" onChange={(e)=>setJobCreationForm({...jobCreationForm, title : e.target.value})}  />                      
                            </div>
                            <div className="mb-3">
