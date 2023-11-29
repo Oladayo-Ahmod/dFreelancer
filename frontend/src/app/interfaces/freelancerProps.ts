@@ -6,6 +6,7 @@ interface FreelancerProps{
     currentEmployerDetails : any | undefined
     currentFreelancerDetails : any | undefined
     jobs : any | undefined
+    singleJob : any | undefined
     freelancers : any | undefined
     jobEscrow : string | undefined
     connectWallet : ()=>void

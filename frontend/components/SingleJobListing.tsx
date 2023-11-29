@@ -7,13 +7,14 @@ import Link from 'next/link'
 
 function SingleJobListing({id} : any){
     const {
-        account,retrieveJobsByEmployer,jobs,completeJob,jobEscrow,retrieveEscrow,retrieveJob
+        account,currentEmployerDetails,employerDetails,singleJob,completeJob,
+        jobEscrow,retrieveEscrow,retrieveJob,depositFunds
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{
         retrieveJob(id)
         if (account) {
-            retrieveJobsByEmployer(account)
+            employerDetails(account)
         }
         
     })
@@ -46,7 +47,7 @@ function SingleJobListing({id} : any){
                             </div>
                         </div>
                         <div className="row">
-                            {jobs? jobs.map((job : any)=>(
+                            {singleJob? (
                             //   {{retrieveEscrow()}}
                             <div className="col-sm-6 col-xl-12">
                             <div className="job-list-style1 bdr1 d-xl-flex align-items-start">
@@ -55,21 +56,27 @@ function SingleJobListing({id} : any){
                                     <span className="fav-icon flaticon-star"></span>
                                 </div>
                                 <div className="details ml20 ml0-xl">
-                                    <p>{job.description}</p>
-                                    <h4 className="mb-3 text-thm">{job.title}</h4>
-                                    <p className="list-inline-item mb-0">{job.budget.toString()} KLAY</p>
-                                    <p className="list-inline-item mb-0 bdrl1 pl15">{job.completed ? 'Expired' : (
+                                    <p>{singleJob.description}</p>
+                                    <h4 className="mb-3 text-thm">{singleJob.title}</h4>
+                                    <p className="list-inline-item mb-0">{singleJob.budget.toString()} KLAY</p>
+                                    <p className="list-inline-item mb-0 bdrl1 pl15">{singleJob.completed ? 'Expired' : (
                                         'Ongoing'
                                         // <button className="btn-warning btn" type='button'
                                         // onClick={()=>completeJob(job.id.toString(),job.hiredFreelancer)}>Mark as completed</button>
                                     )}</p>
+                                    {currentEmployerDetails?.registered && 
+                                    Number(currentEmployerDetails.employerAddress) == Number(singleJob.employer)
+                                    && singleJob.completed == false? 
+                                    <button className="btn-warning btn" type='button'
+                                    onClick={()=>depositFunds(singleJob.id.toString(),singleJob.budget.toString())}>Deposit Fund</button>
+                                    : ''
+                                    }
                                     <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p>
-                                    <Link href={'/'}>View Job</Link>
                                     {/* <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p> */}
                                 </div>
                             </div>
                             </div>
-                            )):(
+                            ):(
                                 <h1 className='text-center text-warning'>No job found</h1>
                             )
                         }
