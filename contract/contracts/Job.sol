@@ -106,7 +106,7 @@ contract Djob{
     function allJobs() external view returns(Job[] memory props){
         props = new Job[](totalJobs);
         for (uint i = 0; i < totalJobs; i++) {
-            props[i] = jobs[i];
+            props[i] = jobs[i + 1];
         }
 
     }
