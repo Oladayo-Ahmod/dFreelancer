@@ -13,13 +13,14 @@ function Navbar(){
     const modalRef = useRef(null) // boostrap modal  
     const {
         account,employerDetails,currentEmployerDetails,setJobCreationForm,
-        connectWallet,jobCreationForm,createJob
+        connectWallet,jobCreationForm,createJob,currentFreelancerDetails,freelancerDetails
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{
         connectWallet()
         if (account) {
             employerDetails(account)
+            freelancerDetails(account)
             // console.log(currentEmployerDetails);
         }
         
@@ -53,7 +54,7 @@ function Navbar(){
                                          <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href={'/job-listing'}><span className="title">Browse Jobs</span></Link>
                                     </li>
                                     <li className="visible_list"> 
-                                    {!currentEmployerDetails?.registered?
+                                    {currentEmployerDetails?.registered?
                                     (
                                         <button className="btn btn-primary btn-sm text-white" 
                                         data-bs-toggle="modal" data-bs-target="#modalId">create job</button>
@@ -61,6 +62,26 @@ function Navbar(){
                                         <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href={'/become-an-employer'}><span className="title">Join as employer</span></Link>
 
                                     )
+                                }
+                                    </li>
+                                    <li className="visible_list"> 
+                                    {currentEmployerDetails?.registered?
+                                    (
+                                        
+                                        <button className="btn btn-warning" >
+                                             <span className="badge bg-primary">{currentEmployerDetails.balance.toString()} klay</span>
+                                    </button>
+                                    ): ''
+                                }
+                                    </li>
+                                    <li className="visible_list"> 
+                                    {currentFreelancerDetails?.registered?
+                                    (
+                                        
+                                        <button className="btn btn-warning" >
+                                             <span className="badge bg-primary">{currentFreelancerDetails.balance.toString()} klay</span>
+                                    </button>
+                                    ): ''
                                 }
                                     </li>
                                     <li> 
