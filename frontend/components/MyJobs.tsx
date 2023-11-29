@@ -3,10 +3,11 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 import { FREELANCER_CONTEXT} from '../context/MarketPlace'
 import FreelancerProps from "@/app/interfaces/freelancerProps"
+import Link from 'next/link'
 
 function MyJobs(){
     const {
-        account,retrieveJobsByEmployer,jobs,completeJob
+        account,retrieveJobsByEmployer,jobs,completeJob,jobEscrow,retrieveEscrow
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{
@@ -46,6 +47,7 @@ function MyJobs(){
                         </div>
                         <div className="row">
                             {jobs? jobs.map((job : any)=>(
+                            //   {{retrieveEscrow()}}
                             <div className="col-sm-6 col-xl-12">
                             <div className="job-list-style1 bdr1 d-xl-flex align-items-start">
                                 <div className="icon d-flex align-items-center mb20">
@@ -57,11 +59,13 @@ function MyJobs(){
                                     <h4 className="mb-3 text-thm">{job.title}</h4>
                                     <p className="list-inline-item mb-0">{job.budget.toString()} KLAY</p>
                                     <p className="list-inline-item mb-0 bdrl1 pl15">{job.completed ? 'Expired' : (
-                                        <button className="btn-warning btn" type='button'
-                                        onClick={()=>completeJob(job.id.toString(),job.hiredFreelancer)}>Mark as completed</button>
+                                        'Ongoing'
+                                        // <button className="btn-warning btn" type='button'
+                                        // onClick={()=>completeJob(job.id.toString(),job.hiredFreelancer)}>Mark as completed</button>
                                     )}</p>
                                     <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p>
-                                    <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p>
+                                    <Link href={'/'}>View Job</Link>
+                                    {/* <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p> */}
                                 </div>
                             </div>
                             </div>

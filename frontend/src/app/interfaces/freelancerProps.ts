@@ -7,6 +7,7 @@ interface FreelancerProps{
     currentFreelancerDetails : any | undefined
     jobs : any | undefined
     freelancers : any | undefined
+    jobEscrow : string | undefined
     connectWallet : ()=>void
     freelancerForm : {
         name : string | undefined,

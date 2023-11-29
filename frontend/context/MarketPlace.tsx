@@ -678,7 +678,8 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             retrieveJobsByEmployer,
             retrieveUncompletedJobsByEmployer,
             getFreelancerHiredJobs,
-            retrieveEscrow
+            retrieveEscrow,
+            jobEscrow
         }}
         >
             {children}
