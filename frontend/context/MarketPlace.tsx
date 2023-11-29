@@ -575,6 +575,13 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
 
     }
 
+    // get all uncompleted jobs by current employer
+    const retrieveUncompletedJobsByEmployer : FreelancerProps["retrieveUncompletedJobsByEmployer"] = async(address)=>{
+        retrieveJobsByEmployer(address)
+        const filteredJobs = jobs.filter((job : any) => job.completed == false);
+        setJobs(filteredJobs)
+    }
+
 
 
     // handle profile image uploading to IPFS
@@ -646,7 +653,8 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             freelancers,
             retrieveAllJobs,
             jobs,
-            retrieveJobsByEmployer
+            retrieveJobsByEmployer,
+            retrieveUncompletedJobsByEmployer
         }}
         >
             {children}

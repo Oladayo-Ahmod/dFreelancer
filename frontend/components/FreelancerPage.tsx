@@ -9,14 +9,18 @@ import Image from 'next/image'
 function FreelancerPage({address} : any){
 
     const {
-        account,hireFreelancer
-        ,freelancerDetails,currentFreelancerDetails
+        account,hireFreelancer,retrieveUncompletedJobsByEmployer,jobs
+        ,freelancerDetails,currentFreelancerDetails,employerDetails,currentEmployerDetails,
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{
-        freelancerDetails(address.address)        
+        freelancerDetails(address.address)
+        if (account) {
+            employerDetails(account)
+            retrieveUncompletedJobsByEmployer(account)
+        }
     })
-    console.log(currentFreelancerDetails);
+    // console.log(currentFreelancerDetails);
     
     return(
         <>
@@ -55,10 +59,12 @@ function FreelancerPage({address} : any){
                 </a>
                                     <div className="ml20 ml0-xs">
                                         <h5 className="title mb-1">{currentFreelancerDetails.name}</h5>
-                                        <p className="mb-0">UI/UX Designer</p>
+                                        {/* <p className="mb-0">UI/UX Designer</p> */}
                                         <p className="mb-0 dark-color fz15 fw500 list-inline-item mb5-sm"><i className="fas fa-star vam fz10 review-color me-2"></i> 4.82 94 reviews</p>
                                         <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs"><i className="flaticon-place vam fz20 me-2"></i> {currentFreelancerDetails.country}</p>
-                                        <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs"><i className="flaticon-30-days vam fz20 me-2"></i> Member since {currentFreelancerDetails.starting_date}</p>
+                                        <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs">
+                                            <i className="flaticon-30-days vam fz20 me-2"></i> Member since {currentFreelancerDetails.starting_date}</p>
+                                           
                                     </div>
                                 </div>
                             </div>
@@ -124,8 +130,14 @@ function FreelancerPage({address} : any){
                     </a>
                                     </div>
                                     <div className="d-grid">
-                                        <a href="#" className="ud-btn btn-thm" onClick={()=>hireFreelancer(1,'add')} >Hire Me<i
-                        className="fal fa-arrow-right-long"></i></a>
+                                        {currentEmployerDetails?.registered? (
+                                            <button className="btn-warning btn btn-sm ud-btn btn-thm"
+                                            data-bs-toggle="modal" data-bs-target="#modalId"
+                                            type='button'>Hire Me</button>
+                                            ):''
+                                        }
+                                        {/* <a href="#" className="ud-btn btn-thm"  >Hire Me<i
+                        className="fal fa-arrow-right-long"></i></a> */}
                                     </div>
                                 </div>
                                 <div className="sidebar-widget mb30 pb20 bdrs8">
@@ -136,10 +148,6 @@ function FreelancerPage({address} : any){
                                         })}
                                         <a href="#">Figma</a>
 
-                                        {/* Modal trigger button  */}
-                                        <button type="button" className="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalId">
-                                          Launch
-                                        </button>
                                         
                                         {/* Modal Body  */}
                                         <div className="modal fade" id="modalId" tabIndex={1} data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
@@ -150,11 +158,16 @@ function FreelancerPage({address} : any){
                                                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div className="modal-body">
-                                                        Body
+                                                       {jobs?.map((job : any)=>(
+                                                        
+                                                        <button className="btn-warning btn btn-sm ud-btn btn-thm"
+                                                        data-bs-toggle="modal" data-bs-target="#modalId"
+                                                        type='button' onClick={()=>hireFreelancer(job.id.toString(),currentFreelancerDetails.address)}>Hire</button>
+
+                                                       ))}
                                                     </div>
                                                     <div className="modal-footer">
                                                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" className="btn btn-primary">Save</button>
                                                     </div>
                                                 </div>
                                             </div>
