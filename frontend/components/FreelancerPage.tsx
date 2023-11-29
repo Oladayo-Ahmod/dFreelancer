@@ -158,8 +158,7 @@ function FreelancerPage({address} : any){
                                                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div className="modal-body">
-                                                       {jobs?.map((job : any)=>(
-                                                        
+                                                       {jobs?.map((job : any)=>(                
                                                         <button className="btn-warning btn btn-sm ud-btn btn-thm"
                                                         data-bs-toggle="modal" data-bs-target="#modalId"
                                                         type='button' onClick={()=>hireFreelancer(job.id.toString(),currentFreelancerDetails.address)}>Hire</button>
