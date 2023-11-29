@@ -72,18 +72,16 @@ function SingleJobListing({id} : any){
                                     : ''
                                     }
                                     <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p>
-                                    {Number(jobEscrow) > 0 ? (
+                                    {singleJob?.completed == false && Number(jobEscrow) > 0 ? (
                                         <button className="btn-warning btn" type='button'
                                         onClick={()=>completeJob(singleJob.id.toString(),singleJob.hiredFreelancer)}>Mark as completed</button>
                                     ): ''
                                 }
-                                    <button></button>
-                                    {/* <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p> */}
                                 </div>
                             </div>
                             </div>
                             ):(
-                                <h1 className='text-center text-warning'>No job found</h1>
+                                <h1 className='text-center text-warning'>Invalid Job</h1>
                             )
                         }
                            
