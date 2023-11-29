@@ -562,7 +562,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             const provider = new ethers.providers.Web3Provider(connect)
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
-            const job = await contract.getJobByID(jobId)
+            const job = await contract.getJobByID(jobId.toString())
             setSingeJob(job)
         } catch (error) {
             console.log(error);

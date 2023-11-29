@@ -5,10 +5,18 @@ import { FREELANCER_CONTEXT} from '../context/MarketPlace'
 import FreelancerProps from "@/app/interfaces/freelancerProps"
 import Link from 'next/link'
 
-function SingleJob(){
+function SingleJobListing({id} : any){
     const {
-        account,retrieveJobsByEmployer,jobs,completeJob,jobEscrow,retrieveEscrow
+        account,retrieveJobsByEmployer,jobs,completeJob,jobEscrow,retrieveEscrow,retrieveJob
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
+
+    useEffect(()=>{
+        retrieveJob(id)
+        if (account) {
+            retrieveJobsByEmployer(account)
+        }
+        
+    })
 
     return(
         <section className="pt30 pb90 bg-white">
@@ -76,4 +84,4 @@ function SingleJob(){
     )
 }
 
-export default SingleJob
+export default SingleJobListing
