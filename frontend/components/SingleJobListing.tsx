@@ -14,6 +14,7 @@ function SingleJobListing({id} : any){
     useEffect(()=>{
         retrieveJob(id)
         if (account) {
+            retrieveEscrow(id)
             employerDetails(account)
         }
         
@@ -61,8 +62,7 @@ function SingleJobListing({id} : any){
                                     <p className="list-inline-item mb-0">{singleJob.budget.toString()} KLAY</p>
                                     <p className="list-inline-item mb-0 bdrl1 pl15">{singleJob.completed ? 'Expired' : (
                                         'Ongoing'
-                                        // <button className="btn-warning btn" type='button'
-                                        // onClick={()=>completeJob(job.id.toString(),job.hiredFreelancer)}>Mark as completed</button>
+                                        // 
                                     )}</p>
                                     {currentEmployerDetails?.registered && 
                                     Number(currentEmployerDetails.employerAddress) == Number(singleJob.employer)
@@ -72,6 +72,12 @@ function SingleJobListing({id} : any){
                                     : ''
                                     }
                                     <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p>
+                                    {Number(jobEscrow) > 0 ? (
+                                        <button className="btn-warning btn" type='button'
+                                        onClick={()=>completeJob(singleJob.id.toString(),singleJob.hiredFreelancer)}>Mark as completed</button>
+                                    ): ''
+                                }
+                                    <button></button>
                                     {/* <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p> */}
                                 </div>
                             </div>
