@@ -11,7 +11,7 @@ function MobileNavbar(){
     const pathname = usePathname()  
     const modalRef = useRef(null) // boostrap modal  
     const {
-        account,employerDetails,currentEmployerDetails,setJobCreationForm,
+        account,employerDetails,currentEmployerDetails,withdrawEarnings,setJobCreationForm,
         connectWallet,jobCreationForm,createJob,currentFreelancerDetails,freelancerDetails
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
@@ -124,7 +124,44 @@ function MobileNavbar(){
                         </li>                             
             </ul>
         </nav>
+
+          {/* Modal  */}
+          <div className="modal fade"  ref={modalRef} id="modalId" tabIndex={1} role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div className="modal-dialog" role="document">
+                <div className="modal-content">
+                        <div className="modal-header">
+                                <h5 className="modal-title" id="modalTitleId">Create Job</h5>
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                    <div className="modal-body">
+                        <div className="container-fluid">
+                           <div className="mb-3">
+                             <label  className="form-label">Company Name</label>
+                             <input type="text" className="form-control" placeholder="company name" 
+                             aria-describedby="helpId" onChange={(e)=>setJobCreationForm({...jobCreationForm, title : e.target.value})}  />                      
+                           </div>
+                           <div className="mb-3">
+                             <label  className="form-label">Description</label>
+                             <input type="text" className="form-control" placeholder="job description" 
+                             aria-describedby="helpId" onChange={(e)=>setJobCreationForm({...jobCreationForm, description : e.target.value})}  />                      
+                           </div>
+                           <div className="mb-3">
+                             <label  className="form-label">Budget</label>
+                             <input type="number" className="form-control" placeholder="job budget" 
+                             aria-describedby="helpId" onChange={(e)=>setJobCreationForm({...jobCreationForm, budget : Number(e.target.value)})}  />                      
+                           </div>
+                        </div>
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary text-white" data-bs-dismiss="modal">Close</button>
+                        <button type="button" onClick={()=>createJob(modalRef)} className="btn btn-primary text-white">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    
 
     )
 }
