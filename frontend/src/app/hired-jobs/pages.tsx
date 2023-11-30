@@ -1,6 +1,7 @@
 import Footer from "../../../components/Footer"
 import JobListing from "../../../components/JobListing"
 import MobileNavbar from "../../../components/MobileNavbar"
+import MyHiredJobsListing from "../../../components/MyHiredJobs"
 import Navbar from "../../../components/Navbar"
 
 function MyHiredJob(){
@@ -11,7 +12,7 @@ function MyHiredJob(){
             <MobileNavbar />
             <div className="body_content">
                <JobListing />
-               <MyHiredJob />
+               <MyHiredJobsListing />
                 <Footer />
             </div>
         </main>

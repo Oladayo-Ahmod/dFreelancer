@@ -72,7 +72,7 @@ function SingleJobListing({id} : any){
                                     : ''
                                     }
                                     <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p>
-                                    {singleJob?.completed == false && Number(jobEscrow) > 0 ? (
+                                    {currentEmployerDetails?.registered && singleJob?.completed == false && Number(jobEscrow) > 0 ? (
                                         <button className="btn-warning btn" type='button'
                                         onClick={()=>completeJob(singleJob.id.toString(),singleJob.hiredFreelancer)}>Mark as completed</button>
                                     ): ''

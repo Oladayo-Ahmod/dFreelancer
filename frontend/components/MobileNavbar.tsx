@@ -93,7 +93,17 @@ function MobileNavbar(){
                     }
                         </li>
                         <li> 
-                            <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href={'/become-a-freelancer'}>Join as freelancer</Link></li>
+                            {currentFreelancerDetails?.registered? (
+                                <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} 
+                                className="list-item" href={'/hired-jobs'}>Hired jobs</Link>
+
+                                ):
+                                (
+                                    <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} 
+                                    className="list-item" href={'/become-a-freelancer'}>Join as freelancer</Link>
+                                )
+                            }
+                        </li>
                         <li>
                             <button style={{
                                 'color' : pathname !== '/'? '#14A800' : 'white',

@@ -4,9 +4,9 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { FREELANCER_CONTEXT} from '../context/MarketPlace'
 import FreelancerProps from "@/app/interfaces/freelancerProps"
 
-function MyHiredJobs(){
+function MyHiredJobsListing(){
     const {
-        account,getFreelancerHiredJobs,jobs,
+        account,getFreelancerHiredJobs,jobs,withdrawEarnings
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{
@@ -75,4 +75,4 @@ function MyHiredJobs(){
         </section>
     )
 }
-export default MyHiredJobs
+export default MyHiredJobsListing

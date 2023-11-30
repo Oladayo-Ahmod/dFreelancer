@@ -64,6 +64,19 @@ function Navbar(){
                                     )
                                 }
                                     </li>
+
+                                    <li className="visible_list">
+                                        {currentFreelancerDetails?.registered? (
+                                        <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} 
+                                        className="list-item" href={'/hired-jobs'}>Hired jobs</Link>
+
+                                        ):
+                                        (
+                                            <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} 
+                                            className="list-item" href={'/become-a-freelancer'}>Join as freelancer</Link>
+                                        )
+                                    }
+                                    </li>
                                     <li className="visible_list"> 
                                     {currentEmployerDetails?.registered?
                                     (
@@ -84,8 +97,6 @@ function Navbar(){
                                     ): ''
                                 }
                                     </li>
-                                    <li> 
-                                        <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href={'/become-a-freelancer'}>Join as freelancer</Link></li>
                                 </ul>                              
                                 <button style={{
                                  'color' : pathname !== '/'? '#14A800' : 'white',
