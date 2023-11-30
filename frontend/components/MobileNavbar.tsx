@@ -104,6 +104,16 @@ function MobileNavbar(){
                                 )
                             }
                         </li>
+                        <li> 
+                                    {currentFreelancerDetails?.registered == true && currentFreelancerDetails.balance.toString() > 0 ?
+                                    (
+                                        
+                                        <button className="btn btn-warning" type="button" onClick={()=>withdrawEarnings()}>
+                                            Withdraw
+                                    </button>
+                                    ): ''
+                                }
+                                    </li>
                         <li>
                             <button style={{
                                 'color' : pathname !== '/'? '#14A800' : 'white',
