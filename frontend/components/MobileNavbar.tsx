@@ -13,7 +13,7 @@ function MobileNavbar(){
     const modalRef = useRef(null) // boostrap modal  
     const {
         account,employerDetails,currentEmployerDetails,withdrawEarnings,setJobCreationForm,
-        connectWallet,jobCreationForm,createJob,currentFreelancerDetails,freelancerDetails
+        connectWallet,jobCreationForm,createJob,currentFreelancerDetails,freelancerDetails,toggleNav
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{
@@ -33,6 +33,19 @@ function MobileNavbar(){
     return(
 
         <div id="page" className="mobilie_header_nav stylehome1">
+            <style jsx>
+                {`
+                    .block-nav{
+                        display : block !important;
+                        transition : 1s ease;
+
+                    }
+                    .none-nav{
+                        display : none;
+                        transition : 1s ease;
+                    }
+                `}
+            </style>
         <div className="mobile-menu">
             <div className="header bb-white-light">
                 <div className="menu_and_widgets">
@@ -41,9 +54,9 @@ function MobileNavbar(){
                             <Image src="/images/header-logo.svg" width={120} height={40}  alt="" />
                        </a>
                         <div className="right-side text-end">
-                            <a className="text-white" href="page-login.html">join</a>
-                            <a className="menubar ml30" href="#menu">
-                                <Image src="/images/white-nav-icon.svg" width={120} height={40}  alt="" />
+                            {/* <a className="text-white" href="page-login.html">join</a> */}
+                            <a className="menubar ml30" href="#menu" >
+                                <Image src="/images/white-nav-icon.svg" onClick={()=>toggleNav()} width={20} height={20}  alt="" />
                             </a>
                         </div>
                     </div>
@@ -55,7 +68,7 @@ function MobileNavbar(){
         </div>
         {/* mobile-menu  */}
 
-        <nav id="menu" className="mm-menu mm-menu--offcanvas mm-menu--position-left-front mm-menu--theme-light mm-menu--opened" aria-label="Menu" aria-modal="true" role="dialog">
+        <nav id="menu" className="none-nav mm-menu mm-menu--offcanvas mm-menu--position-left-front mm-menu--theme-light mm-menu--opened" aria-label="Menu" aria-modal="true" role="dialog">
                 
                 <div className="mm-panels">
                     <div className="mm-panel mm-panel--noanimation mm-panel--opened" id="mm-1"><div className="mm-navbar"><a className="mm-navbar__title" tabIndex={1} aria-hidden="true"><span className="">Menu</span></a></div><ul className="mm-listview">

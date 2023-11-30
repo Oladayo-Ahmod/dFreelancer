@@ -501,6 +501,14 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             
         }
      }
+
+    //  navbar togglr
+    const toggleNav : FreelancerProps["toggleNav"] = async()=>{
+        const element = document.querySelector('.none-nav')
+        if (element) {
+            element.classList.toggle('block-nav')
+        }
+     }
      
    
 
@@ -683,7 +691,8 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             getFreelancerHiredJobs,
             retrieveEscrow,
             jobEscrow,
-            singleJob
+            singleJob,
+            toggleNav
         }}
         >
             {children}

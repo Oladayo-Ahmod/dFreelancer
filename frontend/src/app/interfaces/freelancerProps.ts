@@ -70,6 +70,7 @@ interface FreelancerProps{
     retrieveUncompletedJobsByEmployer : (address : string)=> void
     getFreelancerHiredJobs : (address : string) => void
     retrieveEscrow : (jobId : number)=> void
+    toggleNav : ()=> void
 
 }
 
