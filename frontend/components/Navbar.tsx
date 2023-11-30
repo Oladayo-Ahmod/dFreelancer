@@ -12,7 +12,7 @@ function Navbar(){
     const pathname = usePathname()  
     const modalRef = useRef(null) // boostrap modal  
     const {
-        account,employerDetails,currentEmployerDetails,setJobCreationForm,
+        account,employerDetails,currentEmployerDetails,setJobCreationForm,withdrawEarnings
         connectWallet,jobCreationForm,createJob,currentFreelancerDetails,freelancerDetails
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
@@ -93,6 +93,16 @@ function Navbar(){
                                         
                                         <button className="btn btn-warning" >
                                              <span className="badge bg-primary">{currentFreelancerDetails.balance.toString()} klay</span>
+                                    </button>
+                                    ): ''
+                                }
+                                    </li>
+                                    <li className="visible_list"> 
+                                    {currentFreelancerDetails?.registered == true && currentFreelancerDetails.balance.toString() > 0 ?
+                                    (
+                                        
+                                        <button className="btn btn-warning" type="button" onClick={()=>withdrawEarnings()}>
+                                            Withdraw
                                     </button>
                                     ): ''
                                 }

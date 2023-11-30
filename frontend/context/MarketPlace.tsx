@@ -513,7 +513,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                text: `You have successfully withdrawn ${ ethers.utils.formatEther(availableBalance.toString())} ETH!`,
+                text: `You have successfully withdrawn ${ ethers.utils.formatEther(availableBalance.toString())} KLAY!`,
                 showConfirmButton: true,
                 timer: 4000
             })
