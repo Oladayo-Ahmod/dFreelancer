@@ -6,6 +6,7 @@ import { FREELANCER_CONTEXT} from '../context/MarketPlace'
 import FreelancerProps from "@/app/interfaces/freelancerProps"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
+import Test from "./Test"
 
 function MobileNavbar(){
     const pathname = usePathname()  
@@ -53,77 +54,85 @@ function MobileNavbar(){
             </div>
         </div>
         {/* mobile-menu  */}
-        <nav id="menu" className="">
-            <ul>
-                <li > 
-                        <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href={'/'}><span className="title">Home</span></Link>
-                        </li>
-                        <li >
-                                <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href={'/job-listing'}><span className="title">Browse Jobs</span></Link>
-                        </li>
-                        <li > 
-                        {currentEmployerDetails?.registered?
-                        (
-                            <button className="btn btn-primary btn-sm text-white" 
-                            data-bs-toggle="modal" data-bs-target="#modalId">create job</button>
-                        ):(
-                            <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href={'/become-an-employer'}><span className="title">Join as employer</span></Link>
 
-                        )
-                    }
+        <nav id="menu" className="mm-menu mm-menu--offcanvas mm-menu--position-left-front mm-menu--theme-light mm-menu--opened" aria-label="Menu" aria-modal="true" role="dialog">
+                
+                <div className="mm-panels">
+                    <div className="mm-panel mm-panel--noanimation mm-panel--opened" id="mm-1"><div className="mm-navbar"><a className="mm-navbar__title" tabIndex={1} aria-hidden="true"><span className="">Menu</span></a></div><ul className="mm-listview">
+                        <li className="mm-listitem" >
+                        <Link style={{'color' : pathname !== '/'? '#14A800' : 'black'}} 
+                            className="mm-btn mm-btn--next mm-listitem__btn mm-listitem__text" href={'/'}><span className="title">Home</span></Link>
                         </li>
-                        <li > 
+                        <li className="mm-listitem" >
+                            <Link style={{'color' : pathname !== '/'? '#14A800' : 'black'}} 
+                            className="mm-btn mm-btn--next mm-listitem__btn mm-listitem__text" href={'/job-listing'}><span className="title">Browse Jobs</span></Link>
+                        </li>
+                        <li className="mm-listitem">
+                            {currentEmployerDetails?.registered?
+                            (
+                                <button className="btn btn-primary btn-sm text-black" 
+                                data-bs-toggle="modal" data-bs-target="#modalId">create job</button>
+                            ):(
+                                <Link style={{'color' : pathname !== '/'? '#14A800' : 'black'}} 
+                                className="mm-btn mm-btn--next mm-listitem__btn mm-listitem__text" href={'/become-an-employer'}><span className="title">Join as employer</span></Link>
+
+                            )
+                            }
+                    </li>
+                        <li className="mm-listitem">
                         {currentEmployerDetails?.registered?
                         (
-                            
                             <button className="btn btn-warning" >
                                     <span className="badge bg-primary">{currentEmployerDetails.balance.toString()} klay</span>
                         </button>
                         ): ''
-                    }
+                        }                        
                         </li>
-                        <li > 
+                        <li className="mm-listitem" >
                         {currentFreelancerDetails?.registered?
                         (
                             
-                            <button className="btn btn-warning" >
-                                    <span className="badge bg-primary">{currentFreelancerDetails.balance.toString()} klay</span>
+                        <button className="btn btn-warning" >
+                                <span className="badge bg-primary">{currentFreelancerDetails.balance.toString()} klay</span>
                         </button>
                         ): ''
-                    }
+                        }                        
                         </li>
-                        <li> 
-                            {currentFreelancerDetails?.registered? (
-                                <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} 
-                                className="list-item" href={'/hired-jobs'}>Hired jobs</Link>
+                        <li className="mm-listitem" >
+                        {currentFreelancerDetails?.registered? (
+                                <Link style={{'color' : pathname !== '/'? '#14A800' : 'black'}} 
+                                className="mm-btn mm-btn--next mm-listitem__btn mm-listitem__text" href={'/hired-jobs'}>Hired jobs</Link>
 
                                 ):
                                 (
-                                    <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} 
-                                    className="list-item" href={'/become-a-freelancer'}>Join as freelancer</Link>
+                                    <Link style={{'color' : pathname !== '/'? '#14A800' : 'black'}} 
+                                    className="mm-btn mm-btn--next mm-listitem__btn mm-listitem__text" href={'/become-a-freelancer'}>Join as freelancer</Link>
                                 )
                             }
                         </li>
-                        <li> 
-                                    {currentFreelancerDetails?.registered == true && currentFreelancerDetails.balance.toString() > 0 ?
-                                    (
-                                        
-                                        <button className="btn btn-warning" type="button" onClick={()=>withdrawEarnings()}>
-                                            Withdraw
-                                    </button>
-                                    ): ''
-                                }
-                                    </li>
-                        <li>
+                        <li className="mm-listitem" >
+                            {currentFreelancerDetails?.registered == true && currentFreelancerDetails.balance.toString() > 0 ?
+                            (
+                                
+                                <button className="btn btn-warning" type="button" onClick={()=>withdrawEarnings()}>
+                                    Withdraw
+                            </button>
+                            ): ''
+                            }
+                        </li>
+                        <li className="mm-listitem" >
                             <button style={{
                                 'color' : pathname !== '/'? '#14A800' : 'white',
                                 'backgroundColor' : pathname !== '/' ? 'rgb(224 255 224)' : 'green', 'border' : 'none'}}
                             className="ud-btn btn-white add-joining" type="button" onClick={connectWallet}>
                             {account ? `${account.slice(0,6)}...${account.slice(account.length -4)}` : 'connect wallet'}
                             </button>
-                        </li>                             
-            </ul>
-        </nav>
+                        </li>    
+                    </ul>
+                    </div>
+                </div>
+            </nav>
+        
 
           {/* Modal  */}
           <div className="modal fade"  ref={modalRef} id="modalId" tabIndex={1} role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
