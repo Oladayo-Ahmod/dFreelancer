@@ -39,7 +39,7 @@ function PopularService(){
     useEffect(()=>{
         allFreelancers()
         if(freelancers){
-            console.log(freelancers);
+            // console.log(freelancers);
 
         }
     },[freelancers])
