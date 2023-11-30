@@ -12,7 +12,7 @@ function Navbar(){
     const pathname = usePathname()  
     const modalRef = useRef(null) // boostrap modal  
     const {
-        account,employerDetails,currentEmployerDetails,setJobCreationForm,withdrawEarnings
+        account,employerDetails,currentEmployerDetails,setJobCreationForm,withdrawEarnings,
         connectWallet,jobCreationForm,createJob,currentFreelancerDetails,freelancerDetails
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
