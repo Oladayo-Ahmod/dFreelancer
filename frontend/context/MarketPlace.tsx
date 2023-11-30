@@ -409,54 +409,8 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         }
      }
 
-    //  complete job by employer
-     const completeJob : FreelancerProps["completeJob"] = async(jobId, address)=>{
-        try {
-            const provider = new ethers.providers.Web3Provider(connect)
-            const signer = provider.getSigner()
-            const contract = new ethers.Contract(ADDRESS,ABI,signer)
-            await contract.completeJob(jobId,address)
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                text: `You have successfully marked this job as completed!`,
-                showConfirmButton: true,
-                timer: 4000
-            })
-        } catch (error : any) {
-            if(error.message.includes('JDE')){
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'warning',
-                    text: `Job does not exist`,
-                    showConfirmButton: true,
-                    timer: 4000
-                })
-            }
-            else if(error.message.includes('FNH')){
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'warning',
-                    text: `Freelancer is not hired for this job!`,
-                    showConfirmButton: true,
-                    timer: 4000
-                })
-            }
-            else{
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'warning',
-                    text: `An error occured!`,
-                    showConfirmButton: true,
-                    timer: 4000
-                })
-            }
-            
-        }
-     }
-     
-    //  release escrow by employer
-     const releaseEscrow : FreelancerProps["releaseEscrow"] = async(jobId,address)=>{
+      //  release escrow by employer
+      const releaseEscrow : FreelancerProps["releaseEscrow"] = async(jobId,address)=>{
         try {
             const provider = new ethers.providers.Web3Provider(connect)
             const signer = provider.getSigner()
@@ -500,6 +454,55 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             
         }
      }
+
+    //  complete job by employer
+     const completeJob : FreelancerProps["completeJob"] = async(jobId, address)=>{
+        try {
+            const provider = new ethers.providers.Web3Provider(connect)
+            const signer = provider.getSigner()
+            const contract = new ethers.Contract(ADDRESS,ABI,signer)
+            await contract.completeJob(jobId,address)
+            releaseEscrow(jobId,address)
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                text: `You have successfully marked this job as completed!`,
+                showConfirmButton: true,
+                timer: 4000
+            })
+        } catch (error : any) {
+            if(error.message.includes('JDE')){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `Job does not exist`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
+            else if(error.message.includes('FNH')){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `Freelancer is not hired for this job!`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
+            else{
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    text: `An error occured!`,
+                    showConfirmButton: true,
+                    timer: 4000
+                })
+            }
+            
+        }
+     }
+     
+   
 
     //  withdraw earnings by freelancer
     const withdrawEarnings : FreelancerProps["withdrawEarnings"] = async()=>{
