@@ -509,8 +509,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             element.classList.toggle('block-nav')
         }
      }
-     
-   
+       
 
     //  withdraw earnings by freelancer
     const withdrawEarnings : FreelancerProps["withdrawEarnings"] = async()=>{
@@ -587,15 +586,29 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             const provider = new ethers.providers.Web3Provider(connect)
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
-            const job = await contract.allJobs()
-            setJobs(job)
+            const jobs = await contract.allJobs()
+            const data = await Promise.all(jobs.map((job :any)=>{
+                let item = {
+                    id :  job.id,
+                    employer : job.employer,
+                    description : job.description,
+                    title : job.title,
+                    budget : ethers.utils.parseUnits(job.budget.toString, 'ether'),
+                    completed : job.completed,
+                    applicants : job.applicants,
+                    hiredFreelancer : job.hiredFreelancer
+                }
+
+                return item
+            }))
+            setJobs(data)
         } catch (error) {
             console.log(error);
             
         }
     }
 
-    // get all jobs by currrent employer
+    // get all jobs by currrent employerp
     const retrieveJobsByEmployer : FreelancerProps["retrieveJobsByEmployer"] = async(address)=>{
         retrieveAllJobs()
         const filteredJobs = jobs.filter((job : any) => Number(job.employer) === Number(address));
