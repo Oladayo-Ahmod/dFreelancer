@@ -24,7 +24,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
     const [balance, setBalance] = useState<string>()
     const [deployer, setDeployer] = useState<string>()
     const [jobEscrow, setJobEscrow] = useState<string>()
-    const [singleJob, setSingeJob] = useState<string>()
+    const [singleJob, setSingeJob] = useState<any>()
     const [profileImage, setProfileImage] = useState<string>()
     const [gigImage, setGigImage] = useState<string>()
     const [currentEmployerDetails, setCurrentEmployerDetails] = useState<any>()
@@ -573,7 +573,17 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
             const job = await contract.getJobByID(jobId.toString())
-            setSingeJob(job)
+            let item = {
+                id :  job.id,
+                employer : job.employer,
+                description : job.description,
+                title : job.title,
+                budget : ethers.utils.parseUnits(job.budget.toString, 'ether'),
+                completed : job.completed,
+                applicants : job.applicants,
+                hiredFreelancer : job.hiredFreelancer
+        }
+            setSingeJob(item)
         } catch (error) {
             console.log(error);
             
@@ -612,7 +622,21 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
     const retrieveJobsByEmployer : FreelancerProps["retrieveJobsByEmployer"] = async(address)=>{
         retrieveAllJobs()
         const filteredJobs = jobs.filter((job : any) => Number(job.employer) === Number(address));
-        setJobs(filteredJobs)
+        const data = await Promise.all(filteredJobs.map((job :any)=>{
+            let item = {
+                id :  job.id,
+                employer : job.employer,
+                description : job.description,
+                title : job.title,
+                budget : ethers.utils.parseUnits(job.budget.toString, 'ether'),
+                completed : job.completed,
+                applicants : job.applicants,
+                hiredFreelancer : job.hiredFreelancer
+            }
+
+            return item
+        }))
+        setJobs(data)
 
     }
 
@@ -620,14 +644,42 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
     const retrieveUncompletedJobsByEmployer : FreelancerProps["retrieveUncompletedJobsByEmployer"] = async(address)=>{
         retrieveJobsByEmployer(address)
         const filteredJobs = jobs.filter((job : any) => job.completed == false);
-        setJobs(filteredJobs)
+        const data = await Promise.all(filteredJobs.map((job :any)=>{
+            let item = {
+                id :  job.id,
+                employer : job.employer,
+                description : job.description,
+                title : job.title,
+                budget : ethers.utils.parseUnits(job.budget.toString, 'ether'),
+                completed : job.completed,
+                applicants : job.applicants,
+                hiredFreelancer : job.hiredFreelancer
+            }
+
+            return item
+        }))
+        setJobs(data)
     }
 
     // get all jobs where freelancer is hired 
     const getFreelancerHiredJobs : FreelancerProps["retrieveJobsByEmployer"] = async(address)=>{
         retrieveAllJobs()
         const filteredJobs = jobs.filter((job : any) => Number(job.hiredFreelancer)  === Number(address));
-        setJobs(filteredJobs)
+        const data = await Promise.all(filteredJobs.map((job :any)=>{
+            let item = {
+                id :  job.id,
+                employer : job.employer,
+                description : job.description,
+                title : job.title,
+                budget : ethers.utils.parseUnits(job.budget.toString, 'ether'),
+                completed : job.completed,
+                applicants : job.applicants,
+                hiredFreelancer : job.hiredFreelancer
+            }
+
+            return item
+        }))
+        setJobs(data)
     }
 
     // handle profile image uploading to IPFS
