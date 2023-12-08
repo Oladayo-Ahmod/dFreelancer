@@ -65,7 +65,7 @@ function FreelancerPage({address} : any){
                                         <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs">
                                             <i className="flaticon-place vam fz20 me-2"></i> {currentFreelancerDetails.country}</p>
                                         <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs">
-                                            <i className="flaticon-30-days vam fz20 me-2"></i> Member since {new Date(currentFreelancerDetails.registration_date * 1000).toDateString()}
+                                            <i className="flaticon-30-days vam fz20 me-2"></i> Member since {currentFreelancerDetails.registration_date}
                                         </p>
                                            
                                     </div>
