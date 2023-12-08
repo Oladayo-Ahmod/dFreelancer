@@ -15,6 +15,8 @@ function MyJobs(){
             retrieveJobsByEmployer(account)
         }
         
+        // console.log(jobs);
+        
     })
 
     return(

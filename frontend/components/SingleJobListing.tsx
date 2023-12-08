@@ -11,10 +11,10 @@ function SingleJobListing({id} : any){
         jobEscrow,retrieveEscrow,retrieveJob,depositFunds
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
-    useEffect(()=>{
-        retrieveJob(id)
+    useEffect(()=>{        
+        retrieveJob(id.id)
         if (account) {
-            retrieveEscrow(id)
+            retrieveEscrow(id.id)
             employerDetails(account)
         }
         

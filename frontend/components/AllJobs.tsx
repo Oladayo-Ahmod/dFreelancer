@@ -15,8 +15,10 @@ function AllJobs(){
         retrieveAllJobs()
         if (account) {
             freelancerDetails(account)
+            
             // console.log(currentFreelancerDetails);
         }
+        // console.log(jobs);
         
     })
 
@@ -59,13 +61,13 @@ function AllJobs(){
                                 <div className="details ml20 ml0-xl">
                                     <p>{job.description}</p>
                                     <h4 className="mb-3 text-thm">{job.title}</h4>
-                                    <p className="list-inline-item mb-0">{job.budget} KLAY</p>
+                                    <p className="list-inline-item mb-0">{job.budget.toString()} KLAY</p>
                                     <p className="list-inline-item mb-0 bdrl1 pl15">{job.completed ? 'Expired' : ''}</p>
                                     <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p>
                                     <Link href={'/single-job/'+job.id}>View Job</Link>
                                     {/* check if user is a freelancer */}
                                     {currentFreelancerDetails?.registered ? (
-                                        <button className="btn-primary btn-sm btn text-white" 
+                                        <button className="btn-primary btn-sm btn ml-1 text-white" 
                                         onClick={()=>applyJob(job.id.toNumber())} type="button">Apply</button>
                                     ):
                                     (

@@ -3,6 +3,8 @@ import React, { SetStateAction } from "react"
 interface FreelancerProps{
 
     account : string | undefined
+    freelancerBal : string | undefined
+    employerBal : string | undefined
     currentEmployerDetails : any | undefined
     currentFreelancerDetails : any | undefined
     jobs : any | undefined

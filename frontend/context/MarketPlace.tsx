@@ -21,7 +21,8 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
 
     // states variables
     const [account, setAccount] = useState<string>()
-    const [balance, setBalance] = useState<string>()
+    const [freelancerBal, setFreelancerBal] = useState<string>()
+    const [employerBal, setEmployerBal] = useState<string>()
     const [deployer, setDeployer] = useState<string>()
     const [jobEscrow, setJobEscrow] = useState<string>()
     const [singleJob, setSingeJob] = useState<any>()
@@ -147,7 +148,26 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
             const details = await contract.freelancers(account)
-            setCurrentFreelancerDetails(details)
+            const balance = ethers.utils.formatEther(details.balance.toString())
+            const date  = new Date(details.registration_date.toString() * 1000)
+            const year = date.getFullYear()
+            const month = date.toLocaleString('default', {month : 'long'})
+            let freelancer = {
+                freelancerAddress : details.freelancerAddress,
+                name : details.name,
+                skills : details.skills,
+                balance : details.balance,
+                country : details.country,
+                gigTitle : details.gigTitle,
+                gitDescription : details.gitDescription,
+                images : details.images,
+                jobsCompleted : details.jobsCompleted,
+                registered : details.registered,
+                registration_date : month + ',' + year
+
+            }
+            setCurrentFreelancerDetails(freelancer)
+            setFreelancerBal(balance.toString())
         } catch (error) {
             console.log(error);
             
@@ -161,6 +181,8 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
             const details = await contract.employers(account)
+            const balance = ethers.utils.formatEther(details.balance.toString())
+            setEmployerBal(balance.toString())
             setCurrentEmployerDetails(details)
         } catch (error) {
             console.log(error);
@@ -578,7 +600,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
                 employer : job.employer,
                 description : job.description,
                 title : job.title,
-                budget : ethers.utils.parseUnits(job.budget.toString, 'ether'),
+                budget : ethers.utils.formatEther(job.budget.toString()),
                 completed : job.completed,
                 applicants : job.applicants,
                 hiredFreelancer : job.hiredFreelancer
@@ -603,7 +625,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
                     employer : job.employer,
                     description : job.description,
                     title : job.title,
-                    budget : ethers.utils.parseUnits(job.budget.toString, 'ether'),
+                    budget : ethers.utils.formatEther(job.budget.toString()),
                     completed : job.completed,
                     applicants : job.applicants,
                     hiredFreelancer : job.hiredFreelancer
@@ -611,6 +633,8 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
 
                 return item
             }))
+            // console.log(jobs);
+            
             setJobs(data)
         } catch (error) {
             console.log(error);
@@ -621,65 +645,75 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
     // get all jobs by currrent employerp
     const retrieveJobsByEmployer : FreelancerProps["retrieveJobsByEmployer"] = async(address)=>{
         retrieveAllJobs()
-        const filteredJobs = jobs.filter((job : any) => Number(job.employer) === Number(address));
-        const data = await Promise.all(filteredJobs.map((job :any)=>{
-            let item = {
-                id :  job.id,
-                employer : job.employer,
-                description : job.description,
-                title : job.title,
-                budget : ethers.utils.parseUnits(job.budget.toString, 'ether'),
-                completed : job.completed,
-                applicants : job.applicants,
-                hiredFreelancer : job.hiredFreelancer
-            }
-
-            return item
-        }))
-        setJobs(data)
+        if (jobs) {
+            const filteredJobs = await jobs.filter((job : any) => Number(job.employer) === Number(address));
+            const data = await Promise.all(filteredJobs.map((job :any)=>{
+                let item = {
+                    id :  job.id,
+                    employer : job.employer,
+                    description : job.description,
+                    title : job.title,
+                    budget : job.budget,
+                    completed : job.completed,
+                    applicants : job.applicants,
+                    hiredFreelancer : job.hiredFreelancer
+                }
+    
+                return item
+            }))
+            setJobs(data)
+        }
+       
+       
 
     }
 
     // get all uncompleted jobs by current employer
     const retrieveUncompletedJobsByEmployer : FreelancerProps["retrieveUncompletedJobsByEmployer"] = async(address)=>{
         retrieveJobsByEmployer(address)
-        const filteredJobs = jobs.filter((job : any) => job.completed == false);
-        const data = await Promise.all(filteredJobs.map((job :any)=>{
-            let item = {
-                id :  job.id,
-                employer : job.employer,
-                description : job.description,
-                title : job.title,
-                budget : ethers.utils.parseUnits(job.budget.toString, 'ether'),
-                completed : job.completed,
-                applicants : job.applicants,
-                hiredFreelancer : job.hiredFreelancer
-            }
-
-            return item
-        }))
-        setJobs(data)
+        if (jobs) {
+            const filteredJobs = jobs.filter((job : any) => job.completed == false);
+            const data = await Promise.all(filteredJobs.map((job :any)=>{
+                let item = {
+                    id :  job.id,
+                    employer : job.employer,
+                    description : job.description,
+                    title : job.title,
+                    budget :job.budget,
+                    completed : job.completed,
+                    applicants : job.applicants,
+                    hiredFreelancer : job.hiredFreelancer
+                }
+    
+                return item
+            }))
+            setJobs(data)
+        }
+       
     }
 
     // get all jobs where freelancer is hired 
     const getFreelancerHiredJobs : FreelancerProps["retrieveJobsByEmployer"] = async(address)=>{
         retrieveAllJobs()
-        const filteredJobs = jobs.filter((job : any) => Number(job.hiredFreelancer)  === Number(address));
-        const data = await Promise.all(filteredJobs.map((job :any)=>{
-            let item = {
-                id :  job.id,
-                employer : job.employer,
-                description : job.description,
-                title : job.title,
-                budget : ethers.utils.parseUnits(job.budget.toString, 'ether'),
-                completed : job.completed,
-                applicants : job.applicants,
-                hiredFreelancer : job.hiredFreelancer
-            }
-
-            return item
-        }))
-        setJobs(data)
+        if(jobs){
+            const filteredJobs = jobs.filter((job : any) => Number(job.hiredFreelancer)  === Number(address));
+            const data = await Promise.all(filteredJobs.map((job :any)=>{
+                let item = {
+                    id :  job.id,
+                    employer : job.employer,
+                    description : job.description,
+                    title : job.title,
+                    budget : job.budget,
+                    completed : job.completed,
+                    applicants : job.applicants,
+                    hiredFreelancer : job.hiredFreelancer
+                }
+    
+                return item
+            }))
+            setJobs(data)
+        }
+       
     }
 
     // handle profile image uploading to IPFS
@@ -724,6 +758,8 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         <FREELANCER_CONTEXT.Provider
         value={{
             account,
+            freelancerBal,
+            employerBal,
             connectWallet,
             freelancerForm,
             setFreelancerForm,

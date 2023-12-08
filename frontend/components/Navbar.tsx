@@ -12,8 +12,8 @@ function Navbar(){
     const pathname = usePathname()  
     const modalRef = useRef(null) // boostrap modal  
     const {
-        account,employerDetails,currentEmployerDetails,setJobCreationForm,withdrawEarnings,
-        connectWallet,jobCreationForm,createJob,currentFreelancerDetails,freelancerDetails
+        account,employerDetails,currentEmployerDetails,setJobCreationForm,withdrawEarnings,freelancerBal,
+        connectWallet,jobCreationForm,createJob,currentFreelancerDetails,freelancerDetails,employerBal
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{
@@ -21,6 +21,8 @@ function Navbar(){
         if (account) {
             employerDetails(account)
             freelancerDetails(account)
+            // console.log(employerBal);
+            
             // console.log(currentEmployerDetails);
         }
         
@@ -82,7 +84,7 @@ function Navbar(){
                                     (
                                         
                                         <button className="btn btn-warning" >
-                                             <span className="badge bg-primary">{currentEmployerDetails.balance.toString()} klay</span>
+                                             <span className="badge bg-primary">{employerBal} klay</span>
                                     </button>
                                     ): ''
                                 }
@@ -92,7 +94,7 @@ function Navbar(){
                                     (
                                         
                                         <button className="btn btn-warning" >
-                                             <span className="badge bg-primary">{currentFreelancerDetails.balance.toString()} klay</span>
+                                             <span className="badge bg-primary">{freelancerBal} klay</span>
                                     </button>
                                     ): ''
                                 }

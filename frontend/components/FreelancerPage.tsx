@@ -43,6 +43,7 @@ function FreelancerPage({address} : any){
                 }
             </style>
                 {currentFreelancerDetails ? (
+
                     <div className="cta-service-v1 freelancer-single-style mx-auto maxw1700 pt120 pt60-sm pb120 pb60-sm bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg px30-lg">
                 <img className="left-top-img wow zoomIn" src="/images/vector-img/left-top.png" alt="" />
                 <img className="right-bottom-img wow zoomIn" src="/images/vector-img/right-bottom.png" alt="" />
@@ -53,17 +54,19 @@ function FreelancerPage({address} : any){
                                 <h2>{currentFreelancerDetails.gigTitle}</h2>
                                 <div className="list-meta d-sm-flex align-items-center mt30">
                                     <a className="position-relative freelancer-single-style" href="#">
-                  <span className="online"></span>
-                  <Image width={90} height={90} className="rounded-circle w-100 wa-sm mb15-sm"
-                   src={currentFreelancerDetails.images['1']} loader={()=>currentFreelancerDetails.images['1']} alt="Freelancer Photo" />
-                </a>
+                                        <span className="online"></span>
+                                        {/* <Image width={90} height={90} className="rounded-circle w-100 wa-sm mb15-sm"
+                                        src={currentFreelancerDetails.images['1']} loader={()=>currentFreelancerDetails.images['1']} alt="Freelancer Photo" /> */}
+                                        </a>
                                     <div className="ml20 ml0-xs">
                                         <h5 className="title mb-1">{currentFreelancerDetails.name}</h5>
                                         {/* <p className="mb-0">UI/UX Designer</p> */}
                                         <p className="mb-0 dark-color fz15 fw500 list-inline-item mb5-sm"><i className="fas fa-star vam fz10 review-color me-2"></i> 4.82 94 reviews</p>
-                                        <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs"><i className="flaticon-place vam fz20 me-2"></i> {currentFreelancerDetails.country}</p>
                                         <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs">
-                                            <i className="flaticon-30-days vam fz20 me-2"></i> Member since {currentFreelancerDetails.starting_date}</p>
+                                            <i className="flaticon-place vam fz20 me-2"></i> {currentFreelancerDetails.country}</p>
+                                        <p className="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs">
+                                            <i className="flaticon-30-days vam fz20 me-2"></i> Member since {new Date(currentFreelancerDetails.registration_date * 1000).toDateString()}
+                                        </p>
                                            
                                     </div>
                                 </div>
@@ -114,7 +117,7 @@ function FreelancerPage({address} : any){
                         <div className="col-lg-4">
                             <div className="blog-sidebar ms-lg-auto">
                                 <div className="price-widget pt25 widget-mt-minus bdrs8">
-                                    <h3 className="widget-title">{currentFreelancerDetails.starting_price} <small className="fz15 fw500">KLAY</small></h3>
+                                    <h3 className="widget-title">{currentFreelancerDetails.starting_price.toString()} <small className="fz15 fw500">KLAY</small></h3>
                                     <div className="category-list mt20">
                                         <a className="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
                       <span className="text"><i className="flaticon-place text-thm2 pe-2 vam"></i>Location</span> <span
@@ -122,7 +125,7 @@ function FreelancerPage({address} : any){
                     </a>
                                         <a className="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
                       <span className="text"><i className="flaticon-30-days text-thm2 pe-2 vam"></i>Member since</span> <span
-                        className="">{currentFreelancerDetails.registration_date}</span>
+                        className="">{currentFreelancerDetails.registration_date.toString()}</span>
                     </a>
                         <a className="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
                       <span className="text"><i className="flaticon-translator text-thm2 pe-2 vam"></i>Languages</span> <span
