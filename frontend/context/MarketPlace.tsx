@@ -163,7 +163,8 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
                 images : details.images,
                 jobsCompleted : details.jobsCompleted,
                 registered : details.registered,
-                registration_date : month + ',' + year
+                registration_date : month + ',' + year,
+                starting_price : details.starting_price
 
             }
             setCurrentFreelancerDetails(freelancer)
@@ -334,7 +335,9 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             const provider = new ethers.providers.Web3Provider(connect)
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
-            await contract.hireFreelancer(jobId,address)
+             await contract.hireFreelancer(jobId,address)
+            console.log(typeof(address));
+            
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -370,6 +373,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
                     showConfirmButton: true,
                     timer: 4000
                 })
+                console.log(error)
             }
                
         }

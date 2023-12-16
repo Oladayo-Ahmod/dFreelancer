@@ -66,13 +66,16 @@ function AllJobs(){
                                     <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p>
                                     <Link href={'/single-job/'+job.id}>View Job</Link>
                                     {/* check if user is a freelancer */}
-                                    {currentFreelancerDetails?.registered ? (
+                                    {currentFreelancerDetails?.registered && !job.applicants.includes(currentFreelancerDetails.freelancerAddress)? (
                                         <button className="btn-primary btn-sm btn ml-1 text-white" 
-                                        onClick={()=>applyJob(job.id.toNumber())} type="button">Apply</button>
-                                    ):
+                                        onClick={()=>applyJob(job.id.toString())} type="button">Apply</button>
+                                    ): 
+                                    currentFreelancerDetails?.registered && job.applicants.includes(currentFreelancerDetails.freelancerAddress)?
                                     (
-                                        ''
+                                        <i> Applied</i>
                                     )
+                                    :
+                                    ('')
                                 }
                                 </div>
                             </div>

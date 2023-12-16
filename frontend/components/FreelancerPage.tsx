@@ -20,7 +20,7 @@ function FreelancerPage({address} : any){
             retrieveUncompletedJobsByEmployer(account)
         }
     })
-    // console.log(currentFreelancerDetails);
+    // console.log(currentFreelancerDetails.freelancerAddress);
     
     return(
         <>
@@ -135,7 +135,7 @@ function FreelancerPage({address} : any){
                                     <div className="d-grid">
                                         {currentEmployerDetails?.registered? (
                                             <button className="btn-warning btn btn-sm ud-btn btn-thm"
-                                            data-bs-toggle="modal" data-bs-target="#modalId"
+                                            data-bs-toggle="modal" data-bs-target="#modalId2"
                                             type='button'>Hire Me</button>
                                             ):''
                                         }
@@ -153,7 +153,7 @@ function FreelancerPage({address} : any){
 
                                         
                                         {/* Modal Body  */}
-                                        <div className="modal fade" id="modalId" tabIndex={1} data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                                        <div className="modal fade" id="modalId2" tabIndex={1} data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                                             <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
                                                 <div className="modal-content">
                                                     <div className="modal-header">
@@ -161,12 +161,18 @@ function FreelancerPage({address} : any){
                                                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div className="modal-body">
-                                                       {jobs?.map((job : any)=>(                
-                                                        <button className="btn-warning btn btn-sm ud-btn btn-thm"
-                                                        data-bs-toggle="modal" data-bs-target="#modalId"
-                                                        type='button' onClick={()=>hireFreelancer(job.id.toString(),currentFreelancerDetails.address)}>Hire</button>
+                                                        
+                                                       {jobs?.map((job : any)=>(       
+                                                        <div className="d-flex justify-content-space-around">
+                                                            <button className="btn-warning btn btn-sm ud-btn btn-thm"
+                                                            type='button'
+                                                             onClick={()=>hireFreelancer(job.id.toString(),currentFreelancerDetails.freelancerAddress)}>
+                                                                Hire
+                                                            </button>
+                                                            <p className='text-secondary text-lg mt-3'>{job.title}</p>
 
-                                                       ))}
+                                                        </div>         
+                                                         ))}
                                                     </div>
                                                     <div className="modal-footer">
                                                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 function MyJobs(){
     const {
-        account,retrieveJobsByEmployer,jobs,completeJob,jobEscrow,retrieveEscrow
+        account,retrieveJobsByEmployer,jobs,hireFreelancer,
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{
@@ -25,12 +25,11 @@ function MyJobs(){
             <div className="container">
                 <div className="row">
                  
-
                     <div className="col-lg-9">
                         <div className="row align-items-center mb20">
                             <div className="col-md-6">
                                 <div className="text-center text-md-start">
-                                    <p className="text mb-0 mb10-sm"><span className="fw500">7,512</span> available services </p>
+                                    {/* <p className="text mb-0 mb10-sm"><span className="fw500">7,512</span> available services </p> */}
                                 </div>
                             </div>
                             <div className="col-md-6">
@@ -67,7 +66,36 @@ function MyJobs(){
                                     )}</p>
                                     <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p>
                                     <Link href={'/single-job/'+job.id}>View Job</Link>
-                                    {/* <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p> */}
+                                    <div className="card mt-4">
+                                        <div className="card-body">
+                                            <h4 className="card-title">Applicants</h4>
+                                        </div>
+                                        <ul className="list-group list-group-flush">
+                                            {
+                                                job.applicants.map((applicant:any)=>(
+                                                    <div className="d-flex">
+                                                        <li className="list-group-item text-primary">
+                                                            {`${applicant.slice(0,6)}...${applicant.slice(applicant.length -4)}`}
+                                                        </li>
+                                                        <Link className="d-flex mt-2" href={'/freelancer/'+applicant}>View Applicant</Link>
+                                                        {job.hiredFreelancer? (
+                                                            <p>Hired {`${job.hiredFreelancer.slice(0,6)}...${job.hiredFreelancer.slice(job.hiredFreelancer.length -4)}`}</p>
+                                                        ):
+                                                        (
+                                                         <button className="btn-warning btn m-1"
+                                                            type='button'
+                                                            onClick={()=>hireFreelancer(job.id.toString(),applicant)}>
+                                                            Hire
+                                                        </button>
+                                                        )
+                                                    }
+                                                        
+                                                    </div>
+                                                ))
+                                            }
+                                        </ul>
+                                    </div>
+                                    
                                 </div>
                             </div>
                             </div>
