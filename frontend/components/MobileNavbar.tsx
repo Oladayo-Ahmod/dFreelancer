@@ -71,16 +71,27 @@ function MobileNavbar(){
         <nav id="menu" className="none-nav mm-menu mm-menu--offcanvas mm-menu--position-left-front mm-menu--theme-light mm-menu--opened" aria-label="Menu" aria-modal="true" role="dialog">
                 
                 <div className="mm-panels">
-                    <div className="mm-panel mm-panel--noanimation mm-panel--opened" id="mm-1"><div className="mm-navbar"><a className="mm-navbar__title" tabIndex={1} aria-hidden="true"><span className="">Menu</span></a></div><ul className="mm-listview">
+                    <div className="mm-panel mm-panel--noanimation mm-panel--opened" id="mm-1">
+                        <div className="mm-navbar">
+                            <a className="mm-navbar__title" tabIndex={1} aria-hidden="true">
+                            <span className="">Menu</span>
+                            </a>
+                        </div>
+                        <ul className="mm-listview">
+
+                        {/* home page */}
                         <li className="mm-listitem" >
                         <Link style={{'color' : pathname !== '/'? '#14A800' : 'black'}} 
                             className="mm-btn mm-btn--next mm-listitem__btn mm-listitem__text" href={'/'}><span className="title">Home</span></Link>
                         </li>
+
+                        {/* jobs page */}
                         <li className="mm-listitem" >
                             <Link style={{'color' : pathname !== '/'? '#14A800' : 'black'}} 
                             className="mm-btn mm-btn--next mm-listitem__btn mm-listitem__text" href={'/job-listing'}><span className="title">Browse Jobs</span></Link>
                         </li>
 
+                        {/* create job functionality for employer */}
                         <li className="mm-listitem">
                             {currentEmployerDetails?.registered?
                             (
@@ -94,6 +105,7 @@ function MobileNavbar(){
                             }
                         </li>
 
+                        {/* created jobs by employer */}
                         <li className="mm-listitem">
                             {currentEmployerDetails?.registered?
                             (
@@ -105,6 +117,7 @@ function MobileNavbar(){
                             }
                         </li>
 
+                            {/* employer balance */}
                         <li className="mm-listitem">
                         {currentEmployerDetails?.registered?
                         (
@@ -114,6 +127,8 @@ function MobileNavbar(){
                         ): ''
                         }                        
                         </li>
+
+                        {/* freelancer balance */}
                         <li className="mm-listitem" >
                         {currentFreelancerDetails?.registered?
                         (
@@ -124,6 +139,8 @@ function MobileNavbar(){
                         ): ''
                         }                        
                         </li>
+
+                        {/* hired jobs link for freelancer */}
                         <li className="mm-listitem" >
                         {currentFreelancerDetails?.registered? (
                                 <Link style={{'color' : pathname !== '/'? '#14A800' : 'black'}} 
@@ -136,6 +153,8 @@ function MobileNavbar(){
                                 )
                             }
                         </li>
+
+                         {/* withdrawal method for freelancer  */}
                         <li className="mm-listitem" >
                             {currentFreelancerDetails?.registered == true && currentFreelancerDetails.balance.toString() > 0 ?
                             (
@@ -146,6 +165,8 @@ function MobileNavbar(){
                             ): ''
                             }
                         </li>
+
+                        {/* connect wallet functionality */}
                         <li className="mm-listitem" >
                             <button style={{
                                 'color' : pathname !== '/'? '#14A800' : 'white',
