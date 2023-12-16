@@ -80,6 +80,7 @@ function MobileNavbar(){
                             <Link style={{'color' : pathname !== '/'? '#14A800' : 'black'}} 
                             className="mm-btn mm-btn--next mm-listitem__btn mm-listitem__text" href={'/job-listing'}><span className="title">Browse Jobs</span></Link>
                         </li>
+
                         <li className="mm-listitem">
                             {currentEmployerDetails?.registered?
                             (
@@ -91,7 +92,19 @@ function MobileNavbar(){
 
                             )
                             }
-                    </li>
+                        </li>
+
+                        <li className="mm-listitem">
+                            {currentEmployerDetails?.registered?
+                            (
+                                <Link style={{'color' : pathname !== '/'? '#14A800' : 'black'}} 
+                                    className="mm-btn mm-btn--next mm-listitem__btn mm-listitem__text" href={'/my-jobs'}>
+                                    <span className="title">My jobs</span>
+                                </Link>
+                            ):''
+                            }
+                        </li>
+
                         <li className="mm-listitem">
                         {currentEmployerDetails?.registered?
                         (
