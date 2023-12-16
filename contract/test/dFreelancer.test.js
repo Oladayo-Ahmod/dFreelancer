@@ -155,7 +155,9 @@ describe("Dfreelancer", function () {
   // withrawal of earnings by freelancer
   it("Should withdraw earnings", async function () {
     const fund = '105' // job budget plus incentive
-    const initialBalance = (await dfreelancer.freelancers(freelancer.address)).balance; // previous balance
+    let remainingBalance = (5 / 100) * Number(fund); // previous balance
+    remainingBalance = fund - Number(remainingBalance)
+    remainingBalance = remainingBalance.toString()
 
     await dfreelancer.connect(freelancer)
     .registerFreelancer(freelancerName, freelancerSkills,freelancerCountry,
@@ -175,7 +177,7 @@ describe("Dfreelancer", function () {
     const withdraw = await dfreelancer.connect(freelancer).withdrawEarnings();
     const receipt = await withdraw.wait()
     const event = receipt.events.find((event)=> event.event == 'WithdrawFund')
-    assert.equal(event.args[1].toString(),ethers.utils.parseEther(fund).toString()) 
+    assert.equal(event.args[1].toString(),ethers.utils.parseEther(remainingBalance).toString()) 
 
   });
 
