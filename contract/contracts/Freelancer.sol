@@ -80,15 +80,15 @@ contract Dfreelancer is Employers {
 
     /// @notice process funds withdrawal to the freelancer after successful completion of a job
     function withdrawEarnings() public onlyFreelancer(msg.sender) {
-        Freelancer storage freelancer = freelancers[msg.sender];
+       Freelancer storage freelancer = freelancers[msg.sender];
         require(freelancer.balance > 0, "NBW"); // No balance to withdraw.
 
-        uint balance = freelancer.balance;
+        uint withdrawAmount = (freelancer.balance * 95) / 100; // 95% of balance
         freelancer.balance = 0;
 
-        (bool success, ) = msg.sender.call{value: balance}("");
+        (bool success, ) = msg.sender.call{value: withdrawAmount}("");
         require(success, "TF"); // Transfer failed
 
-        emit WithdrawFund(msg.sender,balance);
+        emit WithdrawFund(msg.sender, withdrawAmount);
     }
 }
