@@ -49,12 +49,18 @@ function Navbar(){
                         <div className="col-auto px-0">
                             <div className="d-flex align-items-center">
                                 <ul id="respMenu" className="ace-responsive-menu" data-menu-style="horizontal">
+
+                                    {/* home page */}
                                     <li className="visible_list"> 
                                     <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href={'/'}><span className="title">Home</span></Link>
                                     </li>
+
+                                    {/* jobs page  */}
                                     <li className="visible_list">
                                          <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} className="list-item" href={'/job-listing'}><span className="title">Browse Jobs</span></Link>
                                     </li>
+
+                                    {/* create job link for employer */}
                                     <li className="visible_list"> 
                                     {currentEmployerDetails?.registered?
                                     (
@@ -67,6 +73,19 @@ function Navbar(){
                                 }
                                     </li>
 
+                                    {/* created jobs link by employer */}
+                                    <li className="visible_list"> 
+                                    {currentEmployerDetails?.registered?
+                                    (
+                                        <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} 
+                                        className="list-item" href={'/my-jobs'}>
+                                            <span className="title">My jobs</span>
+                                        </Link>
+                                    ):''
+                                }
+                                    </li>
+
+                                    {/* hired jobs link for freelancer  */}
                                     <li className="visible_list">
                                         {currentFreelancerDetails?.registered? (
                                         <Link style={{'color' : pathname !== '/'? '#14A800' : 'white'}} 
@@ -79,6 +98,7 @@ function Navbar(){
                                         )
                                     }
                                     </li>
+                                    {/* employer balance */}
                                     <li className="visible_list"> 
                                     {currentEmployerDetails?.registered?
                                     (
@@ -89,6 +109,8 @@ function Navbar(){
                                     ): ''
                                 }
                                     </li>
+
+                                    {/* freelancer balance */}
                                     <li className="visible_list"> 
                                     {currentFreelancerDetails?.registered?
                                     (
@@ -99,6 +121,8 @@ function Navbar(){
                                     ): ''
                                 }
                                     </li>
+
+                                    {/* withdrawal method for freelancer  */}
                                     <li className="visible_list"> 
                                     {currentFreelancerDetails?.registered == true && currentFreelancerDetails.balance.toString() > 0 ?
                                     (
@@ -109,7 +133,9 @@ function Navbar(){
                                     ): ''
                                 }
                                     </li>
-                                </ul>                              
+                                </ul>  
+                                
+                                {/*connect wallet functionality */}
                                 <button style={{
                                  'color' : pathname !== '/'? '#14A800' : 'white',
                                  'backgroundColor' : pathname !== '/' ? 'rgb(224 255 224)' : 'green', 'border' : 'none'}}

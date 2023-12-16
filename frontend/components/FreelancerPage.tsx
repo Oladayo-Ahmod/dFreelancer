@@ -146,9 +146,9 @@ function FreelancerPage({address} : any){
                                 <div className="sidebar-widget mb30 pb20 bdrs8">
                                     <h4 className="widget-title">My Skills</h4>
                                     <div className="tag-list mt30">
-                                        {currentFreelancerDetails.skills.split(',').map((value : string,key : string)=>{
+                                        {currentFreelancerDetails.skills.split(',').map((value : string,key : string)=>(
                                             <a href="#" key={key}>{value}</a>
-                                        })}
+                                        ))}
                                         <a href="#">Figma</a>
 
                                         
