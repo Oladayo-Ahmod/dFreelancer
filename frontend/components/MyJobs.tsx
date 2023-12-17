@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 function MyJobs(){
     const {
-        account,retrieveJobsByEmployer,jobs,hireFreelancer,
+        account,retrieveJobsByEmployer,jobs,hireFreelancer,completeJob
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{
@@ -78,8 +78,15 @@ function MyJobs(){
                                                             {`${applicant.slice(0,6)}...${applicant.slice(applicant.length -4)}`}
                                                         </li>
                                                         <Link className="d-flex mt-2" href={'/freelancer/'+applicant}>View Applicant</Link>
-                                                        {job.hiredFreelancer? (
-                                                            <p>Hired {`${job.hiredFreelancer.slice(0,6)}...${job.hiredFreelancer.slice(job.hiredFreelancer.length -4)}`}</p>
+                                                        {!job.hiredFreelancer.includes('0x000000000000')? (
+                                                            <>
+                                                                <p className="mt-2 mx-2">Hired 
+                                                                {`${job.hiredFreelancer.slice(0,6)}...${job.hiredFreelancer.slice(job.hiredFreelancer.length -4)}`}
+                                                                </p>
+                                                                <button className='btn btn-danger'
+                                                                 onClick={()=>completeJob(job.id.toString(),applicant)}>Mark as completed</button>
+                                                            </>
+                                                           
                                                         ):
                                                         (
                                                          <button className="btn-warning btn m-1"

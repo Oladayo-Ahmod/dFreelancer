@@ -336,7 +336,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
              await contract.hireFreelancer(jobId,address)
-            console.log(typeof(address));
+            // console.log(typeof(address));
             
             Swal.fire({
                 position: 'top-end',
@@ -450,6 +450,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
                 timer: 4000
             })
         } catch (error : any) {
+            console.log(error)
             if(error.message.includes('JDE')){
                 Swal.fire({
                     position: 'top-end',
@@ -483,49 +484,63 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
 
     //  complete job by employer
      const completeJob : FreelancerProps["completeJob"] = async(jobId, address)=>{
-        try {
-            const provider = new ethers.providers.Web3Provider(connect)
-            const signer = provider.getSigner()
-            const contract = new ethers.Contract(ADDRESS,ABI,signer)
-            await contract.completeJob(jobId,address)
-            releaseEscrow(jobId,address)
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                text: `You have successfully marked this job as completed!`,
-                showConfirmButton: true,
-                timer: 4000
-            })
-        } catch (error : any) {
-            if(error.message.includes('JDE')){
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'warning',
-                    text: `Job does not exist`,
-                    showConfirmButton: true,
-                    timer: 4000
-                })
+        Swal.fire({
+            title : "Are you sure?",
+            text : "You won't be able to revert this!",
+            icon : 'warning',
+            showCancelButton : true,
+            confirmButtonColor : "#3085d6",
+            cancelButtonColor : "#d33",
+            confirmButtonText : 'Yes, mark as completed!'      
+        }).
+        then(async(result)=>{
+            if(result.isConfirmed){
+                try {
+                    const provider = new ethers.providers.Web3Provider(connect)
+                    const signer = provider.getSigner()
+                    const contract = new ethers.Contract(ADDRESS,ABI,signer)
+                    await contract.completeJob(jobId,address)
+                    releaseEscrow(jobId,address)
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        text: `You have successfully marked this job as completed!`,
+                        showConfirmButton: true,
+                        timer: 4000
+                    })
+                } catch (error : any) {
+                    if(error.message.includes('JDE')){
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'warning',
+                            text: `Job does not exist`,
+                            showConfirmButton: true,
+                            timer: 4000
+                        })
+                    }
+                    else if(error.message.includes('FNH')){
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'warning',
+                            text: `Freelancer is not hired for this job!`,
+                            showConfirmButton: true,
+                            timer: 4000
+                        })
+                    }
+                    else{
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'warning',
+                            text: `An error occured!`,
+                            showConfirmButton: true,
+                            timer: 4000
+                        })
+                    }
+                    
+                }
             }
-            else if(error.message.includes('FNH')){
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'warning',
-                    text: `Freelancer is not hired for this job!`,
-                    showConfirmButton: true,
-                    timer: 4000
-                })
-            }
-            else{
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'warning',
-                    text: `An error occured!`,
-                    showConfirmButton: true,
-                    timer: 4000
-                })
-            }
-            
-        }
+        })
+       
      }
 
     //  navbar togglr
