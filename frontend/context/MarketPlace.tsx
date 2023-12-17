@@ -390,7 +390,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                text: `You have successfully applied for this job`,
+                text: `You have successfully deposited ${amount} ETH for this job`,
                 showConfirmButton: true,
                 timer: 4000
             })
@@ -500,7 +500,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
                     const signer = provider.getSigner()
                     const contract = new ethers.Contract(ADDRESS,ABI,signer)
                     await contract.completeJob(jobId,address)
-                    releaseEscrow(jobId,address)
+                    // releaseEscrow(jobId,address)
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',

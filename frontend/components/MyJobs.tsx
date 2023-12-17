@@ -82,9 +82,7 @@ function MyJobs(){
                                                             <>
                                                                 <p className="mt-2 mx-2">Hired 
                                                                 {`${job.hiredFreelancer.slice(0,6)}...${job.hiredFreelancer.slice(job.hiredFreelancer.length -4)}`}
-                                                                </p>
-                                                                <button className='btn btn-danger'
-                                                                 onClick={()=>completeJob(job.id.toString(),applicant)}>Mark as completed</button>
+                                                                </p>                                                                
                                                             </>
                                                            
                                                         ):

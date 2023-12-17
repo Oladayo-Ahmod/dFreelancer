@@ -8,7 +8,7 @@ import Link from 'next/link'
 function SingleJobListing({id} : any){
     const {
         account,currentEmployerDetails,employerDetails,singleJob,completeJob,
-        jobEscrow,retrieveEscrow,retrieveJob,depositFunds
+        jobEscrow,retrieveEscrow,retrieveJob,depositFunds,releaseEscrow
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{        
@@ -66,17 +66,36 @@ function SingleJobListing({id} : any){
                                     )}</p>
                                     {currentEmployerDetails?.registered && 
                                     Number(currentEmployerDetails.employerAddress) == Number(singleJob.employer)
-                                    && singleJob.completed == false? 
+                                    && singleJob.completed == false && Number(jobEscrow) <= 0?
                                     <button className="btn-warning btn" type='button'
                                     onClick={()=>depositFunds(singleJob.id.toString(),singleJob.budget.toString())}>Deposit Fund</button>
                                     : ''
                                     }
+                                    
+                                    {/* funding status */}
+                                    {Number(jobEscrow) > 0 ?'funded' : ''} 
+
+                                    {/* job location */}
                                     <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p>
-                                    {currentEmployerDetails?.registered && singleJob?.completed == false && Number(jobEscrow) > 0 ? (
+
+                                    {/* job completion */}
+                                    {currentEmployerDetails?.registered &&
+                                     singleJob?.completed == false && Number(jobEscrow) > 0
+                                     && !singleJob.hiredFreelancer.includes('0x000000000000')
+                                      ? (
                                         <button className="btn-warning btn" type='button'
                                         onClick={()=>completeJob(singleJob.id.toString(),singleJob.hiredFreelancer)}>Mark as completed</button>
                                     ): ''
                                 }
+                                    {/* release funds escrow */}
+                                    {currentEmployerDetails?.registered &&
+                                     singleJob?.completed == false?
+                                     (
+                                        <button className="btn-warning btn" type='button'
+                                        onClick={()=>releaseEscrow(singleJob.id.toString(),singleJob.hiredFreelancer)}>Release escrow</button>
+                                     )
+                                     :''
+                                     }
                                 </div>
                             </div>
                             </div>
