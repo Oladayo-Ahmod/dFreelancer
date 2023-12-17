@@ -16,6 +16,7 @@ function SingleJobListing({id} : any){
         if (account) {
             retrieveEscrow(id.id)
             employerDetails(account)
+            // console.log(jobEscrow)
         }
         
     })
@@ -30,7 +31,7 @@ function SingleJobListing({id} : any){
                         <div className="row align-items-center mb20">
                             <div className="col-md-6">
                                 <div className="text-center text-md-start">
-                                    <p className="text mb-0 mb10-sm"><span className="fw500">7,512</span> available services </p>
+                                    {/* <p className="text mb-0 mb10-sm"><span className="fw500">7,512</span> available services </p> */}
                                 </div>
                             </div>
                             <div className="col-md-6">
@@ -83,19 +84,25 @@ function SingleJobListing({id} : any){
                                      singleJob?.completed == false && Number(jobEscrow) > 0
                                      && !singleJob.hiredFreelancer.includes('0x000000000000')
                                       ? (
-                                        <button className="btn-warning btn" type='button'
+                                        <button className="btn-warning btn text-white" type='button'
                                         onClick={()=>completeJob(singleJob.id.toString(),singleJob.hiredFreelancer)}>Mark as completed</button>
                                     ): ''
                                 }
                                     {/* release funds escrow */}
                                     {currentEmployerDetails?.registered &&
-                                     singleJob?.completed == false?
+                                     singleJob?.completed == true && Number(jobEscrow) > 0?
+                                     
                                      (
-                                        <button className="btn-warning btn" type='button'
+                                        <button className="btn-warning btn text-white" type='button'
                                         onClick={()=>releaseEscrow(singleJob.id.toString(),singleJob.hiredFreelancer)}>Release escrow</button>
                                      )
                                      :''
                                      }
+
+                                     {/* escrow status */}
+                                     {currentEmployerDetails?.registered && 
+                                     singleJob?.completed == true && Number(jobEscrow) <= 0 ? 
+                                     (<p className="list-inline-item mb-0 bdrl1 pl15">Escrow released</p>) : ''}
                                 </div>
                             </div>
                             </div>
