@@ -74,6 +74,10 @@ contract Dfreelancer is Employers {
         // Implement logic to release funds from escrow to the freelancer's address
         Freelancer storage freelancer = freelancers[freelancerAddress];
         freelancer.balance += escrowAmount;
+        // update employer balance
+         Employer storage employer = employers[msg.sender];
+         employer.balance -= escrowAmount;
+         
         emit FundsReleased(jobId, freelancerAddress, escrowAmount);
     }
 
