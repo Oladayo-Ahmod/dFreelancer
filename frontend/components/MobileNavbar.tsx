@@ -12,7 +12,7 @@ function MobileNavbar(){
     const pathname = usePathname()  
     const modalRef = useRef(null) // boostrap modal  
     const {
-        account,employerDetails,currentEmployerDetails,withdrawEarnings,setJobCreationForm,
+        account,employerDetails,currentEmployerDetails,withdrawEarnings,setJobCreationForm,employerBal,freelancerBal,
         connectWallet,jobCreationForm,createJob,currentFreelancerDetails,freelancerDetails,toggleNav
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
@@ -43,6 +43,9 @@ function MobileNavbar(){
                     .none-nav{
                         display : none;
                         transition : 1s ease;
+                    }
+                    .withdraw-btn{
+                        margin-left :20px;
                     }
                 `}
             </style>
@@ -118,23 +121,23 @@ function MobileNavbar(){
                         </li>
 
                             {/* employer balance */}
-                        <li className="mm-listitem">
+                        <li className="mm-listitem withdraw-btn">
                         {currentEmployerDetails?.registered?
                         (
                             <button className="btn btn-warning" >
-                                    <span className="badge bg-primary">{currentEmployerDetails.balance.toString()} klay</span>
+                                    <span className="badge bg-primary">{employerBal} klay</span>
                         </button>
                         ): ''
                         }                        
                         </li>
 
                         {/* freelancer balance */}
-                        <li className="mm-listitem" >
+                        <li className="mm-listitem withdraw-btn" >
                         {currentFreelancerDetails?.registered?
                         (
                             
                         <button className="btn btn-warning" >
-                                <span className="badge bg-primary">{currentFreelancerDetails.balance.toString()} klay</span>
+                                <span className="badge bg-primary">{freelancerBal} klay</span>
                         </button>
                         ): ''
                         }                        
@@ -155,11 +158,12 @@ function MobileNavbar(){
                         </li>
 
                          {/* withdrawal method for freelancer  */}
-                        <li className="mm-listitem" >
+                       
+                        <li className="mm-listitem withdraw-btn" >
                             {currentFreelancerDetails?.registered == true && currentFreelancerDetails.balance.toString() > 0 ?
                             (
                                 
-                                <button className="btn btn-warning" type="button" onClick={()=>withdrawEarnings()}>
+                                <button className="btn btn-warning text-success mb-2" type="button" onClick={()=>withdrawEarnings()}>
                                     Withdraw
                             </button>
                             ): ''

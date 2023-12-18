@@ -149,7 +149,6 @@ function FreelancerPage({address} : any){
                                         {currentFreelancerDetails.skills.split(',').map((value : string,key : string)=>(
                                             <a href="#" key={key}>{value}</a>
                                         ))}
-                                        <a href="#">Figma</a>
 
                                         
                                         {/* Modal Body  */}
@@ -163,7 +162,7 @@ function FreelancerPage({address} : any){
                                                     <div className="modal-body">
                                                         
                                                        {jobs?.map((job : any)=>(       
-                                                        <div className="d-flex justify-content-space-around">
+                                                        <div className="d-flex justify-content-space-around" key={job.id}>
                                                             <button className="btn-warning btn btn-sm ud-btn btn-thm"
                                                             type='button'
                                                              onClick={()=>hireFreelancer(job.id.toString(),currentFreelancerDetails.freelancerAddress)}>

@@ -25,7 +25,7 @@ function Navbar(){
             
             // console.log(currentEmployerDetails);
         }
-        
+        // console.log(freelancerBal)
     })
     return (
         <>
@@ -127,7 +127,7 @@ function Navbar(){
                                     {currentFreelancerDetails?.registered == true && currentFreelancerDetails.balance.toString() > 0 ?
                                     (
                                         
-                                        <button className="btn btn-warning" type="button" onClick={()=>withdrawEarnings()}>
+                                        <button className="btn btn-warning mx-1 text-success" type="button" onClick={()=>withdrawEarnings()}>
                                             Withdraw
                                     </button>
                                     ): ''

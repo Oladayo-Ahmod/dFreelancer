@@ -18,7 +18,8 @@ function SingleJobListing({id} : any){
             employerDetails(account)
             // console.log(jobEscrow)
         }
-        
+        // console.log(singleJob);
+        // console.log(currentEmployerDetails)
     })
 
     return(

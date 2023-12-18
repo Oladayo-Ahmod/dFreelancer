@@ -33,7 +33,7 @@ function AllJobs(){
                         <div className="row align-items-center mb20">
                             <div className="col-md-6">
                                 <div className="text-center text-md-start">
-                                    <p className="text mb-0 mb10-sm"><span className="fw500">7,512</span> available services </p>
+                                    {/* <p className="text mb-0 mb10-sm"><span className="fw500">7,512</span> available services </p> */}
                                 </div>
                             </div>
                             <div className="col-md-6">
@@ -52,7 +52,7 @@ function AllJobs(){
                         </div>
                         <div className="row">
                             {jobs? jobs.map((job : any)=>(
-                            <div className="col-sm-6 col-xl-12">
+                            <div className="col-sm-6 col-xl-12" key={job.id}>
                             <div className="job-list-style1 bdr1 d-xl-flex align-items-start">
                                 <div className="icon d-flex align-items-center mb20">
                                     {/* <img className="wa" src="/images/team/client-1.png" alt="" /> */}
@@ -67,7 +67,7 @@ function AllJobs(){
                                     <Link href={'/single-job/'+job.id}>View Job</Link>
                                     {/* check if user is a freelancer */}
                                     {currentFreelancerDetails?.registered && !job.applicants.includes(currentFreelancerDetails.freelancerAddress)? (
-                                        <button className="btn-primary btn-sm btn ml-1 text-white" 
+                                        <button className="btn-primary btn-sm btn mx-1 text-white" 
                                         onClick={()=>applyJob(job.id.toString())} type="button">Apply</button>
                                     ): 
                                     currentFreelancerDetails?.registered && job.applicants.includes(currentFreelancerDetails.freelancerAddress)?

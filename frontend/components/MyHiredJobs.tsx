@@ -3,18 +3,22 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 import { FREELANCER_CONTEXT} from '../context/MarketPlace'
 import FreelancerProps from "@/app/interfaces/freelancerProps"
+import Link from 'next/link'
 
 function MyHiredJobsListing(){
     const {
-        account,getFreelancerHiredJobs,jobs,withdrawEarnings
+        account,getFreelancerHiredJobs,jobs,withdrawEarnings,freelancerDetails,currentFreelancerDetails
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{
         if (account) {
             getFreelancerHiredJobs(account)
+            freelancerDetails(account)
+            
         }
+        // console.log(currentFreelancerDetails);
         
-    })
+    },[account])
 
     return(
         // all jobs
@@ -27,7 +31,7 @@ function MyHiredJobsListing(){
                         <div className="row align-items-center mb20">
                             <div className="col-md-6">
                                 <div className="text-center text-md-start">
-                                    <p className="text mb-0 mb10-sm"><span className="fw500">7,512</span> available services </p>
+                                    {/* <p className="text mb-0 mb10-sm"><span className="fw500">7,512</span> available services </p> */}
                                 </div>
                             </div>
                             <div className="col-md-6">
@@ -46,7 +50,7 @@ function MyHiredJobsListing(){
                         </div>
                         <div className="row">
                             {jobs? jobs.map((job : any)=>(
-                            <div className="col-sm-6 col-xl-12">
+                            <div className="col-sm-6 col-xl-12" key={job.id}>
                             <div className="job-list-style1 bdr1 d-xl-flex align-items-start">
                                 <div className="icon d-flex align-items-center mb20">
                                     {/* <img className="wa" src="/images/team/client-1.png" alt="" /> */}
@@ -58,6 +62,7 @@ function MyHiredJobsListing(){
                                     <p className="list-inline-item mb-0">{job.budget.toString()} KLAY</p>
                                     <p className="list-inline-item mb-0 bdrl1 pl15">{job.completed ? 'Expired' : 'Ongoing'}</p>
                                     <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p>
+                                    <Link href={'/single-job/'+job.id}>View Job</Link>
                                 </div>
                             </div>
                             </div>

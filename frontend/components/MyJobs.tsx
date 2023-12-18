@@ -49,7 +49,7 @@ function MyJobs(){
                         <div className="row">
                             {jobs? jobs.map((job : any)=>(
                             //   {{retrieveEscrow()}}
-                            <div className="col-sm-6 col-xl-12">
+                            <div className="col-sm-6 col-xl-12" key={job.id}>
                             <div className="job-list-style1 bdr1 d-xl-flex align-items-start">
                                 <div className="icon d-flex align-items-center mb20">
                                     {/* <img className="wa" src="/images/team/client-1.png" alt="" /> */}
@@ -73,7 +73,7 @@ function MyJobs(){
                                         <ul className="list-group list-group-flush">
                                             {
                                                 job.applicants.map((applicant:any)=>(
-                                                    <div className="d-flex">
+                                                    <div className="d-flex" key={applicant}>
                                                         <li className="list-group-item text-primary">
                                                             {`${applicant.slice(0,6)}...${applicant.slice(applicant.length -4)}`}
                                                         </li>
@@ -81,7 +81,7 @@ function MyJobs(){
                                                         {!job.hiredFreelancer.includes('0x000000000000')? (
                                                             <>
                                                                 <p className="mt-2 mx-2">Hired 
-                                                                {`${job.hiredFreelancer.slice(0,6)}...${job.hiredFreelancer.slice(job.hiredFreelancer.length -4)}`}
+                                                                {` ${job.hiredFreelancer.slice(0,6)}...${job.hiredFreelancer.slice(job.hiredFreelancer.length -4)}`}
                                                                 </p>                                                                
                                                             </>
                                                            

@@ -559,8 +559,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
             const availableBalance = await contract.freelancers(account).balance;
-            const withdraw = await contract.withdrawEarnings()
-            await withdraw.wait()
+            await contract.withdrawEarnings()
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -587,6 +586,8 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
                     showConfirmButton: true,
                     timer: 4000
                 })
+                console.log(error);
+                
             }
         }
     }
