@@ -6,17 +6,16 @@ import FreelancerProps from "@/app/interfaces/freelancerProps"
 import Link from 'next/link'
 
 function MyHiredJobsListing(){
+    // import context apis
     const {
         account,getFreelancerHiredJobs,jobs,withdrawEarnings,freelancerDetails,currentFreelancerDetails
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{
         if (account) {
-            getFreelancerHiredJobs(account)
-            freelancerDetails(account)
-            
+            getFreelancerHiredJobs(account) // retrieve all jobs where current freelancer is hired
+            freelancerDetails(account) // retrieve current freelancer details            
         }
-        // console.log(currentFreelancerDetails);
         
     },[account])
 
@@ -49,6 +48,7 @@ function MyHiredJobsListing(){
                             </div>
                         </div>
                         <div className="row">
+                            {/* render all jobs */}
                             {jobs? jobs.map((job : any)=>(
                             <div className="col-sm-6 col-xl-12" key={job.id}>
                             <div className="job-list-style1 bdr1 d-xl-flex align-items-start">
@@ -59,7 +59,7 @@ function MyHiredJobsListing(){
                                 <div className="details ml20 ml0-xl">
                                     <p>{job.description}</p>
                                     <h4 className="mb-3 text-thm">{job.title}</h4>
-                                    <p className="list-inline-item mb-0">{job.budget.toString()} KLAY</p>
+                                    <p className="list-inline-item mb-0">{job.budget.toString()} INJ</p>
                                     <p className="list-inline-item mb-0 bdrl1 pl15">{job.completed ? 'Expired' : 'Ongoing'}</p>
                                     <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p>
                                     <Link href={'/single-job/'+job.id}>View Job</Link>

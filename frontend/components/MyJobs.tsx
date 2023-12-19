@@ -6,16 +6,15 @@ import FreelancerProps from "@/app/interfaces/freelancerProps"
 import Link from 'next/link'
 
 function MyJobs(){
+    // import context apis
     const {
         account,retrieveJobsByEmployer,jobs,hireFreelancer,completeJob
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
 
     useEffect(()=>{
         if (account) {
-            retrieveJobsByEmployer(account)
-        }
-        
-        // console.log(jobs);
+            retrieveJobsByEmployer(account) // retrieve current employer details
+        }        
         
     })
 
@@ -47,6 +46,7 @@ function MyJobs(){
                             </div>
                         </div>
                         <div className="row">
+                            {/* render jobs */}
                             {jobs? jobs.map((job : any)=>(
                             //   {{retrieveEscrow()}}
                             <div className="col-sm-6 col-xl-12" key={job.id}>
@@ -58,7 +58,7 @@ function MyJobs(){
                                 <div className="details ml20 ml0-xl">
                                     <p>{job.description}</p>
                                     <h4 className="mb-3 text-thm">{job.title}</h4>
-                                    <p className="list-inline-item mb-0">{job.budget.toString()} KLAY</p>
+                                    <p className="list-inline-item mb-0">{job.budget.toString()} INJ</p>
                                     <p className="list-inline-item mb-0 bdrl1 pl15">{job.completed ? 'Expired' : (
                                         'Ongoing'
                                         // <button className="btn-warning btn" type='button'

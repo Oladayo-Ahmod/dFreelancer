@@ -7,6 +7,7 @@ import Link from 'next/link'
 
 
 function AllJobs(){
+    // import context apis
     const {
         account,freelancerDetails,retrieveAllJobs,jobs,applyJob,currentFreelancerDetails
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
@@ -14,12 +15,8 @@ function AllJobs(){
     useEffect(()=>{
         retrieveAllJobs()
         if (account) {
-            freelancerDetails(account)
-            
-            // console.log(currentFreelancerDetails);
-        }
-        // console.log(jobs);
-        
+            freelancerDetails(account) // retrieve current freelancer details            
+        }        
     })
 
     return(
@@ -59,13 +56,15 @@ function AllJobs(){
                                     <span className="fav-icon flaticon-star"></span>
                                 </div>
                                 <div className="details ml20 ml0-xl">
+                                    {/* job details */}
+
                                     <p>{job.description}</p>
                                     <h4 className="mb-3 text-thm">{job.title}</h4>
-                                    <p className="list-inline-item mb-0">{job.budget.toString()} KLAY</p>
+                                    <p className="list-inline-item mb-0">{job.budget.toString()} INJ</p>
                                     <p className="list-inline-item mb-0 bdrl1 pl15">{job.completed ? 'Expired' : ''}</p>
                                     <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p>
                                     <Link href={'/single-job/'+job.id}>View Job</Link>
-                                    {/* check if user is a freelancer */}
+                                    {/* check if user is a registered freelancer and not already applied for the job*/}
                                     {currentFreelancerDetails?.registered && !job.applicants.includes(currentFreelancerDetails.freelancerAddress)? (
                                         <button className="btn-primary btn-sm btn mx-1 text-white" 
                                         onClick={()=>applyJob(job.id.toString())} type="button">Apply</button>

@@ -6,6 +6,8 @@ import FreelancerProps from "@/app/interfaces/freelancerProps"
 import Link from 'next/link'
 
 function SingleJobListing({id} : any){
+
+    // import context apis
     const {
         account,currentEmployerDetails,employerDetails,singleJob,completeJob,
         jobEscrow,retrieveEscrow,retrieveJob,depositFunds,releaseEscrow
@@ -15,11 +17,8 @@ function SingleJobListing({id} : any){
         retrieveJob(id.id)
         if (account) {
             retrieveEscrow(id.id)
-            employerDetails(account)
-            // console.log(jobEscrow)
+            employerDetails(account) // retrieve employer details
         }
-        // console.log(singleJob);
-        // console.log(currentEmployerDetails)
     })
 
     return(
@@ -61,7 +60,7 @@ function SingleJobListing({id} : any){
                                 <div className="details ml20 ml0-xl">
                                     <p>{singleJob.description}</p>
                                     <h4 className="mb-3 text-thm">{singleJob.title}</h4>
-                                    <p className="list-inline-item mb-0">{singleJob.budget.toString()} KLAY</p>
+                                    <p className="list-inline-item mb-0">{singleJob.budget.toString()} INJ</p>
                                     <p className="list-inline-item mb-0 bdrl1 pl15">{singleJob.completed ? 'Expired' : (
                                         'Ongoing'
                                         // 

@@ -7,7 +7,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 function FreelancerPage({address} : any){
-
+    // import context apis
     const {
         account,hireFreelancer,retrieveUncompletedJobsByEmployer,jobs
         ,freelancerDetails,currentFreelancerDetails,employerDetails,currentEmployerDetails,
@@ -16,11 +16,10 @@ function FreelancerPage({address} : any){
     useEffect(()=>{
         freelancerDetails(address.address)
         if (account) {
-            employerDetails(account)
-            retrieveUncompletedJobsByEmployer(account)
+            employerDetails(account) // retrieve current employer details 
+            retrieveUncompletedJobsByEmployer(account) // retrieve uncompleted jobs by employer
         }
     })
-    // console.log(currentFreelancerDetails.freelancerAddress);
     
     return(
         <>
@@ -29,6 +28,7 @@ function FreelancerPage({address} : any){
          <>
 
         <section className="breadcumb-section pt-0">
+            {/* styles */}
             <style>
                 {
                     `
@@ -42,6 +42,8 @@ function FreelancerPage({address} : any){
                     `
                 }
             </style>
+
+            {/* render freelancer details  */}
                 {currentFreelancerDetails ? (
 
                     <div className="cta-service-v1 freelancer-single-style mx-auto maxw1700 pt120 pt60-sm pb120 pb60-sm bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg px30-lg">
@@ -117,7 +119,7 @@ function FreelancerPage({address} : any){
                         <div className="col-lg-4">
                             <div className="blog-sidebar ms-lg-auto">
                                 <div className="price-widget pt25 widget-mt-minus bdrs8">
-                                    <h3 className="widget-title">{currentFreelancerDetails.starting_price.toString()} <small className="fz15 fw500">KLAY</small></h3>
+                                    <h3 className="widget-title">{currentFreelancerDetails.starting_price.toString()} <small className="fz15 fw500">INJ</small></h3>
                                     <div className="category-list mt20">
                                         <a className="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
                       <span className="text"><i className="flaticon-place text-thm2 pe-2 vam"></i>Location</span> <span
@@ -151,7 +153,7 @@ function FreelancerPage({address} : any){
                                         ))}
 
                                         
-                                        {/* Modal Body  */}
+                                        {/* Modal Body for hiring freelancer */}
                                         <div className="modal fade" id="modalId2" tabIndex={1} data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                                             <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
                                                 <div className="modal-content">
@@ -161,6 +163,7 @@ function FreelancerPage({address} : any){
                                                     </div>
                                                     <div className="modal-body">
                                                         
+                                                        {/* render all uncompleted jobs by employer for hiring */}
                                                        {jobs?.map((job : any)=>(       
                                                         <div className="d-flex justify-content-space-around" key={job.id}>
                                                             <button className="btn-warning btn btn-sm ud-btn btn-thm"

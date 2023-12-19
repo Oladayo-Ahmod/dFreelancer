@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@pinata/sdk": "^2.1.0",
-    "@sendbird/uikit-react": "^3.9.2",
     "bootstrap": "^5.3.2",
     "dotenv": "^16.3.1",
     "ethers": "^5.7.1",

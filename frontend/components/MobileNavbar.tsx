@@ -6,11 +6,12 @@ import { FREELANCER_CONTEXT} from '../context/MarketPlace'
 import FreelancerProps from "@/app/interfaces/freelancerProps"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
-import Test from "./Test"
 
 function MobileNavbar(){
     const pathname = usePathname()  
-    const modalRef = useRef(null) // boostrap modal  
+    const modalRef = useRef(null) // bootstrap modal  
+
+    // import context apis
     const {
         account,employerDetails,currentEmployerDetails,withdrawEarnings,setJobCreationForm,employerBal,freelancerBal,
         connectWallet,jobCreationForm,createJob,currentFreelancerDetails,freelancerDetails,toggleNav
@@ -19,9 +20,8 @@ function MobileNavbar(){
     useEffect(()=>{
         connectWallet()
         if (account) {
-            employerDetails(account)
-            freelancerDetails(account)
-            // console.log(currentEmployerDetails);
+            employerDetails(account) // retrieve current employer details 
+            freelancerDetails(account) // retrieve current freelancer details 
         }
         
     })
@@ -125,7 +125,7 @@ function MobileNavbar(){
                         {currentEmployerDetails?.registered?
                         (
                             <button className="btn btn-warning" >
-                                    <span className="badge bg-primary">{employerBal} klay</span>
+                                    <span className="badge bg-primary">{employerBal} INJ</span>
                         </button>
                         ): ''
                         }                        
@@ -137,7 +137,7 @@ function MobileNavbar(){
                         (
                             
                         <button className="btn btn-warning" >
-                                <span className="badge bg-primary">{freelancerBal} klay</span>
+                                <span className="badge bg-primary">{freelancerBal} INJ</span>
                         </button>
                         ): ''
                         }                        

@@ -6,6 +6,8 @@ import FreelancerProps from "@/app/interfaces/freelancerProps"
 
 
 function RegisterFreelancer(){
+    
+    // import context apis
     const {
         account,registerFreelancer,setFreelancerForm,freelancerForm,profileImageHandler,gigImageHandler,freelancerDetails,currentFreelancerDetails,connectWallet
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
@@ -13,8 +15,7 @@ function RegisterFreelancer(){
     useEffect(()=>{
         connectWallet()
         if (account) {
-            freelancerDetails(account)
-            // console.log(currentFreelancerDetails);
+            freelancerDetails(account) // retrieve freelancer details
         }
         
     })
@@ -114,7 +115,7 @@ function RegisterFreelancer(){
                             :(
                                 <input type="number"
                                 onChange={(e)=>setFreelancerForm({...freelancerForm, starting_price : Number(e.target.value)})} 
-                                className="form-control" placeholder="e.g 100 KLAY" />
+                                className="form-control" placeholder="e.g 100 INJ" />
                             )
                         }
                             

@@ -6,6 +6,7 @@ import FreelancerProps from "@/app/interfaces/freelancerProps"
 
 
 function RegisterEmployer(){
+    // import context apis
     const {
         account,registerEmployer,setEmployerForm,employerForm,profileImageHandler,employerDetails,currentEmployerDetails,connectWallet
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
@@ -13,8 +14,7 @@ function RegisterEmployer(){
     useEffect(()=>{
         connectWallet()
         if (account) {
-            employerDetails(account)
-            // console.log(currentEmployerDetails);
+            employerDetails(account) // retrieve current employer details
         }
         
     })

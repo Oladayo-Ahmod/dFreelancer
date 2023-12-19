@@ -11,6 +11,8 @@ import Link from "next/link"
 function Navbar(){
     const pathname = usePathname()  
     const modalRef = useRef(null) // boostrap modal  
+
+    // import context apis
     const {
         account,employerDetails,currentEmployerDetails,setJobCreationForm,withdrawEarnings,freelancerBal,
         connectWallet,jobCreationForm,createJob,currentFreelancerDetails,freelancerDetails,employerBal
@@ -19,13 +21,10 @@ function Navbar(){
     useEffect(()=>{
         connectWallet()
         if (account) {
-            employerDetails(account)
-            freelancerDetails(account)
-            // console.log(employerBal);
+            employerDetails(account) // retrieve current employer details
+            freelancerDetails(account) // retrieve current freelancer details
             
-            // console.log(currentEmployerDetails);
         }
-        // console.log(freelancerBal)
     })
     return (
         <>
@@ -104,7 +103,7 @@ function Navbar(){
                                     (
                                         
                                         <button className="btn btn-warning" >
-                                             <span className="badge bg-primary">{employerBal} klay</span>
+                                             <span className="badge bg-primary">{employerBal} INJ</span>
                                     </button>
                                     ): ''
                                 }
@@ -116,7 +115,7 @@ function Navbar(){
                                     (
                                         
                                         <button className="btn btn-warning" >
-                                             <span className="badge bg-primary">{freelancerBal} klay</span>
+                                             <span className="badge bg-primary">{freelancerBal} INJ</span>
                                     </button>
                                     ): ''
                                 }

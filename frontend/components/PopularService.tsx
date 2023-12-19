@@ -13,10 +13,12 @@ import Link from "next/link"
 
 
 function PopularService(){
+    // import context apis
     const {
         allFreelancers,freelancers
     } = useContext(FREELANCER_CONTEXT) as FreelancerProps
     
+    // swiperjs library breakpoints
     const breakpoints:Record<number , {slidesPerView :number, spaceBetween? : number}> = {
         320 :{
             slidesPerView : 1,
@@ -38,10 +40,6 @@ function PopularService(){
 
     useEffect(()=>{
         allFreelancers()
-        if(freelancers){
-            // console.log(freelancers);
-
-        }
     },[freelancers])
     return (
         
@@ -63,6 +61,7 @@ function PopularService(){
             </div>
             <div className="row">
                 <div className="col-lg-12">
+                {/* initializing swiper library */}
                 <Swiper
                     modules={[Navigation, Scrollbar,Autoplay]}
                     autoplay={{delay: 3000}}
@@ -88,6 +87,8 @@ function PopularService(){
                 >
 
                     <div className="slider-outer-dib vam_nav_style dots_none slider-4-grid2 owl-carousel owl-theme wow fadeInUp">
+                    
+                    {/* render all registered freelancers */}
                         {freelancers ? 
                         freelancers.map((freelancer : any)=>(
 
@@ -117,7 +118,7 @@ function PopularService(){
                                             {/* <span className="fz14">{freelancer.name}</span> */}
                                             </Link>
                                             <div className="budget">
-                                                <p className="mb-0 body-color">Starting at<span className="fz17 fw500 dark-color ms-1">{freelancer.starting_price.toString()}</span><small>klay</small></p>
+                                                <p className="mb-0 body-color">Starting at<span className="fz17 fw500 dark-color ms-1">{freelancer.starting_price.toString()}</span><small>INJ</small></p>
                                             </div>
                                         </div>
                                     </div>
