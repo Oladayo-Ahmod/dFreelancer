@@ -12,12 +12,14 @@ const MAINNET_RPC_URL =
     process.env.MAINNET_RPC_URL ||
     process.env.ALCHEMY_MAINNET_RPC_URL ||
     "https://eth-mainnet.alchemyapi.io/v2/your-api-key"
-const SEPOLIA_RPC_URL =
-    process.env.SEPOLIA_RPC_URL || "https://eth-sepolia.g.alchemy.com/v2/your-api-key"
-const PRIVATE_KEY = process.env.PRIVATE_KEY || "0x"
+
+const INJECTIVE_RPC_URL = process.env.INJECTIVE_RPC_URL // injective rpc url
+
+const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL || "https://eth-sepolia.g.alchemy.com/v2/your-api-key" // sepolia rpc url
+const PRIVATE_KEY = process.env.PRIVATE_KEY || "0x" // private key
 
 // Your API key for Etherscan, obtain one at https://etherscan.io/
-const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "Your etherscan API key"
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "Your etherscan API key" // etherscan api key
 const REPORT_GAS = process.env.REPORT_GAS || false
 
 module.exports = {
@@ -28,6 +30,11 @@ module.exports = {
         },
         localhost: {
             chainId: 31337,
+        },
+        inEVm : {
+            url : INJECTIVE_RPC_URL,
+            accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
+            chainId : 1738
         },
         sepolia: {
             url: SEPOLIA_RPC_URL,
