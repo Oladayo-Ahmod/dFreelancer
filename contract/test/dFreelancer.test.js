@@ -8,9 +8,7 @@ describe("Dfreelancer", function () {
   const freelancerCountry = 'Nigeria'
   const freelancerGigTitle = 'I will design and develop a dApp'
   const images = ['https://image.com/freelancerImage','https://image.com/gigImage']
-  const freelancerProfileTitle = 'Solidity developer'
   const freelancerGigDesc = 'Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using '
-  const date = new Date().toLocaleString('default', {month : 'long'}) + ',' + new Date().getFullYear()
   const starting_price = '100'
   
   let freelancer;

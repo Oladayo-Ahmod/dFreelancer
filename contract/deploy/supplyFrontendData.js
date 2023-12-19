@@ -3,6 +3,7 @@ const fs = require('fs')
 require('dotenv').config()
 
 module.exports = async function(){
+    // automatic abi and address updates to frontend upon deployment
     if (process.env.UPDATE_FRONTEND) {
         console.log('-----------------updating--------frontend-------------parameters');
         const ABI = '../frontend/constants/abi.json'  // abi location
