@@ -31,6 +31,19 @@ function CustomizedChat({ }){
                 }}
                 />
             </div>
+            {showSettings && (
+                <div className="channel-settings">
+                    <ChannelSettings
+                        channelUrl={currentChannelURL}
+                        onCloseClick={()=>{
+                            setShowSettings(false)
+                            
+                        }}
+                    >
+
+                    </ChannelSettings>
+                </div>
+            )}
         </div>
     )
 }
