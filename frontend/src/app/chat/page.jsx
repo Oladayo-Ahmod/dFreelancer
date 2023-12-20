@@ -1,21 +1,24 @@
-import '@sendbird/uikit-react'
-import SendbirdProvider from '@sendbird/uikit-react/SendbirdProvider'
-import CustomizedChat from '../../../components/CustomizedChat'
+"use client"
 
-function Chat(){
-    const APP_ID = process.env.SENDBIRD_APP_ID 
-    const USER_ID = process.env.SENDBIRD_USER_ID
-    const USERNAME = process.env.SENDBIRD_USERNAME
-    const ACCESS_TOKEN = process.env.SENDBIRD_ACCESS_TOKEN
+import '../../../styles/chat.css'
 
+import SBProvider from '@sendbird/uikit-react/SendbirdProvider'
+import '@sendbird/uikit-react/dist/index.css'
+import CustomizedApp from '../../../components/CustomizedChat'
+
+import { APP_ID, USER_ID, NICKNAME } from '../../../constants/chat'
+
+function ChatApp() {
+  if (!APP_ID) {
     return (
-        <SendbirdProvider 
-        appId={APP_ID}
-        userId={USER_ID}
-        >
-            <CustomizedChat />
-        </SendbirdProvider>
+      <p>Set APP_ID in chat.js</p>
     )
+  }
+  return (
+    <SBProvider appId={APP_ID} userId={USER_ID} nickname={NICKNAME}>
+      <CustomizedApp />
+    </SBProvider>
+  )
 }
 
-export default Chat
+export default ChatApp

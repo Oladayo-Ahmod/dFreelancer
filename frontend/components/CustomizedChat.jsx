@@ -1,69 +1,45 @@
-import {ChannelList,Channel,ChannelSettings} from '@sendbird/uikit-react'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
-function CustomizedChat({ }){
-    const [currentChannel,setCurrentChannel] = useState(null)
-    const currentChannelURL = currentChannel? currentChannel.url : "" 
-    const [showSettings, setShowSettings] = useState(false)
-    var channelChatDiv = document.getElementsByClassName('channel-chat')[0]
+import SBConversation from '@sendbird/uikit-react/Channel'
+import SBChannelList from '@sendbird/uikit-react/ChannelList'
+import SBChannelSettings from '@sendbird/uikit-react/ChannelSettings'
 
-    const renderSettingsBar=()=>{
-        channelChatDiv.style.width = "52%"
-        channelChatDiv.style.cssFloat = "left"
-    }
+export default function CustomizedApp() {
+  // useState
+  const [showSettings, setShowSettings] = useState(false)
+  const [currentChannelUrl, setCurrentChannelUrl] = useState('')
 
-    const hideSettingsBar =()=>{
-        channelChatDiv.style.width = "76%"
-        channelChatDiv.style.cssFloat = "right"
-    }
-
-    return (
-        <div className="channel-wrap">
-            <style>
-                {`
-                .channel-wrap{
-                    display : flex;
-                    height : 100%;
-                }
-                .channel-list{
-                    float : left;
-                }
-                .channel-chat{
-                    width : 76%;
-                }
-                `}
-            </style>
-            <div className="channel-list">
-                <ChannelList
-                onChannelSelect={(channel)=>{
-                    setCurrentChannel(channel)
-                }}
-                > 
-                </ChannelList>
-            </div>
-            <div className="channel-list">
-                <Channel
-                channelUrl={currentChannelURL}
-                onChatHeaderActionClick={()=>{
-                    setShowSettings(!showSettings)
-                    renderSettingsBar()
-                }}
-                />
-            </div>
-            {showSettings && (
-                <div className="channel-settings">
-                    <ChannelSettings
-                        channelUrl={currentChannelURL}
-                        onCloseClick={()=>{
-                            setShowSettings(false)
-                            hideSettingsBar()
-                        }}
-                    >
-
-                    </ChannelSettings>
-                </div>
-            )}
+  return (
+    <div className="customized-app">
+      <div className="sendbird-app__wrap">
+        <div className="sendbird-app__channellist-wrap">
+          <SBChannelList
+            onChannelSelect={(channel) => {
+              if (channel && channel.url) {
+                setCurrentChannelUrl(channel.url)
+              }
+            }}
+          />
         </div>
-    )
+        <div className="sendbird-app__conversation-wrap">
+          <SBConversation
+            channelUrl={currentChannelUrl}
+            onChatHeaderActionClick={() => {
+              setShowSettings(true)
+            }}
+          />
+        </div>
+      </div>
+      {showSettings && (
+        <div className="sendbird-app__settingspanel-wrap">
+          <SBChannelSettings
+            channelUrl={currentChannelUrl}
+            onCloseClick={() => {
+              setShowSettings(false)
+            }}
+          />
+        </div>
+      )}
+    </div>
+  )
 }
-export default CustomizedChat
