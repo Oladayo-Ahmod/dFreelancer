@@ -12,6 +12,11 @@ function CustomizedChat({ }){
         channelChatDiv.style.cssFloat = "left"
     }
 
+    const hideSettingsBar =()=>{
+        channelChatDiv.style.width = "76%"
+        channelChatDiv.style.cssFloat = "right"
+    }
+
     return (
         <div className="channel-wrap">
             <div className="channel-list">
@@ -37,7 +42,7 @@ function CustomizedChat({ }){
                         channelUrl={currentChannelURL}
                         onCloseClick={()=>{
                             setShowSettings(false)
-                            
+                            hideSettingsBar()
                         }}
                     >
 
