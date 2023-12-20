@@ -8,7 +8,7 @@ function Chat(){
     const ACCESS_TOKEN = process.env.SENDBIRD_ACCESS_TOKEN
 
     return (
-        <SendbirdProvider>
+        <SendbirdProvider >
 
         </SendbirdProvider>
     )
