@@ -23,7 +23,8 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
     const [account, setAccount] = useState<string>()
     const [freelancerBal, setFreelancerBal] = useState<string>()
     const [employerBal, setEmployerBal] = useState<string>()
-    const [deployer, setDeployer] = useState<string>()
+    const [buyerId, setBuyerId] = useState<string>()
+    const [sellerId, setSellerId] = useState<string>()
     const [jobEscrow, setJobEscrow] = useState<string>()
     const [singleJob, setSingeJob] = useState<any>()
     const [profileImage, setProfileImage] = useState<string>()
@@ -335,8 +336,10 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             const provider = new ethers.providers.Web3Provider(connect)
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
-             await contract.hireFreelancer(jobId,address)
-            // console.log(typeof(address));
+            await contract.hireFreelancer(jobId,address)
+            setSellerId(account)
+            setBuyerId(address)
+            
             
             Swal.fire({
                 position: 'top-end',
@@ -542,6 +545,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         })
        
      }
+
 
     //  navbar togglr
     const toggleNav : FreelancerProps["toggleNav"] = async()=>{
@@ -813,7 +817,9 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
             retrieveEscrow,
             jobEscrow,
             singleJob,
-            toggleNav
+            toggleNav,
+            sellerId,
+            buyerId
         }}
         >
             {children}
