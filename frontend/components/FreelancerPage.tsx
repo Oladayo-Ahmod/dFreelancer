@@ -18,7 +18,11 @@ function FreelancerPage({address} : any){
         if (account) {
             employerDetails(account) // retrieve current employer details 
             retrieveUncompletedJobsByEmployer(account) // retrieve uncompleted jobs by employer
+            // console.log(jobs);
+            
         }
+       
+        
     })
     
     return(
@@ -105,8 +109,8 @@ function FreelancerPage({address} : any){
                                     <div className="iconbox-style1 contact-style d-flex align-items-start mb30">
                                         <div className="icon flex-shrink-0"><span className="flaticon-goal"></span></div>
                                         <div className="details">
-                                            <h5 className="title">Total Jobs</h5>
-                                            <p className="mb-0 text">921</p>
+                                            {/* <h5 className="title">Total Jobs</h5> */}
+                                            {/* <p className="mb-0 text">921</p> */}
                                         </div>
                                     </div>
                                 </div>
@@ -163,15 +167,23 @@ function FreelancerPage({address} : any){
                                                     </div>
                                                     <div className="modal-body">
                                                         
-                                                        {/* render all uncompleted jobs by employer for hiring */}
+                                                        {/* render all uncompleted and unhired jobs by employer for hiring */}
                                                        {jobs?.map((job : any)=>(       
                                                         <div className="d-flex justify-content-space-around" key={job.id}>
-                                                            <button className="btn-warning btn btn-sm ud-btn btn-thm"
+                                                            {
+                                                                job.hiredFreelancer.includes('0x000000000000')?(
+                                                                    <>
+                                                                     <button className="btn-warning btn btn-sm ud-btn btn-thm"
                                                             type='button'
                                                              onClick={()=>hireFreelancer(job.id.toString(),currentFreelancerDetails.freelancerAddress)}>
                                                                 Hire
                                                             </button>
                                                             <p className='text-secondary text-lg mt-3'>{job.title}</p>
+                                                                    </>
+                                                                )
+                                                                :''
+                                                            }
+                                                           
 
                                                         </div>         
                                                          ))}
