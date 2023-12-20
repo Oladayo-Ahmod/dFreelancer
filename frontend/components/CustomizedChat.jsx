@@ -7,6 +7,11 @@ function CustomizedChat({ }){
     const [showSettings, setShowSettings] = useState(false)
     var channelChatDiv = document.getElementsByClassName('channel-chat')[0]
 
+    const renderSettingsBar=()=>{
+        channelChatDiv.style.width = "52%"
+        channelChatDiv.style.cssFloat = "left"
+    }
+
     return (
         <div className="channel-wrap">
             <div className="channel-list">
@@ -22,7 +27,7 @@ function CustomizedChat({ }){
                 channelUrl={currentChannelURL}
                 onChatHeaderActionClick={()=>{
                     setShowSettings(!showSettings)
-                    // render
+                    renderSettingsBar()
                 }}
                 />
             </div>
