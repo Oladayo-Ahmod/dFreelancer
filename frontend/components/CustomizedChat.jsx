@@ -19,6 +19,20 @@ function CustomizedChat({ }){
 
     return (
         <div className="channel-wrap">
+            <style>
+                {`
+                .channel-wrap{
+                    display : flex;
+                    height : 100%;
+                }
+                .channel-list{
+                    float : left;
+                }
+                .channel-chat{
+                    width : 76%;
+                }
+                `}
+            </style>
             <div className="channel-list">
                 <ChannelList
                 onChannelSelect={(channel)=>{
