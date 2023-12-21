@@ -2,7 +2,7 @@
 
 import React, { createContext, useEffect, useState } from 'react';
 import { ADDRESS, ABI } from '../constants/index';
-import { ethers , BigNumber} from 'ethers';
+import { ethers } from 'ethers';
 import Router from 'next/router';
 import Swal from 'sweetalert2';
 import FreelancerProps from '@/app/interfaces/freelancerProps';
@@ -176,7 +176,7 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
         }
     }
 
-    // get empployer details by address
+    // get employer details by address
     const employerDetails : FreelancerProps["employerDetails"] =async(account)=>{
         try {
             const provider = new ethers.providers.Web3Provider(connect)
@@ -333,13 +333,13 @@ export const FreelancerProvider:React.FC<{children : React.ReactNode}>=({childre
     //  hire freelancer by employer
      const hireFreelancer : FreelancerProps["hireFreelancer"]= async(jobId,address)=>{
         try {
+            const location = '../constants/nickname.json'
             const provider = new ethers.providers.Web3Provider(connect)
             const signer = provider.getSigner()
             const contract = new ethers.Contract(ADDRESS,ABI,signer)
             await contract.hireFreelancer(jobId,address)
             setSellerId(account)
-            setBuyerId(address)
-            
+            setBuyerId(address)            
             
             Swal.fire({
                 position: 'top-end',

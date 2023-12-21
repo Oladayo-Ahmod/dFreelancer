@@ -54,8 +54,8 @@ function PopularService(){
                 </div>
                 <div className="col-lg-3">
                     <div className="text-start text-lg-end mb-4 mb-lg-2">
-                        <a className="ud-btn2" href="page-service-single.html">All Categories<i
-            className="fal fa-arrow-right-long"></i></a>
+                        {/* <a className="ud-btn2" href="page-service-single.html">All Categories<i
+            className="fal fa-arrow-right-long"></i></a> */}
                     </div>
                 </div>
             </div>

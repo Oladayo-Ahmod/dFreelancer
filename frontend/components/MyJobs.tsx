@@ -83,7 +83,9 @@ function MyJobs(){
                                                                 <p className="mt-2 mx-2">Hired 
                                                                 {` ${job.hiredFreelancer.slice(0,6)}...${job.hiredFreelancer.slice(job.hiredFreelancer.length -4)}`}
                                                                 </p>
-                                                                <Link href={'/chat'}>Enter Chat Room</Link>                                                                
+                                                                <Link className='mt-2 text-primary'
+                                                                 href={'/chat/'+`buyer@${job.hiredFreelancer?.slice(0,6)}&seller@${account?.slice(0,6)}`}
+                                                                 >Enter Chat Room</Link>
                                                             </>
                                                            
                                                         ):

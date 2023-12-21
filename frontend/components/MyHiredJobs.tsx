@@ -63,6 +63,7 @@ function MyHiredJobsListing(){
                                     <p className="list-inline-item mb-0 bdrl1 pl15">{job.completed ? 'Expired' : 'Ongoing'}</p>
                                     <p className="list-inline-item mb-0 bdrl1 pl15">Remote</p>
                                     <Link href={'/single-job/'+job.id}>View Job</Link>
+                                    <Link href={'/chat'}>Enter Chat Room</Link>
                                 </div>
                             </div>
                             </div>

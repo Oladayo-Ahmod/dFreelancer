@@ -24,10 +24,10 @@ function HomeBanner(){
                 <div className="row">
                     <div className="col-xl-10 col-xxl-7">
                         <div className="position-relative">
-                            <h3 className="banner-title">Easily find and hire the finest freelancers for any online job.
+                            <h3 className="banner-title">Decentralized Talent Exchange: Empowering Freelancers and Clients in a Borderless Marketplace
                             </h3>
-                            <p className="banner-text text-white ff-heading mb25">Taskhub.com empowers millions to transform ideas into reality.</p>
-                            <div className="advance-search-tab bgc-white bgct-sm p10 p0-md bdrs4 banner-btn position-relative zi9">
+                            <p className="banner-text text-white ff-heading mb25">Explore boundless possibilities beneath your fingertips.</p>
+                            {/* <div className="advance-search-tab bgc-white bgct-sm p10 p0-md bdrs4 banner-btn position-relative zi9">
                                 <div className="row">
                                     <div className="col-md-5 col-lg-6 col-xl-6">
                                         <div className="advance-search-field mb10-sm bdrr1 bdrn-sm">
@@ -95,15 +95,15 @@ function HomeBanner(){
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="d-none d-md-flex mt30 banner-text">
+                            </div> */}
+                            {/* <div className="d-none d-md-flex mt30 banner-text">
                                 <p className="hero-text fz15 me-2 text-white mb-0">Popular Searches:</p>
                                 <a className="text-white" href="#"> Website Design, </a>
                                 <a className="text-white" href="#"> WordPress, </a>
                                 <a className="text-white" href="#"> Logo Design, </a>
                                 <a className="text-white" href="#"> AI Services, </a>
                                 <a className="text-white" href="#"> Digital Marketing </a>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
