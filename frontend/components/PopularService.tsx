@@ -92,6 +92,7 @@ function PopularService(){
                         {freelancers ? 
                         freelancers.map((freelancer : any)=>(
 
+                           <div key={freelancer.freelancerAddress}>
                             <SwiperSlide >
                             <div className="item">
                                 <div className="listing-style1">
@@ -125,6 +126,7 @@ function PopularService(){
                                 </div>
                             </div>
                             </SwiperSlide >
+                           </div>
                         )):
                         (
                            <div>
